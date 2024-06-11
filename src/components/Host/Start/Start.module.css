@@ -1,0 +1,29 @@
+@import url('../../../styles/_colors.css');
+@import url('../../../styles/_fonts.css');
+
+.title {
+    font-family: var(--primary-font);
+    font-size: 1.8rem;
+    font-weight: 800;
+    border-bottom: 0.3rem solid rgba(0, 0, 0, 0.15);
+}
+  
+.main {
+    font-family: var(--secondary-font);
+    font-size: 4rem;
+    font-weight: 800;
+    color: var(--color-white);
+    background: var(--background-color-orange);
+    border-bottom: 0.3rem solid rgba(0, 0, 0, 0.15);
+}
+
+.questions {
+    font-size: 3.2rem;
+}
+
+@media only screen and (max-width: 420px) {
+    .title {
+        font-size: 1rem;
+    }
+}
+  

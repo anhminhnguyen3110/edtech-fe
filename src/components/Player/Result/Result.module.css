@@ -1,0 +1,36 @@
+@import url('../../../styles/_colors.css');
+@import url('../../../styles/_fonts.css');
+
+.result, .streak, .rank {
+    font-family: var(--secondary-font);
+    color: var(--color-white);
+}
+
+.correct {
+    background-color: var(--color-correct);
+}
+
+.incorrect {
+    background-color: var(--color-incorrect);
+}
+
+.result {
+    font-style: italic;
+    font-size: 4rem;
+}
+
+.streak {
+    font-size: 3.2rem;
+}
+
+.rank {
+    font-size: 2.4rem;
+}
+
+.streakNumber {
+    margin-left: 1rem;
+    background-color: var(--color-red);
+    border-radius: 100%;
+    min-width: 4rem;
+    min-height: 4rem;
+}

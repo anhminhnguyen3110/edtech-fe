@@ -1,0 +1,53 @@
+@import url('../../../styles/_colors.css');
+@import url('../../../styles/_fonts.css');
+
+.home {
+    height: 100vh;
+    background-color: var(--background-color-blue);
+    animation: home-background 14s ease 0s infinite alternate none running;
+}
+  
+.mainTitle {
+    color: var(--color-white);
+    font-family: var(--main-logo);
+    font-size: 10rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    margin: 0 auto;
+    min-width: 10rem;
+}
+  
+@keyframes home-background {
+    25% {background: var(--background-transition-color-blue);}
+    50% {background: var(--background-transition-color-green);}
+    75% {background: var(--background-transition-color-yellow);}
+    100% {background: var(--background-transition-color-orange);}
+}
+
+.verticalMainForm {
+    max-width: 25.5rem;
+}
+
+.error {
+    display: table-cell;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    border-radius: 0.4rem;
+    vertical-align: middle;
+    text-align: center;
+    padding: 1rem 0.5rem;
+    font-size: 1.6rem;
+    font-weight: bold;
+    min-height: 6rem;
+    margin-top: 2rem;
+}
+
+.enterBtn > span {
+    margin: 0 auto;
+}
+
+.createQuiz, .hostQuiz {
+    color: var(--color-white);
+    font-size: 2rem;
+    margin: 1rem 0;
+}

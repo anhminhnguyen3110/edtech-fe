@@ -1,0 +1,50 @@
+@import url('../../../styles/_colors.css');
+@import url('../../../styles/_fonts.css');
+
+
+div.answerBlock {
+    font-family: var(--primary-font);
+    background-color: var(--color-white);
+    margin: 0;
+}
+  
+div.answerBlock div > button {
+    min-height: 44vh;
+}
+  
+div.answerBlock div > button:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+div.answerBlock div > button span {
+    margin: 0 auto;
+}
+
+.answerSubmitted {
+    font-family: var(--primary-font);
+    font-size: 2.4rem;
+    color: var(--color-white);
+    font-weight: bold;
+    background-color: var(--background-color-aqua);
+}
+
+button.red {
+    background-color: var(--color-answer-red);
+}
+
+button.blue {
+    background-color: var(--color-answer-blue);
+}
+
+button.orange {
+    background-color: var(--color-answer-orange);
+}
+
+button.green {
+    background-color: var(--color-answer-green);
+}
+
+svg.icons {
+    color: var(--color-white);
+    font-size: 6rem;
+}
