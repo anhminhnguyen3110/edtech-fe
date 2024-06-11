@@ -1,0 +1,13 @@
+@import url('../../../../styles/_colors.css');
+@import url('../../../../styles/_fonts.css');
+
+.continueBtn > span, .addQuestionBtn > span, .backBtn > span {
+    font-family: var(--secondary-font);
+    font-size: 1.6rem;
+    margin: 0 auto;
+  }
+
+.questions {
+    margin: 2rem 0;
+    font-size: 1.6rem;
+}

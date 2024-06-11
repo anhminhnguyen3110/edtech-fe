@@ -1,0 +1,21 @@
+@import url('../../../styles/_colors.css');
+@import url('../../../styles/_fonts.css');
+
+.mainInfo {
+    background-color: var(--color-light-green);
+    color: var(--color-white);
+    font-family: var(--primary-font);
+    font-weight: 800;
+  }
+  
+  .in {
+    font-size: 4rem;
+    font-family: var(--secondary-font);
+    font-style: italic;
+  }
+  
+  .name {
+    font-size: 2rem;
+    text-align: center;
+  }
+  

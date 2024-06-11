@@ -1,0 +1,27 @@
+@import url('../../../styles/_colors.css');
+@import url('../../../styles/_fonts.css');
+
+.main {
+    background: var(--background-color-aqua);
+}
+  
+.status {
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--color-white);
+    font-size: 3rem;
+    top: 0;
+    left: 0;
+    position: fixed;
+    padding: 20px;
+}
+
+.question {
+    font-family: var(--primary-font);
+    line-height: 1.7;
+    font-size: 2.4rem;
+    background: var(--color-white);
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+  
