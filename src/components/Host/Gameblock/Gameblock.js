@@ -1,199 +1,173 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { socket } from '../../Global/Header';
 import QuestionBlockIntro from '../QuestionBlockIntro/QuestionBlockIntro';
 import QuestionBlock from '../QuestionBlock/QuestionBlock';
 import ResultBlock from '../ResultBlock/ResultBlock';
 import Scoreboard from '../Scoreboard/Scoreboard';
 import Gameover from '../Gameover/Gameover';
+import queryString from 'query-string';
 
-export default class Gameblock extends Component {
-  constructor() {
-    super();
-    this.state = {
-      step: 1,
-      gameId: null,
-      quizId: null,
-      quizName: null,
-      pin: null,
-      questionNumber: 1,
-      totalNumberOfQuestions: null,
-      questionStatus: true,
-      question: null,
-      answers: [],
-      answeredA: 0,
-      answeredB: 0,
-      answeredC: 0,
-      answeredD: 0,
-      correctAnswer: null,
-      gameStatus: true,
-      rankedPlayers: []
-    };
-  }
+const Gameblock = (props) => {
+  const [step, setStep] = useState(1);
+  const [gameId, setGameId] = useState(null);
+  const [quizId, setQuizId] = useState(null);
+  const [quizName, setQuizName] = useState(null);
+  const [pin, setPin] = useState(null);
+  const [questionNumber, setQuestionNumber] = useState(1);
+  const [totalNumberOfQuestions, setTotalNumberOfQuestions] = useState(null);
+  const [question, setQuestion] = useState(null);
+  const [answers, setAnswers] = useState([]);
+  const [answeredA, setAnsweredA] = useState(0);
+  const [answeredB, setAnsweredB] = useState(0);
+  const [answeredC, setAnsweredC] = useState(0);
+  const [answeredD, setAnsweredD] = useState(0);
+  const [correctAnswer, setCorrectAnswer] = useState(null);
+  const [gameStatus, setGameStatus] = useState(true);
+  const [rankedPlayers, setRankedPlayers] = useState([]);
 
-  nextStep = () => {
-    const { step, questionNumber, totalNumberOfQuestions } = this.state;
-    this.setState({
-      step: step + 1
-    });
-
+  const nextStep = () => {
+    setStep(step + 1);
     if (questionNumber === totalNumberOfQuestions) {
-      this.setState({
-        gameStatus: false
-      })
+      setGameStatus(false);
     }
-  }
+  };
 
-  nextQuestion = () => {
-    this.setState({
-      step: 1,
-      rankedPlayers: [],
-      answeredA: 0,
-      answeredB: 0,
-      answeredC: 0,
-      answeredD: 0,
-      correctAnswer: null
-    })
-    const { pin } = this.state;
+  const nextQuestion = () => {
+    setStep(1);
+    setRankedPlayers([]);
+    setAnsweredA(0);
+    setAnsweredB(0);
+    setAnsweredC(0);
+    setAnsweredD(0);
+    setCorrectAnswer(null);
     socket.emit("PROCEED_TO_NEXT_QUESTION", pin);
-  }
+  };
 
-  endGame = () => {
-    this.setState({
-      step: 5
-    })
-    const pin = this.state.pin;
+  const endGame = () => {
+    setStep(5);
     socket.emit("FINISH_GAME", pin);
-  }
+  };
 
-  fetchScoreboard = () => {
-    const { gameId } = this.state;
+  const fetchScoreboard = () => {
     socket.emit("FETCH_SCOREBOARD", gameId);
     console.log('Host requesting for scoreboard.');
-  }
+  };
 
-  componentDidMount() {
-    const queryString = require('query-string');
-    const parsed = queryString.parse(this.props.location.search);
+  useEffect(() => {
+    const parsed = queryString.parse(props.location.search);
     const quizId = parsed.quizId;
     const pin = parseInt(parsed.pin);
-    this.setState({
-      pin: pin,
-      quizId: quizId
-    })
+    setPin(pin);
+    setQuizId(quizId);
 
     socket.emit("FETCH_FIRST_QUESTION", pin);
 
     socket.on("RECEIVE_FIRST_QUESTION", data => {
       const { gameId, quizName, question, totalNumberOfQuestions } = data;
-      this.setState({
-        gameId: gameId,
-        quizName: quizName,
-        question: question.question,
-        answers: question.answers,
-        correctAnswer: question.correct,
-        totalNumberOfQuestions: totalNumberOfQuestions
-      })
-    })
+      setGameId(gameId);
+      setQuizName(quizName);
+      setQuestion(question.question);
+      setAnswers(question.answers);
+      setCorrectAnswer(question.correct);
+      setTotalNumberOfQuestions(totalNumberOfQuestions);
+    });
 
     socket.on("QUESTION_RESULT", data => {
       const { answeredA, answeredB, answeredC, answeredD, correctAnswer } = data;
-      this.setState({
-        answeredA: answeredA,
-        answeredB: answeredB,
-        answeredC: answeredC,
-        answeredD: answeredD,
-        correctAnswer: correctAnswer,
-        step: 3
-      });
+      setAnsweredA(answeredA);
+      setAnsweredB(answeredB);
+      setAnsweredC(answeredC);
+      setAnsweredD(answeredD);
+      setCorrectAnswer(correctAnswer);
+      setStep(3);
     });
 
     socket.on("RECEIVE_SCOREBOARD", rankedPlayers => {
-      this.setState({
-        rankedPlayers: rankedPlayers
-      })
-    })
+      setRankedPlayers(rankedPlayers);
+    });
 
     socket.on("NEXT_QUESTION", data => {
       const { questionNumber, question } = data;
-      this.setState({
-        questionNumber: questionNumber,
-        question: question.question,
-        answers: question.answers,
-        correctAnswer: question.correct,
-      })
+      setQuestionNumber(questionNumber);
+      setQuestion(question.question);
+      setAnswers(question.answers);
+      setCorrectAnswer(question.correct);
     });
 
     socket.on("GAME_OVER", data => {
-      this.setState({
-        gameStatus: false,
-        rankedPlayers: data
-      })
-    })
+      setGameStatus(false);
+      setRankedPlayers(data);
+    });
+
+    // Clean up socket listeners on component unmount
+    return () => {
+      socket.off("RECEIVE_FIRST_QUESTION");
+      socket.off("QUESTION_RESULT");
+      socket.off("RECEIVE_SCOREBOARD");
+      socket.off("NEXT_QUESTION");
+      socket.off("GAME_OVER");
+    };
+  }, [props.location.search]);
+
+  let component = null;
+  switch(step) {
+    case 1:
+      component = <QuestionBlockIntro
+        nextStep={nextStep}
+        questionNumber={questionNumber}
+        question={question}
+        totalNumberOfQuestions={totalNumberOfQuestions}
+      />;
+      break;
+    case 2:
+      component = <QuestionBlock
+        nextStep={nextStep}
+        pin={pin}
+        question={question}
+        answers={answers}
+      />;
+      break;
+    case 3:
+      component = <ResultBlock
+        answers={answers}
+        answeredA={answeredA}
+        answeredB={answeredB}
+        answeredC={answeredC}
+        answeredD={answeredD}
+        correctAnswer={correctAnswer}
+        question={question}
+        pin={pin}
+        nextStep={nextStep}
+        fetchScoreboard={fetchScoreboard}
+      />;
+      break;
+    case 4:
+      component = <Scoreboard
+        pin={pin}
+        rankedPlayers={rankedPlayers}
+        questionNumber={questionNumber}
+        totalNumberOfQuestions={totalNumberOfQuestions}
+        nextQuestion={nextQuestion}
+        endGame={endGame}
+        gameStatus={gameStatus}
+      />;
+      break;
+    case 5:
+      component = <Gameover
+        quizName={quizName}
+        totalNumberOfQuestions={totalNumberOfQuestions}
+        finalRankings={rankedPlayers}
+      />;
+      break;
+    default:
+      component = null;
   }
 
-  render() {
-    const { step } = this.state;
-    const { quizName, pin, questionNumber, totalNumberOfQuestions, question, answers, answeredA, answeredB, answeredC, answeredD, correctAnswer, playersAnswered, rankedPlayers, gameStatus } = this.state;
+  return (
+    <div>
+      {component}
+    </div>
+  );
+};
 
-    let component = null;
-    switch(step) {
-      case 1:
-        component = <QuestionBlockIntro
-          nextStep={ this.nextStep }
-          handleChange={ this.handleChange }
-          questionNumber={ questionNumber }
-          question={ question }
-          totalNumberOfQuestions={ totalNumberOfQuestions }
-        />
-        break;
-      case 2:
-        component = <QuestionBlock
-          nextStep={ this.nextStep }
-          pin={ pin }
-          question={ question }
-          answers={ answers }
-          playersAnswered={ playersAnswered }
-        />
-        break;
-      case 3:
-        component = <ResultBlock
-          answers={ answers }
-          answeredA={ answeredA }
-          answeredB={ answeredB }
-          answeredC={ answeredC }
-          answeredD={ answeredD }
-          correctAnswer={ correctAnswer }
-          question={ question }
-          pin={ pin }
-          nextStep={ this.nextStep }
-          fetchScoreboard={ this.fetchScoreboard }
-        />
-        break;
-      case 4:
-        component = <Scoreboard
-          pin={ pin }
-          rankedPlayers={ rankedPlayers }
-          questionNumber={ questionNumber }
-          totalNumberOfQuestions={ totalNumberOfQuestions }
-          nextQuestion={ this.nextQuestion }
-          endGame={ this.endGame }
-          gameStatus={ gameStatus }
-        />
-        break;
-      case 5:
-        component = <Gameover
-          quizName={ quizName }
-          totalNumberOfQuestions={ totalNumberOfQuestions }
-          finalRankings={ rankedPlayers }
-        />
-        break;
-      default:
-        component = null
-    }
-    return (
-      <div>
-        { component }
-      </div>
-    )
-  }
-}
+export default Gameblock;

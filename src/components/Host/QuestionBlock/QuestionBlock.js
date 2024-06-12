@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../Footer/Footer';
 import styles from './QuestionBlock.module.css';
 import { socket } from '../../Global/Header';
@@ -8,156 +8,133 @@ import GradeIcon from '@material-ui/icons/Grade';
 import FiberManualRecordRoundedIcon from '@material-ui/icons/FiberManualRecordRounded';
 import Brightness3SharpIcon from '@material-ui/icons/Brightness3Sharp';
 
-export default class QuestionBlock extends Component {
-  constructor() {
-    super();
-    this.state = {
-      time: 20,
-      playersAnswered: 0,
-      intervalId: ''
-    }
-  }
+const QuestionBlock = ({ pin, question, answers, nextStep }) => {
+  const [time, setTime] = useState(20);
+  const [playersAnswered, setPlayersAnswered] = useState(0);
+  const [intervalId, setIntervalId] = useState(null);
 
-  timer = () => {
-    this.setState({
-      time: this.state.time - 1
-    })
+  useEffect(() => {
+    const timer = () => {
+      setTime(prevTime => {
+        if (prevTime <= 1) {
+          clearInterval(intervalId);
+          socket.emit("QUESTION_END", pin);
+          nextStep();
+          return 0;
+        }
+        return prevTime - 1;
+      });
+    };
 
-    if (this.state.time <= 0 ) {
-      clearInterval(this.state.intervalId);
-      const pin = this.props.pin;
-      socket.emit("QUESTION_END", pin);
-      this.props.nextStep();
-    }
-  }
+    const id = setInterval(timer, 1000);
+    setIntervalId(id);
 
-  componentDidMount() {
-    const intervalId = setInterval(this.timer, 1000);
-    this.setState({
-      intervalId: intervalId
-    })
-
-    socket.on("UPDATE_PLAYERS_ANSWERED", playersAnswered => {
-      this.setState({
-        playersAnswered: playersAnswered
-      })
-    })
+    socket.on("UPDATE_PLAYERS_ANSWERED", setPlayersAnswered);
 
     socket.on("FETCH_TIME", playerId => {
-
       const data = {
-        pin: this.props.pin,
-        playerId: playerId,
-        time: this.state.time
-      }
-
+        pin,
+        playerId,
+        time
+      };
       socket.emit("SEND_TIME", data);
-    })
-  }
+    });
 
-  componentWillUnmount() {
-    socket.off("UPDATE_PLAYERS_ANSWERED");
-    socket.off("FETCH_TIME");
-    clearInterval(this.state.intervalId);
-  }
+    return () => {
+      socket.off("UPDATE_PLAYERS_ANSWERED");
+      socket.off("FETCH_TIME");
+      clearInterval(id);
+    };
+  }, [pin, nextStep, intervalId, time]);
 
-  render() {
+  const name = playersAnswered === 1 ? <span>answer</span> : <span>answers</span>;
 
-    let name;
-
-    if (this.state.playersAnswered === 1) {
-      name = <span>answer</span>
-    } else {
-      name = <span>answers</span>
-    }
-
-    const { pin, question, answers } = this.props;
-
-    return (
+  return (
+    <Grid
+      container
+      justify="center"
+      alignItems="center"
+      style={{ minHeight: "100vh" }}
+    >
       <Grid
+        item
         container
         justify="center"
         alignItems="center"
-        style={{ minHeight: "100vh" }}
+        xs={12}
+        style={{ minHeight: "20vh" }}
+        className={styles.question}
+      >
+        <h1>{question}</h1>
+      </Grid>
+      <Grid
+        item
+        container
+        justify="space-between"
+        alignItems="center"
+        xs={12}
+        style={{ minHeight: "40vh" }}
+        className={styles.controls}
+      >
+        <div className={styles.time}>{time}</div>
+        <div className={styles.right}>
+          <div className={styles.answersCounter}>
+            <div className={styles.count}>{playersAnswered || 0}</div>
+            <div className={styles.answer}>
+              {name}
+            </div>
+          </div>
+        </div>
+      </Grid>
+      <Grid
+        item
+        container
+        xs={12}
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: "30vh" }}
+        className={styles.answers}
       >
         <Grid
           item
           container
-          justify="center"
           alignItems="center"
-          xs={12}
-          style={{ minHeight: "20vh" }}
-          className={ styles.question }
+          xs={6}
+          className={styles.red}
         >
-          <h1>{ question }</h1>
+          <FavoriteIcon className={styles.icons} />{answers.a}
         </Grid>
         <Grid
           item
           container
-          justify="space-between"
           alignItems="center"
-          xs={12}
-          style={{ minHeight: "40vh" }}
-          className={ styles.controls }
+          xs={6}
+          className={styles.blue}
         >
-          <div className={ styles.time }>{ this.state.time }</div>
-          <div className={ styles.right }>
-            <div className={ styles.answersCounter }>
-              <div className={ styles.count }>{ this.state.playersAnswered || 0 }</div>
-              <div className={ styles.answer }>
-                { name }
-              </div>
-            </div>
-          </div>
+          <GradeIcon className={styles.icons} />{answers.b}
         </Grid>
         <Grid
           item
           container
-          xs={12}
           alignItems="center"
-          justify="center"
-          style={{ minHeight: "30vh" }}
-          className={ styles.answers }
+          xs={6}
+          className={styles.orange}
         >
-          <Grid
-            item
-            container
-            alignItems="center"
-            xs={6}
-            className={ styles.red }
-          >
-            <FavoriteIcon className={ styles.icons }/>{ answers.a }
-          </Grid>
-          <Grid
-            item
-            container
-            alignItems="center"
-            xs={6}
-            className={ styles.blue }
-          >
-            <GradeIcon className={ styles.icons }/>{ answers.b }
-          </Grid>
-          <Grid
-            item
-            container
-            alignItems="center"
-            xs={6}
-            className={ styles.orange }
-          >
-            <FiberManualRecordRoundedIcon className={ styles.icons }/>{ answers.c }
-          </Grid>
-          <Grid
-            item
-            container
-            alignItems="center"
-            xs={6}
-            className={ styles.green }
-          >
-            <Brightness3SharpIcon className={ styles.icons }/>{ answers.d }
-          </Grid>
+          <FiberManualRecordRoundedIcon className={styles.icons} />{answers.c}
         </Grid>
-        <Footer pin={ pin }/>
+        <Grid
+          item
+          container
+          alignItems="center"
+          xs={6}
+          className={styles.green}
+        >
+          <Brightness3SharpIcon className={styles.icons} />{answers.d}
+        </Grid>
       </Grid>
-    )
-  }
-}
+      <Footer pin={pin} />
+    </Grid>
+  );
+};
+
+export default QuestionBlock;
