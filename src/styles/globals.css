@@ -1,135 +1,7 @@
-:root {
-
-  --background-color-aqua: rgb(65, 196, 222);
-  --background-color-blue: rgb(69, 163, 229);
-  --background-color-grey: rgb(51, 51, 51);
-  --background-color-orange: rgb(247, 142, 86);
-  --background-color-dark-purple: rgb(103, 58, 183);
-  --background-color-light-purple: rgb(138, 74, 243);
-  --background-color-yellow: rgb(243, 211, 51);
-  --background-color-white: rgb(242, 242, 242);
-  --background-transition-color-blue: rgb(65, 196, 222);
-  --background-transition-color-green: rgb(140, 199, 63);
-  --background-transition-color-yellow: rgb(243, 211, 51);
-  --background-transition-color-orange: rgb(247, 142, 86);
-
-  --color-black: rgb(0, 0, 0);
-  --color-purple: rgb(69, 24, 143);
-  --color-white: rgb(255, 255, 255);
-  --color-red: rgb(255, 51, 84);
-  --color-light-green: rgb(102, 191, 57);
-
-  --color-correct: rgb(138, 195, 74);
-  --color-incorrect: rgb(244, 67, 54);
-
-  --color-answer-red: rgb(244, 67, 54);
-  --color-answer-blue: rgb(63, 81, 181);
-  --color-answer-orange: rgb(255, 152, 0);
-  --color-answer-green: rgb(76, 175, 80);
-
-  --color-podium-purple: rgb(134, 75, 191);
-  --color-podium-bronze: rgb(205, 127, 50);
-  --color-podium-gold: rgb(255, 215, 0);
-  --color-podium-silver: rgb(192, 192, 192);
-
-
-
-  --max-width: 1100px;
-  --border-radius: 12px;
-  /* --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace; */
-  --primary-font: 'Montserrat', sans-serif;
-  --main-logo: 'Acme', sans-serif;
-  --secondary-font: 'Acme', sans-serif;
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-
-  --primary-glow: conic-gradient(
-    from 180deg at 50% 50%,
-    #16abff33 0deg,
-    #0885ff33 55deg,
-    #54d6ff33 120deg,
-    #0071ff33 160deg,
-    transparent 360deg
-  );
-  --secondary-glow: radial-gradient(
-    rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0)
-  );
-
-  --tile-start-rgb: 239, 245, 249;
-  --tile-end-rgb: 228, 232, 233;
-  --tile-border: conic-gradient(
-    #00000080,
-    #00000040,
-    #00000030,
-    #00000020,
-    #00000010,
-    #00000010,
-    #00000080
-  );
-
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: 180, 185, 188;
-  --card-border-rgb: 131, 134, 135;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-
-    --primary-glow: radial-gradient(rgba(1, 65, 255, 0.4), rgba(1, 65, 255, 0));
-    --secondary-glow: linear-gradient(
-      to bottom right,
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0),
-      rgba(1, 65, 255, 0.3)
-    );
-
-    --tile-start-rgb: 2, 13, 46;
-    --tile-end-rgb: 2, 5, 19;
-    --tile-border: conic-gradient(
-      #ffffff80,
-      #ffffff40,
-      #ffffff30,
-      #ffffff20,
-      #ffffff10,
-      #ffffff10,
-      #ffffff80
-    );
-
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
-  }
-}
-
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
 }
 
 a {
@@ -137,8 +9,6 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+body {
+  padding-right: 0 !important;
 }
