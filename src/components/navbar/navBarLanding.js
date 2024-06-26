@@ -15,8 +15,9 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import NavItem from './customLink'
-
-function Navbar() {
+import Link from 'next/link'
+import { BLUE, GRAY } from '../../theme/palette'
+function NavBarLanding() {
   const [mobileOpen, setMobileOpen] = React.useState(false)
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
@@ -29,10 +30,16 @@ function Navbar() {
   const drawer = (
     <div>
       <List>
-        {['Overview', 'Join Quiz', 'Sign In'].map((text) => (
-          <ListItem button key={text} onClick={() => setMobileOpen(false)}>
-            <ListItemText primary={text} />
-          </ListItem>
+        {[
+          { text: 'Overview', link: '/' },
+          { text: 'Join Quiz', link: '/' },
+          { text: 'Sign In', link: '/auth' },
+        ].map((item, index) => (
+          <Link href={item.link} passHref key={index}>
+            <ListItem button component="a" onClick={() => setMobileOpen(false)}>
+              <ListItemText primary={item.text} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </div>
@@ -62,11 +69,18 @@ function Navbar() {
           </Stack>
           {/* Display the menu icon only on small screens */}
           <IconButton
-            color="#686868"
+            color={GRAY['light']}
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { xs: 'block', sm: 'none' } }}
+            sx={{
+              mr: 2,
+              display: { xs: 'block', sm: 'none' },
+              '&:hover': {
+                color: BLUE['light'],
+              },
+              transition: '0.3s ease',
+            }}
           >
             <MenuIcon />
           </IconButton>
@@ -93,4 +107,4 @@ function Navbar() {
   )
 }
 
-export default Navbar
+export default NavBarLanding

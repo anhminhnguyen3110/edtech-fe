@@ -28,6 +28,7 @@
     "dayjs": "1.11.7",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.4",
+    "js-cookie": "^3.0.5",
     "next": "13.2.4",
     "notistack": "^3.0.1",
     "query-string": "^6.9.0",

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Typography, Box, Stack } from '@mui/material'
 import Image from 'next/image'
-import welcomeImage from '../../public/study.png' // Adjust the path according to your project structure
+import welcomeImage from '../../../public/study.png' // Adjust the path according to your project structure
 
 const LandingBody = () => {
   return (

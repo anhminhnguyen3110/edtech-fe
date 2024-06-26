@@ -4,6 +4,7 @@ import React from 'react'
 import { Box, Typography } from '@mui/material'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
+import { BLUE, GRAY } from '@/theme/palette'
 
 const Footer = () => {
   const router = useRouter()
@@ -12,7 +13,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: isHomePage ? '#D9D9D9' : 'primary.main',
+        backgroundColor: isHomePage ? GRAY['main'] : 'primary.main',
         color: isHomePage ? 'black' : 'white',
         display: 'flex',
         justifyContent: 'space-between',
