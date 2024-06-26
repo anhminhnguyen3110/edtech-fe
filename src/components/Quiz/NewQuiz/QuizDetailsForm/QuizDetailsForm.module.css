@@ -1,8 +1,0 @@
-@import url('../../../../styles/_colors.css');
-@import url('../../../../styles/_fonts.css');
-
-.continueBtn > span {
-    font-family: var(--secondary-font);
-    margin: 0 auto;
-}
-  
