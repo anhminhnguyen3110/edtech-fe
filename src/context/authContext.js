@@ -1,7 +1,6 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import api from '../lib/api'
-import axios from 'axios'
 import Cookies from 'js-cookie'
 
 const AuthContext = createContext()
@@ -10,23 +9,29 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [accessToken, setAccessToken] = useState(null)
   const [refreshToken, setRefreshToken] = useState(null)
+  const [loading, setLoading] = useState(true)
   const Router = useRouter()
 
   useEffect(() => {
     const token = Cookies.get('accessToken')
     const refreshToken = Cookies.get('refreshToken')
     const tokenExpiry = Cookies.get('accessTokenExpiry')
-    console.log('Token:', token)
-    console.log('Token expiry:', Cookies.get('accessTokenExpiry'))
+
     if (token && tokenExpiry) {
       const now = new Date()
       const expiryDate = new Date(tokenExpiry)
       if (expiryDate > now) {
         setAccessToken(token)
         setIsAuthenticated(true)
+        setLoading(false)
       } else if (refreshToken) {
-        refreshAccessToken()
+        console.log('Token expired, attempting to refresh...')
+        refreshAccessToken().finally(() => setLoading(false))
+      } else {
+        setLoading(false)
       }
+    } else {
+      setLoading(false)
     }
 
     const interval = setInterval(() => {
@@ -38,8 +43,9 @@ export const AuthProvider = ({ children }) => {
         refreshAccessToken()
       }
       if (expiryDate <= now && refreshToken) {
+        refreshAccessToken()
       }
-    }, 1 * 15 * 1000) // Adjust interval as needed
+    }, process.env.NEXT_PUBLIC_REFRESH_TOKEN_RATE_IN_MINUTES * 60 * 1000) // Adjust interval as needed
 
     return () => clearInterval(interval)
   }, [])
@@ -54,10 +60,11 @@ export const AuthProvider = ({ children }) => {
     setAccessToken(accessToken)
     setRefreshToken(refreshToken)
     setIsAuthenticated(true)
-    Router.push('/')
+    Router.push('/quiz')
   }
 
   const logout = () => {
+    console.log('Logging out...')
     Cookies.remove('accessToken')
     Cookies.remove('refreshToken')
     Cookies.remove('accessTokenExpiry')
@@ -81,22 +88,14 @@ export const AuthProvider = ({ children }) => {
           },
         }
       )
-      // const response = await axios.post(`${process.env.NEXT_PUBLIC_API}/${process.env.NEXT_PUBLIC_API_PREFIX}/auth/refresh-token`, {}, {
-      //     headers: {
-      //     'accept': 'application/json',
-      //     'Authorization': `Bearer ${Cookies.get('refreshToken')}`
-      //     }
-      // })
       console.log('Refresh token response:', response.data)
       const { accessToken, expiresInMinutes, refreshToken } = response.data
       const now = new Date()
       const expirationDate = new Date(now.getTime() + expiresInMinutes * 60 * 1000)
       console.log('after refresh token response')
       Cookies.set('accessToken', accessToken, { expires: expiresInMinutes / 1440 })
-      Cookies.set('refreshToken', refreshToken)
       Cookies.set('accessTokenExpiry', expirationDate.toISOString())
       console.log('Access token refreshed:', Cookies.get('accessToken'))
-      console.log('Refresh token refreshed:', Cookies.get('refreshToken'))
       setAccessToken(accessToken)
       setIsAuthenticated(true)
     } catch (error) {
@@ -106,7 +105,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, accessToken, login, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, accessToken, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   )

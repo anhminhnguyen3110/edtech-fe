@@ -1,109 +1,82 @@
-import React, { useState } from 'react'
-import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  Typography,
-  Drawer,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from '@mui/material'
-import { styled } from '@mui/material/styles'
-import MenuIcon from '@mui/icons-material/Menu'
+import React, { useState, useRef } from 'react'
+import { Drawer, List, CssBaseline, Toolbar, useMediaQuery, useTheme } from '@mui/material'
+import { styled } from '@mui/system'
+import { GRAY } from '../../theme/palette'
+import NavItem from './navItem'
 import AssessmentIcon from '@mui/icons-material/Assessment'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
+import AppBarMain from './appBarMain'
 
-const drawerWidth = 240
+const navItems = [
+  {
+    name: 'Assessments',
+    icon: <AssessmentIcon sx={{ fontSize: '2rem' }} />,
+    path: '/',
+  },
+  {
+    name: 'Quiz',
+    icon: <SportsEsportsIcon sx={{ fontSize: '2rem' }} />,
+    path: '/quiz',
+  },
+]
 
-const Root = styled('div')(({ theme }) => ({
-  display: 'flex',
-}))
-
-const AppBarStyled = styled(AppBar)(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}))
-
-const DrawerStyled = styled(Drawer)(({ theme, open }) => ({
+const DrawerStyled = styled(Drawer)(({ theme, open, drawerWidth }) => ({
+  width: open ? drawerWidth : 'fit-content',
+  flexShrink: 0,
+  whiteSpace: 'nowrap',
+  transition: 'width 0.3s ease',
+  overflowX: 'hidden',
+  backgroundColor: GRAY.semiLight,
   '& .MuiDrawer-paper': {
-    position: 'relative',
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    boxSizing: 'border-box',
-    ...(!open && {
-      overflowX: 'hidden',
-      transition: theme.transitions.create('width', {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-      }),
-      width: theme.spacing(7),
-      [theme.breakpoints.up('sm')]: {
-        width: theme.spacing(9),
-      },
-    }),
+    width: open ? drawerWidth : 'fit-content',
+    transition: 'width 0.3s ease',
+    overflowX: 'hidden',
+    backgroundColor: GRAY.semiLight,
   },
 }))
 
-const NavBarMain = () => {
+const drawerWidth = 200
+
+const NavBarMain = ({ children }) => {
   const [open, setOpen] = useState(false)
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const listRef = useRef(null)
 
   const toggleDrawer = () => {
     setOpen(!open)
   }
 
   return (
-    <Root>
-      <AppBarStyled position="fixed" open={open} sx={{ backgroundColor: 'primary.main' }}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
-            edge="start"
-            sx={{ marginRight: 5 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            EDTech Assistant
-          </Typography>
-        </Toolbar>
-      </AppBarStyled>
-      <DrawerStyled variant="permanent" open={open}>
+    <div style={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBarMain open={open} toggleDrawer={toggleDrawer} />
+      <DrawerStyled
+        theme={theme}
+        variant={isMobile ? 'temporary' : 'permanent'}
+        anchor="left"
+        open={open}
+        drawerWidth={drawerWidth}
+        onClose={toggleDrawer}
+      >
         <Toolbar />
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <AssessmentIcon />
-            </ListItemIcon>
-            <ListItemText primary="Assignment" />
-          </ListItem>
-          <ListItem button>
-            <ListItemIcon>
-              <SportsEsportsIcon />
-            </ListItemIcon>
-            <ListItemText primary="Quizzes" />
-          </ListItem>
+        <List ref={listRef}>
+          {navItems.map((item, index) => (
+            <NavItem key={index} item={item} open={open} />
+          ))}
         </List>
       </DrawerStyled>
-    </Root>
+      <main
+        style={{
+          flexGrow: 1,
+          padding: '24px',
+          marginLeft: isMobile || open ? '0px' : '64px',
+        }}
+      >
+        <Toolbar />
+        {children}
+      </main>
+    </div>
   )
 }
 
