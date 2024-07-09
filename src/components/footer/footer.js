@@ -13,12 +13,15 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        backgroundColor: isHomePage ? GRAY['main'] : 'primary.main',
+        backgroundColor: isHomePage ? GRAY['homePage'] : BLUE.main,
         color: isHomePage ? 'black' : 'white',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '1rem',
+        width: '100%',
+        zIndex: 2,
+        position: 'relative',
       }}
     >
       <Image

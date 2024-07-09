@@ -1,0 +1,13 @@
+.iconButton {
+  transition: color 0.3s;
+}
+
+.iconButton:hover .toggleIcon {
+  filter: hue-rotate(180deg) brightness(1.2) contrast(1.2);
+}
+
+.toggleIcon {
+  width: 24px;
+  height: 24px;
+  transition: filter 0.3s;
+}

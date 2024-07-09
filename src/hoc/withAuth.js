@@ -1,23 +1,29 @@
 import { useAuth } from '../context/authContext'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 const withAuth = (WrappedComponent) => {
   const WithAuthComponent = (props) => {
-    const { isAuthenticated } = useAuth()
+    const { isAuthenticated, loading } = useAuth()
     const Router = useRouter()
-
+    const [isCheckingAuth, setIsCheckingAuth] = useState(true)
+    console.log('isAuthenticated:', isAuthenticated)
+    console.log('loading:', loading)
     useEffect(() => {
-      if (!isAuthenticated) {
-        Router.replace('/login')
+      if (!loading) {
+        if (!isAuthenticated) {
+          Router.replace('/auth')
+        } else {
+          setIsCheckingAuth(false)
+        }
       }
-    }, [Router, isAuthenticated])
+    }, [Router, isAuthenticated, loading])
 
-    if (isAuthenticated) {
-      return <WrappedComponent {...props} />
-    } else {
-      return null
+    if (loading || isCheckingAuth) {
+      return null // Return null to avoid rendering the component while checking auth
     }
+
+    return <WrappedComponent {...props} />
   }
 
   WithAuthComponent.displayName = `WithAuth(${
