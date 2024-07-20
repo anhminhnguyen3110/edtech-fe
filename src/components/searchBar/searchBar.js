@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Box, TextField } from '@mui/material'
+import { Box, TextField, InputAdornment } from '@mui/material'
+import SearchIcon from '@mui/icons-material/Search'
 import { BLUE, GRAY } from '@/theme/palette'
 
 const SearchBar = ({ placeholder = 'Search', onSearch }) => {
@@ -21,8 +22,16 @@ const SearchBar = ({ placeholder = 'Search', onSearch }) => {
         placeholder={placeholder}
         value={searchValue}
         onChange={handleChange}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          ),
+        }}
         sx={{
           margin: 2,
+          width: '17rem', // Adjust the width to make the bar longer
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
               borderColor: GRAY.light, // Default border color

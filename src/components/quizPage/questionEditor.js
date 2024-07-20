@@ -2,7 +2,8 @@ import React from 'react'
 import { Box, Paper, TextField, Button } from '@mui/material'
 import { BLUE } from '@/theme/palette'
 import CustomTickButton from './customTickButton' // Ensure the correct path is used
-import { BACKGROUND_ANSWER } from '@/theme/palette'
+import { BACKGROUND_ANSWER, TRUE_FALSE_ANSWER } from '@/theme/palette'
+
 const QuestionEditor = ({ question, onUpdate, unsavedChanges, onSave, onDelete }) => {
   const handleQuestionTextChange = (text) => {
     onUpdate({ ...question, text })
@@ -14,7 +15,6 @@ const QuestionEditor = ({ question, onUpdate, unsavedChanges, onSave, onDelete }
   }
 
   const handleCorrectAnswerChange = (index) => {
-    // onUpdate({ ...question, correctAnswer: index });
     const { correctAnswer } = question
     let updatedCorrectAnswer
 
@@ -38,6 +38,7 @@ const QuestionEditor = ({ question, onUpdate, unsavedChanges, onSave, onDelete }
           display: 'flex',
           alignItems: 'center',
           mb: 2,
+          maxWidth: '90%',
         }}
       >
         <TextField
@@ -53,7 +54,6 @@ const QuestionEditor = ({ question, onUpdate, unsavedChanges, onSave, onDelete }
             },
           }}
         />
-        <Box sx={{ width: '48px' }}></Box> {/* Placeholder for alignment */}
       </Box>
       {question.answers.map((answer, index) => (
         <Box
@@ -61,6 +61,7 @@ const QuestionEditor = ({ question, onUpdate, unsavedChanges, onSave, onDelete }
           sx={{
             display: 'flex',
             alignItems: 'center',
+            gap: '1rem',
             mb: 2,
           }}
         >
@@ -72,14 +73,16 @@ const QuestionEditor = ({ question, onUpdate, unsavedChanges, onSave, onDelete }
             InputProps={{
               readOnly: question.type === 'TRUE_FALSE',
               style: {
-                backgroundColor: BACKGROUND_ANSWER[index % BACKGROUND_ANSWER.length],
+                backgroundColor:
+                  question.type === 'TRUE_FALSE'
+                    ? TRUE_FALSE_ANSWER[index % 2]
+                    : BACKGROUND_ANSWER[index % BACKGROUND_ANSWER.length],
                 color: 'white',
                 fontWeight: 'bold',
               },
             }}
           />
           <CustomTickButton
-            // selected={index === question.correctAnswer}
             selected={question.correctAnswer.includes(index)}
             onClick={() => handleCorrectAnswerChange(index)}
           />

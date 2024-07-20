@@ -15,3 +15,4 @@ export const GRAY = {
 }
 
 export const BACKGROUND_ANSWER = ['#FFBD39', '#E61C5D', '#930077', '#3A0088']
+export const TRUE_FALSE_ANSWER = ['#1260be', '#E61C5D']

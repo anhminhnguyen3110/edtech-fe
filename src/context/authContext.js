@@ -48,6 +48,7 @@ export const AuthProvider = ({ children }) => {
     }, process.env.NEXT_PUBLIC_REFRESH_TOKEN_RATE_IN_MINUTES * 60 * 1000) // Adjust interval as needed
 
     return () => clearInterval(interval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const login = (accessToken, refreshToken, expiresInMinutes) => {

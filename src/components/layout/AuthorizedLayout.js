@@ -35,7 +35,7 @@ const AuthorizedLayout = ({ children }) => {
         <main
           style={{
             flexGrow: 1,
-            padding: '24px',
+            padding: isMobile ? '10px' : '24px',
             marginLeft: isMobile || open ? '0px' : '0px',
             display: 'flex',
             flexDirection: 'column',

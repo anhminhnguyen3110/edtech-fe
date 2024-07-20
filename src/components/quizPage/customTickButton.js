@@ -1,18 +1,18 @@
 import React from 'react'
-import { IconButton, Box } from '@mui/material'
-import { Check } from '@mui/icons-material'
+import { IconButton } from '@mui/material'
+import CustomCheckIcon from './customCheckIcon' // Adjust the import path as necessary
 
 const CustomTickButton = ({ selected, onClick }) => {
   return (
     <IconButton
       onClick={onClick}
       sx={{
-        width: 48,
-        height: 48,
+        width: 40,
+        height: 40,
         margin: '3px',
         backgroundColor: selected ? 'lightgreen' : 'inherit',
         borderRadius: '50%',
-        border: selected ? '2px solid green' : '1px solid grey',
+        border: selected ? 'none' : '1px solid grey',
         '&:hover': {
           backgroundColor: selected ? 'lightgreen' : 'lightgrey',
         },
@@ -21,7 +21,7 @@ const CustomTickButton = ({ selected, onClick }) => {
         alignItems: 'center',
       }}
     >
-      {selected && <Check sx={{ color: 'green' }} />}
+      {selected && <CustomCheckIcon sx={{ fontSize: '2rem' }} />}
     </IconButton>
   )
 }

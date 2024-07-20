@@ -10,13 +10,23 @@ const QuizItem = ({ quiz }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen is mobile-sized
   const router = useRouter()
+
   const onEditClick = () => {
     router.push(`/quiz/${quiz.id}`)
   }
+
+  // Function to truncate the quiz name if it exceeds 15 characters
+  const truncateText = (text, maxLength) => {
+    if (text.length > maxLength) {
+      return text.slice(0, maxLength) + '...'
+    }
+    return text
+  }
+
   return (
     <CustomBox>
       <Box display="flex" alignItems="center" justifyContent="space-between" padding="16px">
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" flex="1" minWidth="0">
           <RocketLaunchIcon
             style={{
               marginRight: '16px',
@@ -26,12 +36,20 @@ const QuizItem = ({ quiz }) => {
           />
           <Typography
             variant="h6"
-            sx={{ fontWeight: '500', fontSize: isMobile ? '1.1rem' : '1.5rem' }}
+            sx={{
+              fontWeight: '500',
+              fontSize: isMobile ? '1.1rem' : '1.5rem',
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              flex: '1',
+              minWidth: '0',
+            }}
           >
-            {quiz.name}
+            {isMobile ? truncateText(quiz.name, 12) : quiz.name}
           </Typography>
         </Box>
-        <Box display="flex" alignItems="center">
+        <Box display="flex" alignItems="center" flexShrink="0">
           <IconButton onClick={onEditClick}>
             <EditIcon sx={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 'bold' }} />
           </IconButton>

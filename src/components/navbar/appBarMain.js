@@ -7,6 +7,7 @@ import {
   Menu,
   MenuItem,
   useMediaQuery,
+  Popover,
   useTheme,
   Avatar,
   Divider,
@@ -17,6 +18,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { BLUE } from '../../theme/palette'
 import api from '@/lib/api'
+import Notification from '../notification/notification'
+
 const ToggleIcon = styled('img')({
   width: 24,
   height: 24,
@@ -91,9 +94,7 @@ const AppBarMain = ({ open, toggleDrawer, logout }) => {
           EDTech Assistant
         </Typography>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
-          <IconButton color="inherit" onClick={handleNotificationClick}>
-            <NotificationsIcon />
-          </IconButton>
+          <Notification />
           <Typography
             variant="body1"
             noWrap
@@ -102,22 +103,24 @@ const AppBarMain = ({ open, toggleDrawer, logout }) => {
           >
             {accountInfo ? accountInfo.name : 'Name'}
           </Typography>
-          <Menu
+          <Popover
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
             anchorOrigin={{
               vertical: 'bottom',
-              horizontal: 'right',
+              horizontal: 'left',
             }}
             transformOrigin={{
               vertical: 'top',
-              horizontal: 'right',
+              horizontal: 'left',
             }}
             getContentAnchorEl={null}
             PaperProps={{
-              style: {
-                marginTop: '10px', // Adjust this value as needed to position the menu below the AppBar
+              sx: {
+                borderRadius: '20px',
+                ml: 2, // Use marginLeft: 'auto' to push it further right
+                mt: 2, // Adjust marginTop to position it correctly
               },
             }}
           >
@@ -138,7 +141,7 @@ const AppBarMain = ({ open, toggleDrawer, logout }) => {
               <LogoutIcon sx={{ mr: 1 }} />
               Log out
             </MenuItem>
-          </Menu>
+          </Popover>
         </div>
       </Toolbar>
     </AppBar>
