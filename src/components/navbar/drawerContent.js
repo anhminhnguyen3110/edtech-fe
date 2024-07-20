@@ -17,9 +17,9 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 
 const navItems = [
   {
-    name: 'Assessments',
+    name: 'Assignment',
     icon: <AssessmentIcon sx={{ fontSize: '2rem' }} />,
-    path: '/assessment',
+    path: '/assignment',
   },
   {
     name: 'Quiz',

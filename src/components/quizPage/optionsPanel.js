@@ -102,6 +102,7 @@ const OptionsPanel = ({ question, onUpdate }) => {
         </label>
         {question.image && (
           <Box sx={{ mt: 2, position: 'relative' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={question.image}
               alt="Background"

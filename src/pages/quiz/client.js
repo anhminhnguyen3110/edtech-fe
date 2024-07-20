@@ -15,6 +15,7 @@ import {
 import api from '@/lib/api'
 import { BLUE, GRAY } from '@/theme/palette'
 import CustomSnackbar from '@/components/snackBar/customSnackBar'
+import MessageBox from '@/components/box/messageBox'
 import { useRouter } from 'next/router'
 
 export const QuizPage = () => {
@@ -23,7 +24,7 @@ export const QuizPage = () => {
   const [quizzes, setQuizzes] = useState([]) // State to hold quizzes data
   const [totalPages, setTotalPages] = useState(1) // Total number of pages
   const [currentPage, setCurrentPage] = useState(1) // Current page
-  const itemsPerPage = 3 // Items per page
+  const itemsPerPage = 4 // Items per page
   const [errorMessage, setErrorMessage] = useState(null) // State to hold error message
   const [openSnackbar, setOpenSnackbar] = useState(false) // State to control Snackbar open state
   const [loading, setLoading] = useState(false) // State to manage loading state
@@ -152,17 +153,7 @@ export const QuizPage = () => {
         severity="error"
       />
       {quizzes.length === 0 ? (
-        <Box
-          textAlign="center"
-          p="24px"
-          bgcolor={GRAY.light}
-          borderRadius="8px"
-          marginBottom="32px"
-        >
-          <Typography variant="body1" color="textSecondary" sx={{ fontSize: '1.4rem' }}>
-            No quizzes available.
-          </Typography>
-        </Box>
+        <MessageBox message="No quizzes found." />
       ) : (
         <>
           <Box marginTop="32px">

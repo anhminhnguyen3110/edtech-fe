@@ -1,7 +1,7 @@
 import React from 'react'
 import { Paper, Typography, Grid, Box, Button } from '@mui/material'
-import { Add, Check } from '@mui/icons-material'
-import { BACKGROUND_ANSWER } from '@/theme/palette' // Ensure this import is correct
+import { Add } from '@mui/icons-material'
+import { BACKGROUND_ANSWER, TRUE_FALSE_ANSWER } from '@/theme/palette' // Ensure this import is correct
 
 const QuestionList = ({ questions, selectedQuestionId, onSelect, onAdd }) => (
   <Paper sx={{ p: 2 }}>
@@ -84,45 +84,31 @@ const QuestionList = ({ questions, selectedQuestionId, onSelect, onAdd }) => (
                     <Typography
                       variant="body2"
                       sx={{
-                        backgroundColor: BACKGROUND_ANSWER[index % BACKGROUND_ANSWER.length],
+                        backgroundColor:
+                          q.type === 'TRUE_FALSE'
+                            ? TRUE_FALSE_ANSWER[index % 2]
+                            : BACKGROUND_ANSWER[index % BACKGROUND_ANSWER.length],
                         color: 'white',
                         border: '1px solid #ccc',
                         borderRadius: 1,
                         p: 0.5,
-                        textAlign: 'center',
+                        textAlign: 'left',
                         fontSize: {
                           xs: '0.75rem', // small size for phone screens
                           sm: '0.875rem', // default size
                         },
                         whiteSpace: 'nowrap',
                         overflow: 'hidden',
-                        fontWeight: 'bold',
+                        textOverflow: 'ellipsis',
+                        display: 'block',
+                        fontWeight: q.correctAnswer.includes(index) ? '1000' : 'normal',
                         width: '100%',
-                        height: '100%', // Make sure the boxes fill the grid space
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        position: 'relative',
-                        minHeight: '32px', // Ensure the box is large enough to store the tick
+                        maxHeight: q.type === 'TRUE_FALSE' ? '60px' : '40px', // Fixed height for answer boxes
+                        lineHeight: q.type === 'TRUE_FALSE' ? '30px' : '20px',
                       }}
                     >
                       {answer}
                     </Typography>
-                    {q.correctAnswer.includes(index) && (
-                      <Check
-                        sx={{
-                          position: 'absolute',
-                          right: 4,
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          backgroundColor: 'white',
-                          borderRadius: '50%',
-                          fontSize: '1.1rem',
-                          color: 'green',
-                          padding: '2px',
-                        }}
-                      />
-                    )}
                   </Box>
                 </Grid>
               ))}
