@@ -94,7 +94,7 @@ const Notification = () => {
 
   useEffect(() => {
     if (!accessToken) return
-    socket.current = io('http://localhost:8180/notifications', {
+    socket.current = io(process.env.NEXT_PUBLIC_NOTIFICATION_WEB_SOCKET_URL, {
       transports: ['websocket'],
       auth: {
         token: `${accessToken}`,

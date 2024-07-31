@@ -64,7 +64,7 @@ function NavBarLanding() {
           {/* Display the links centered */}
           <Stack direction="row" spacing={4} sx={{ display: { xs: 'none', sm: 'flex' } }}>
             <NavItem text="Overview" active={true} link="/" />
-            <NavItem text="Join Quiz" active={false} link="/" />
+            <NavItem text="Join Quiz" active={false} link="/join" />
             <NavItem text="Sign In" active={false} link="/auth" />
           </Stack>
           {/* Display the menu icon only on small screens */}
