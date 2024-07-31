@@ -19,7 +19,9 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome'
 import CommonIssueList from '@/components/classAssignmentPage/commonIssueList'
 import LessonList from '@/components/classAssignmentPage/lessonList'
 import QuizList from '@/components/classAssignmentPage/quizList'
-import NotificationSnackbar from '@/components/snackBar/notificationSnackBar'
+import NotificationSnackbar from '@/components/snackBar/notificationSnackbar'
+import GenerateQuizModal from '@/components/classAssignmentPage/generateQuizModal'
+import GenerateLessonModal from '@/components/classAssignmentPage/generateLessonModal'
 import { useAuth } from '@/context/authContext'
 import { io } from 'socket.io-client'
 
@@ -35,6 +37,8 @@ const ClassAssignmentDetail = () => {
   const [error, setError] = useState(false)
   const [classAssignment, setClassAssignment] = useState(null)
   const [initialized, setInitialized] = useState(false)
+  const [openGenerateQuizModal, setOpenGenerateQuizModal] = useState(false)
+  const [openGenerateLessonModal, setOpenGenerateLessonModal] = useState(false)
   const router = useRouter()
   const { assignmentId, classAssignmentId } = router.query
   const { accessToken } = useAuth()
@@ -70,16 +74,32 @@ const ClassAssignmentDetail = () => {
     }
   }
 
-  const handleGenerateQuiz = async () => {
+  const handleCloseQuizModal = () => {
+    setOpenGenerateQuizModal(false)
+  }
+
+  const handleOpenQuizModal = () => {
+    setOpenGenerateQuizModal(true)
+  }
+
+  const handleCloseLessonModal = () => {
+    setOpenGenerateLessonModal(false)
+  }
+
+  const handleOpenLessonModal = () => {
+    setOpenGenerateLessonModal(true)
+  }
+
+  const handleGenerateQuiz = async (prompt, multipleChoice, trueFalse, multipleAnswer) => {
     try {
       const response = await api.post(
         `/quizzes/generate`,
         {
           classAssignmentId: parseInt(classAssignmentId),
-          prompt: 'I want to generate a quiz to improve issues of students',
-          numberOfMultipleChoiceQuestions: 7,
-          numberOfTrueFalseQuestions: 7,
-          numberOfMultipleAnswerQuestions: 7,
+          prompt: prompt,
+          numberOfMultipleChoiceQuestions: multipleChoice,
+          numberOfTrueFalseQuestions: trueFalse,
+          numberOfMultipleAnswerQuestions: multipleAnswer,
         },
         { authRequired: true }
       )
@@ -97,14 +117,17 @@ const ClassAssignmentDetail = () => {
       setSnackbarOpen(true)
     }
   }
-  const handleGenerateLesson = async () => {
+  const handleGenerateLesson = async (name, prompt) => {
     console.log('Generating lesson...')
+    console.log('Name:', name)
+    console.log('Prompt:', prompt)
     try {
       const response = await api.post(
         `/lessons`,
         {
           classAssignmentId: parseInt(classAssignmentId),
-          name: 'untitled lesson',
+          name: name,
+          prompt: prompt,
         },
         { authRequired: true }
       )
@@ -369,14 +392,14 @@ const ClassAssignmentDetail = () => {
             <Grid item xs="auto">
               <Box sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                 <ButtonComponent
-                  onClick={handleGenerateQuiz}
+                  onClick={handleOpenQuizModal}
                   style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
                   <VideogameAssetIcon />
                   Generate Quiz
                 </ButtonComponent>
                 <ButtonComponent
-                  onClick={handleGenerateLesson}
+                  onClick={handleOpenLessonModal}
                   style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
                   <AutoAwesomeIcon />
@@ -431,6 +454,16 @@ const ClassAssignmentDetail = () => {
           </Stack>
         </Box>
       )}
+      <GenerateQuizModal
+        open={openGenerateQuizModal}
+        handleClose={handleCloseQuizModal}
+        generateQuiz={handleGenerateQuiz}
+      />
+      <GenerateLessonModal
+        open={openGenerateLessonModal}
+        handleClose={handleCloseLessonModal}
+        generateLesson={handleGenerateLesson}
+      />
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}

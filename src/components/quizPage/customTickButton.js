@@ -10,7 +10,7 @@ const CustomTickButton = ({ selected, onClick }) => {
         width: 40,
         height: 40,
         margin: '3px',
-        backgroundColor: selected ? 'lightgreen' : 'inherit',
+        backgroundColor: selected ? 'lightgreen' : 'white',
         borderRadius: '50%',
         border: selected ? 'none' : '1px solid grey',
         '&:hover': {
