@@ -142,6 +142,10 @@ const Play = () => {
     socket.emit('ANSWER_SUBMITTED', payload)
   }
 
+  const handleTimesUp = () => {
+    setGameState('WAIT_RESULT')
+  }
+
   const renderDisconnected = () => (
     <>
       <Typography
@@ -192,7 +196,11 @@ const Play = () => {
     <Box display="flex" flexDirection="column" alignItems="center" height="100vh">
       {gameState === 'WAITING' && <Ready />}
       {gameState === 'PLAYING' && (
-        <Answer question={currentQuestion} answerQuestion={handleAnswerClick} />
+        <Answer
+          question={currentQuestion}
+          answerQuestion={handleAnswerClick}
+          handleTimesUp={handleTimesUp}
+        />
       )}
       {gameState === 'WAIT_RESULT' && <WaitResult />}
       {gameState === 'RESULT' && <Result result={playerResult} />}
@@ -204,7 +212,7 @@ const Play = () => {
     <Box
       sx={{
         height: '100vh',
-        background: BLUE.main,
+        background: gameState !== 'RESULT' ? BLUE.main : '',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

@@ -12,10 +12,7 @@ import {
   Tabs,
 } from '@mui/material'
 import { useAuth } from '../../context/authContext'
-import styles from './signIn.module.css'
-import { useRouter } from 'next/router'
 import withNonAuth from '../../hoc/withNonAuth'
-import api from '@/lib/api'
 import { BLUE } from '@/theme/palette'
 
 const CombinedAuth = () => {
@@ -108,13 +105,26 @@ const CombinedAuth = () => {
   }
 
   return (
-    <Box className={styles.background}>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        backgroundImage: `url(bg-signin.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       <Container
         maxWidth="md"
-        className={styles.container}
         sx={{
           width: isMobile ? '80%' : '100%',
           textAlign: isMobile ? 'center' : 'left',
+          background: 'white',
+          padding: '2rem',
+          borderRadius: '8px',
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Grid container spacing={2} alignItems="center">

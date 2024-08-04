@@ -136,3 +136,5 @@ export const AssessmentPage = () => {
     </Container>
   )
 }
+
+export default AssessmentPage

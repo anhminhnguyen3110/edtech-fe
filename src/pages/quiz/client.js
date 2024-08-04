@@ -169,3 +169,5 @@ export const QuizPage = () => {
     </Container>
   )
 }
+
+export default QuizPage

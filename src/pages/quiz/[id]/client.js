@@ -18,7 +18,7 @@ import QuestionEditor from '@/components/quizPage/questionEditor'
 import OptionsPanel from '@/components/quizPage/optionsPanel'
 import { useRouter } from 'next/router'
 import api from '@/lib/api'
-import { times } from 'underscore'
+import { useHistory } from '@/context/historyContext'
 
 const QuizCreator = () => {
   const [quizName, setQuizName] = useState('Sample Quiz')
@@ -33,6 +33,7 @@ const QuizCreator = () => {
   const [error, setError] = useState(false)
   const router = useRouter()
   const { id } = router.query
+  const { previousPath } = useHistory()
 
   const selectedQuestion = questions.find((q) => q.id === selectedQuestionId)
 
@@ -140,7 +141,12 @@ const QuizCreator = () => {
   }
 
   const handleBackClick = () => {
-    router.push('/quiz')
+    console.log('Previous path:', previousPath)
+    if (previousPath && /\/assignment\/\d+\/class-assignment\/\d+/.test(previousPath)) {
+      router.push(previousPath)
+    } else {
+      router.push('/quiz')
+    }
   }
 
   const handleSaveQuestions = async () => {

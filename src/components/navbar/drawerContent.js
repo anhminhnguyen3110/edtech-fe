@@ -14,7 +14,8 @@ import { GRAY } from '../../theme/palette'
 import NavItem from './navItem'
 import AssessmentIcon from '@mui/icons-material/Assessment'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
-
+import AssistantIcon from '@mui/icons-material/Assistant'
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 const navItems = [
   {
     name: 'Assignment',
@@ -25,6 +26,11 @@ const navItems = [
     name: 'Quiz',
     icon: <SportsEsportsIcon sx={{ fontSize: '2rem' }} />,
     path: '/quiz',
+  },
+  {
+    name: 'AI Assistant',
+    icon: <ChatOutlinedIcon sx={{ fontSize: '2rem' }} />,
+    path: '/assistant',
   },
 ]
 

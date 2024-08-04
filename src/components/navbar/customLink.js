@@ -14,11 +14,11 @@ const AnimatedUnderline = styled('span')(({ theme }) => ({
     height: '4px',
     bottom: '-8px', // Adjust this to add space between text and underline
     left: '50%',
-    backgroundColor: BLUE['light'],
+    backgroundColor: BLUE['dark'],
     transition: 'width 0.3s ease, left 0.3s ease',
   },
   '&:hover': {
-    color: BLUE['light'], // Change text color on hover
+    color: BLUE['dark'], // Change text color on hover
     transition: '0.3s ease',
   },
   '&:hover:before': {
@@ -32,10 +32,10 @@ function NavItem({ text, active, link }) {
     <Typography
       component="a"
       href={link}
-      color={active ? BLUE['light'] : 'black'}
+      color={active ? BLUE['main'] : 'black'}
       sx={{
         fontSize: { xs: '1rem', md: '1.25rem' },
-        borderBottom: active ? `4px solid ${BLUE['light']}` : 'none',
+        borderBottom: active ? `4px solid ${BLUE['main']}` : 'none',
         display: 'inline-block',
         cursor: 'pointer',
         textDecoration: 'none', // Remove default underline for links
