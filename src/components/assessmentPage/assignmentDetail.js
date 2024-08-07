@@ -2,7 +2,6 @@ import React from 'react'
 import { Typography, Box } from '@mui/material'
 import CriteriaList from './criteriaList' // Assuming CriteriaList is a custom component
 import ClassesList from './classesList'
-import CustomBox from '../box/customBox'
 
 const AssignmentDetails = ({ assignment }) => {
   return (

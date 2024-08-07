@@ -1,7 +1,7 @@
 import { alpha } from '@mui/material/styles'
 
 export const BLUE = {
-  light: '#3CA3F5',
+  light: '#CCE5FF',
   main: '#57ADE0',
   dark: '#2196F3',
   darker: '#134B70',

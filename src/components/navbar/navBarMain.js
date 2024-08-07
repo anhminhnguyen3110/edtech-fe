@@ -18,6 +18,11 @@ const navItems = [
     icon: <SportsEsportsIcon sx={{ fontSize: '2rem' }} />,
     path: '/quiz',
   },
+  {
+    name: 'A',
+    icon: <SportsEsportsIcon sx={{ fontSize: '2rem' }} />,
+    path: '/quiz',
+  },
 ]
 
 const DrawerStyled = styled(Drawer)(({ theme, open, drawerWidth }) => ({

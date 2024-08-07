@@ -1,7 +1,26 @@
 import React, { useState } from 'react'
-import { Box, Typography, Modal, Backdrop, Fade, TextField, IconButton } from '@mui/material'
+import {
+  Box,
+  Typography,
+  Modal,
+  Backdrop,
+  Fade,
+  TextField,
+  IconButton,
+  Chip,
+  Tooltip,
+} from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
+import AddIcon from '@mui/icons-material/Add'
 import ButtonComponent from '@/components/button/buttonComponent' // Ensure the correct import path
+
+const promptSuggestions = [
+  'Improve student issues',
+  'Assess understanding of world history',
+  'Evaluate science concepts',
+  'Check grammar and vocabulary skills',
+  'Custom prompt',
+]
 
 const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
   const [prompt, setPrompt] = useState('')
@@ -9,6 +28,15 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
   const [numberOfTrueFalseQuestions, setNumberOfTrueFalseQuestions] = useState(0)
   const [numberOfMultipleAnswerQuestions, setNumberOfMultipleAnswerQuestions] = useState(0)
   const [error, setError] = useState('')
+
+  const onClose = () => {
+    setError('')
+    setPrompt('')
+    setNumberOfMultipleChoiceQuestions(0)
+    setNumberOfTrueFalseQuestions(0)
+    setNumberOfMultipleAnswerQuestions(0)
+    handleClose()
+  }
 
   const handleGenerateQuiz = () => {
     if (prompt.trim() === '') {
@@ -28,39 +56,17 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
 
     setError('')
 
-    const newQuiz = {
-      prompt,
-      numberOfMultipleChoiceQuestions,
-      numberOfTrueFalseQuestions,
-      numberOfMultipleAnswerQuestions,
-    }
-
     try {
-      // Call the function to generate the quiz with the newQuiz data
-      console.log(newQuiz)
       generateQuiz(
         prompt,
         numberOfMultipleChoiceQuestions,
         numberOfTrueFalseQuestions,
         numberOfMultipleAnswerQuestions
       )
-      handleClose() // Only close the modal if the operation is successful
-      setPrompt('')
-      setNumberOfMultipleChoiceQuestions(0)
-      setNumberOfTrueFalseQuestions(0)
-      setNumberOfMultipleAnswerQuestions(0)
+      onClose()
     } catch (error) {
       setError('Failed to generate the quiz.')
     }
-  }
-
-  const onClose = () => {
-    setError('')
-    setPrompt('')
-    setNumberOfMultipleChoiceQuestions(0)
-    setNumberOfTrueFalseQuestions(0)
-    setNumberOfMultipleAnswerQuestions(0)
-    handleClose()
   }
 
   const handleNumberOfQuestionsChange = (setter) => (e) => {
@@ -70,15 +76,23 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
     }
   }
 
+  const handleSuggestionSelect = (suggestion) => {
+    if (suggestion === 'Custom prompt') {
+      setPrompt('')
+    } else {
+      setPrompt(`Generate a quiz to ${suggestion.toLowerCase()}`)
+    }
+  }
+
   return (
     <Modal
       open={open}
-      onClose={handleClose}
+      onClose={onClose}
       closeAfterTransition
       BackdropComponent={Backdrop}
       BackdropProps={{
         timeout: 500,
-        sx: { backdropFilter: 'blur(1px)' }, // Blurs the background
+        sx: { backdropFilter: 'blur(3px)' },
       }}
     >
       <Fade in={open}>
@@ -88,11 +102,13 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 500,
+            width: 600,
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
-            borderRadius: '8px',
+            borderRadius: '16px',
+            maxHeight: '90vh',
+            overflowY: 'auto',
           }}
         >
           <IconButton
@@ -100,54 +116,90 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
             onClick={onClose}
             sx={{
               position: 'absolute',
-              right: 8,
-              top: 8,
+              right: 16,
+              top: 16,
               color: (theme) => theme.palette.grey[500],
             }}
           >
             <CloseIcon />
           </IconButton>
-          <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
+          <Typography variant="h5" component="h2" sx={{ mb: 3, fontWeight: 'bold' }}>
             Generate New Quiz
           </Typography>
-          <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <Box>
+              <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 'medium' }}>
+                Prompt Suggestions
+              </Typography>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                {promptSuggestions.map((suggestion, index) => (
+                  <Tooltip title={`Use: "${suggestion}"`} key={index}>
+                    <Chip
+                      label={suggestion}
+                      onClick={() => handleSuggestionSelect(suggestion)}
+                      color={prompt.includes(suggestion.toLowerCase()) ? 'primary' : 'default'}
+                      sx={{
+                        '&:hover': {
+                          backgroundColor: 'primary.main',
+                          color: 'primary.contrastText',
+                        },
+                      }}
+                    />
+                  </Tooltip>
+                ))}
+              </Box>
+            </Box>
             <TextField
               label="Prompt"
               value={prompt}
-              placeholder="E.g I want to generate a quiz to improve issues of students"
               onChange={(e) => setPrompt(e.target.value)}
               fullWidth
+              multiline
+              rows={3}
+              placeholder="Describe the quiz you want to generate..."
+              variant="outlined"
             />
-            <TextField
-              label="Multiple Choice Questions"
-              type="number"
-              value={numberOfMultipleChoiceQuestions}
-              onChange={handleNumberOfQuestionsChange(setNumberOfMultipleChoiceQuestions)}
-              fullWidth
-              InputProps={{ inputProps: { min: 0 } }}
-            />
-            <TextField
-              label="True/False Questions"
-              type="number"
-              value={numberOfTrueFalseQuestions}
-              onChange={handleNumberOfQuestionsChange(setNumberOfTrueFalseQuestions)}
-              fullWidth
-              InputProps={{ inputProps: { min: 0 } }}
-            />
-            <TextField
-              label="Multiple Answer Questions"
-              type="number"
-              value={numberOfMultipleAnswerQuestions}
-              onChange={handleNumberOfQuestionsChange(setNumberOfMultipleAnswerQuestions)}
-              fullWidth
-              InputProps={{ inputProps: { min: 0 } }}
-            />
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              <TextField
+                label="Multiple Choice"
+                type="number"
+                value={numberOfMultipleChoiceQuestions}
+                onChange={handleNumberOfQuestionsChange(setNumberOfMultipleChoiceQuestions)}
+                fullWidth
+                InputProps={{ inputProps: { min: 0 } }}
+              />
+              <TextField
+                label="True/False"
+                type="number"
+                value={numberOfTrueFalseQuestions}
+                onChange={handleNumberOfQuestionsChange(setNumberOfTrueFalseQuestions)}
+                fullWidth
+                InputProps={{ inputProps: { min: 0 } }}
+              />
+              <TextField
+                label="Multiple Answer"
+                type="number"
+                value={numberOfMultipleAnswerQuestions}
+                onChange={handleNumberOfQuestionsChange(setNumberOfMultipleAnswerQuestions)}
+                fullWidth
+                InputProps={{ inputProps: { min: 0 } }}
+              />
+            </Box>
             {error && (
               <Typography color="error" variant="body2">
                 {error}
               </Typography>
             )}
-            <ButtonComponent onClick={handleGenerateQuiz} sx={{ mt: 2 }}>
+            <ButtonComponent
+              onClick={handleGenerateQuiz}
+              startIcon={<AddIcon />}
+              sx={{
+                mt: 2,
+                py: 1.5,
+                fontWeight: 'bold',
+                borderRadius: '8px',
+              }}
+            >
               Generate Quiz
             </ButtonComponent>
           </Box>

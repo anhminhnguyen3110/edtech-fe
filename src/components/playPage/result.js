@@ -8,7 +8,7 @@ const Result = ({ result }) => {
   console.log(result)
   const { isCorrect, pointAwarded, strikeCount } = result
   const backgroundColor = isCorrect ? BLUE.main : 'rgba(255, 0, 0, 0.4755)'
-  const textColor = isCorrect ? '#fff' : '#fff'
+  const textColor = '#fff'
   console.log('isCorrect', isCorrect, backgroundColor)
 
   return (

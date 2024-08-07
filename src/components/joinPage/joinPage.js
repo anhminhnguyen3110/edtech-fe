@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { TextField, Button, Box, Typography, useMediaQuery, useTheme } from '@mui/material'
-import styles from './joinPage.module.css'
 import { BLUE } from '@/theme/palette'
 import { useRouter } from 'next/router'
 import { usePlayerWebSocket } from '@/context/playerWebSocketProvider'
@@ -111,7 +110,17 @@ const JoinPage = () => {
   }
 
   return (
-    <Box className={styles.background}>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        backgroundImage: `url(./bg-signin.png)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
       <Box
         sx={{
           backgroundColor: 'white',

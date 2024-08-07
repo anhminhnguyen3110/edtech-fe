@@ -1,7 +1,26 @@
 import React, { useState } from 'react'
-import { Box, Typography, Modal, Backdrop, Fade, TextField, IconButton } from '@mui/material'
+import {
+  Box,
+  Typography,
+  Modal,
+  Backdrop,
+  Fade,
+  TextField,
+  IconButton,
+  Chip,
+  Tooltip,
+} from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
+import AddIcon from '@mui/icons-material/Add'
 import ButtonComponent from '@/components/button/buttonComponent' // Ensure the correct import path
+
+const promptSuggestions = [
+  'Improve student issues',
+  'Improve critical thinking skills',
+  'Introduce computer programming',
+  'Teach essay writing techniques',
+  'Custom prompt',
+]
 
 const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
   const [prompt, setPrompt] = useState('')
@@ -25,6 +44,18 @@ const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
     onClose()
   }
 
+  const handlePromptChange = (event) => {
+    setPrompt(event.target.value)
+  }
+
+  const handleSuggestionSelect = (suggestion) => {
+    if (suggestion === 'Custom prompt') {
+      setPrompt('')
+    } else {
+      setPrompt(`Generate a lesson to ${suggestion.toLowerCase()}`)
+    }
+  }
+
   return (
     <Modal
       open={open}
@@ -33,7 +64,7 @@ const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
       BackdropComponent={Backdrop}
       BackdropProps={{
         timeout: 500,
-        sx: { backdropFilter: 'blur(1px)' }, // Blurs the background
+        sx: { backdropFilter: 'blur(3px)' },
       }}
     >
       <Fade in={open}>
@@ -43,11 +74,13 @@ const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 500,
+            width: 600,
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
-            borderRadius: '8px',
+            borderRadius: '16px',
+            maxHeight: '90vh',
+            overflowY: 'auto',
           }}
         >
           <IconButton
@@ -55,37 +88,72 @@ const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
             onClick={onClose}
             sx={{
               position: 'absolute',
-              right: 8,
-              top: 8,
+              right: 16,
+              top: 16,
               color: (theme) => theme.palette.grey[500],
             }}
           >
             <CloseIcon />
           </IconButton>
-          <Typography variant="h6" component="h2" sx={{ mb: 2 }}>
+          <Typography variant="h5" component="h2" sx={{ mb: 3, fontWeight: 'bold' }}>
             Generate New Lesson
           </Typography>
-          <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+            <Box>
+              <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 'medium' }}>
+                Prompt Suggestions
+              </Typography>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                {promptSuggestions.map((suggestion, index) => (
+                  <Tooltip title={`Use: "${suggestion}"`} key={index}>
+                    <Chip
+                      label={suggestion}
+                      onClick={() => handleSuggestionSelect(suggestion)}
+                      color={prompt.includes(suggestion.toLowerCase()) ? 'primary' : 'default'}
+                      sx={{
+                        '&:hover': {
+                          backgroundColor: 'primary.main',
+                          color: 'primary.contrastText',
+                        },
+                      }}
+                    />
+                  </Tooltip>
+                ))}
+              </Box>
+            </Box>
             <TextField
               label="Prompt"
               value={prompt}
-              placeholder="E.g I want to generate a lesson to improve issues of students"
-              onChange={(e) => setPrompt(e.target.value)}
+              onChange={handlePromptChange}
               fullWidth
+              multiline
+              rows={4}
+              placeholder="Describe the lesson you want to generate..."
+              variant="outlined"
             />
             <TextField
-              label="Name"
+              label="Lesson Name"
               value={name}
-              placeholder="E.g Lesson 1"
               onChange={(e) => setName(e.target.value)}
               fullWidth
+              placeholder="E.g., Student Issues Resolution 101"
+              variant="outlined"
             />
             {error && (
               <Typography color="error" variant="body2">
                 {error}
               </Typography>
             )}
-            <ButtonComponent onClick={handleGenerateLesson} sx={{ mt: 2 }}>
+            <ButtonComponent
+              onClick={handleGenerateLesson}
+              startIcon={<AddIcon />}
+              sx={{
+                mt: 2,
+                py: 1.5,
+                fontWeight: 'bold',
+                borderRadius: '8px',
+              }}
+            >
               Generate Lesson
             </ButtonComponent>
           </Box>

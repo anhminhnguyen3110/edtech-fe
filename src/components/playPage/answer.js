@@ -3,10 +3,12 @@ import React, { useState, useEffect } from 'react'
 import { Box, Button, Grid } from '@mui/material'
 import { BACKGROUND_ANSWER, TRUE_FALSE_ANSWER } from '@/theme/palette'
 import CustomTickButton from '../quizPage/customTickButton'
+import { BLUE } from '@/theme/palette'
 
-const Answer = ({ question, answerQuestion }) => {
-  const { choices, questionType } = question
+const Answer = ({ question, answerQuestion, handleTimesUp }) => {
+  const { choices, questionType, timeLimitInSecond } = question
   const [selectedAnswers, setSelectedAnswers] = useState([])
+  const [remainingTime, setRemainingTime] = useState(timeLimitInSecond)
 
   const maxAnswerLength = Math.max(...choices.map((choice) => choice.length))
 
@@ -44,6 +46,21 @@ const Answer = ({ question, answerQuestion }) => {
     if (choiceLength > 30) return 3
     return 4
   }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRemainingTime((prevTime) => {
+        if (prevTime <= 1) {
+          clearInterval(timer)
+          handleTimesUp()
+          return 0
+        }
+        return prevTime - 1
+      })
+    }, 1000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <Box
@@ -92,7 +109,12 @@ const Answer = ({ question, answerQuestion }) => {
       </Grid>
       {questionType === 'MULTIPLE_OPTIONS' && (
         <Box sx={{ textAlign: 'center', mt: 4 }}>
-          <Button variant="contained" color="primary" onClick={handleSubmit}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleSubmit}
+            sx={{ background: BLUE.main }}
+          >
             Submit
           </Button>
         </Box>
