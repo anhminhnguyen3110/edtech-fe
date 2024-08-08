@@ -117,6 +117,7 @@ const ChatBox = ({ sendChat }) => {
           multiline
           variant="outlined"
           placeholder="Type your message here..."
+          disabled={isLoading}
           maxRows={5}
           value={message}
           onChange={handleMessageChange}

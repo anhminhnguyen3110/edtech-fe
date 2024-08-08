@@ -46,9 +46,12 @@ const ChatInterface = ({ createChat }) => {
 
     console.log('Sending message:', message)
     console.log('Attached file:', file)
+    const res = await createChat(message, file)
     setMessage('')
     setFile(null)
-    await createChat(message, file)
+    if (!res) {
+      setIsLoading(false)
+    }
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
     }
@@ -77,6 +80,8 @@ const ChatInterface = ({ createChat }) => {
           multiline
           maxRows={4}
           variant="outlined"
+          disabled={isLoading}
+          onKeyDown={handleKeyDown}
           placeholder="Chat with Edtech Assistant..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
