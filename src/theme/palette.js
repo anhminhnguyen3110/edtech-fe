@@ -12,9 +12,11 @@ export const GRAY = {
   semiLight: '#EDEDED',
   homePage: '#D9D9D9',
   dark: '#BDBDBD',
+  darker: '#686D76',
 }
 
 export const RED = {
+  lighter: '#FFCAD4',
   light: '#FF000079',
   main: '#EF5350',
   dark: '#E53935',

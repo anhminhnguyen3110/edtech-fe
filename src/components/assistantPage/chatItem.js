@@ -2,15 +2,20 @@ import React from 'react'
 import { Box, Typography, useMediaQuery, useTheme, Button } from '@mui/material'
 import CustomBox from '../box/customBox'
 import { useRouter } from 'next/router'
-import { BLUE } from '@/theme/palette' // Ensure the correct path is used
+import { BLUE, RED } from '@/theme/palette' // Ensure the correct path is used
 
-const ChatItem = ({ chat }) => {
+const ChatItem = ({ chat, onDelete }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen is mobile-sized
   const router = useRouter()
 
   const onViewClick = () => {
     router.push(`/assistant/${chat.id}`)
+  }
+  const handleDelete = () => {
+    if (onDelete) {
+      onDelete(chat.id)
+    }
   }
 
   // Function to categorize the updatedAt date
@@ -23,8 +28,10 @@ const ChatItem = ({ chat }) => {
       return 'Today'
     } else if (differenceInDays === 1) {
       return 'Yesterday'
+    } else if (differenceInDays < 7) {
+      return `${differenceInDays} days ago`
     } else {
-      return `Previous 7 Days`
+      return `More than 7 days ago`
     }
   }
 
@@ -48,6 +55,26 @@ const ChatItem = ({ chat }) => {
           </Typography>
         </Box>
         <Box display="flex" alignItems="center">
+          <Button
+            variant="outlined"
+            onClick={handleDelete}
+            sx={{
+              marginRight: '8px',
+              borderColor: RED.light,
+              borderRadius: '8px',
+              padding: '5px 12px',
+              width: '7rem',
+              color: RED.main,
+              '&:hover': {
+                backgroundColor: RED.lighter,
+                borderColor: RED.main,
+              },
+            }}
+          >
+            <Typography variant="h6" sx={{ fontSize: isMobile ? '0.65rem' : '1.1rem' }}>
+              Delete
+            </Typography>
+          </Button>
           <Button
             variant="outlined"
             onClick={onViewClick}

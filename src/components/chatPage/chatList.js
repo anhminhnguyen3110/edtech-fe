@@ -2,8 +2,9 @@
 import React, { useRef, useEffect } from 'react'
 import { Box, CircularProgress } from '@mui/material'
 import ChatMessage from './chatMessage'
+import WaitingMessage from './waitingMessage'
 
-const ChatList = ({ chats, loadMoreChats, hasMore, loading }) => {
+const ChatList = ({ chats, loadMoreChats, hasMore, loading, waitingResponse }) => {
   const chatListRef = useRef(null)
   const lastMessageRef = useRef(null)
   const previousChatsLength = useRef(chats.length)
@@ -21,6 +22,9 @@ const ChatList = ({ chats, loadMoreChats, hasMore, loading }) => {
       loadMoreChats()
     }
   }
+  useEffect(() => {
+    scrollToBottom()
+  }, [waitingResponse])
 
   useEffect(() => {
     const container = document.getElementById('chat-list')
@@ -77,6 +81,7 @@ const ChatList = ({ chats, loadMoreChats, hasMore, loading }) => {
           <ChatMessage message={chat.message} role={chat.role} file={chat.file} />
         </div>
       ))}
+      {waitingResponse && <WaitingMessage />}
     </Box>
   )
 }

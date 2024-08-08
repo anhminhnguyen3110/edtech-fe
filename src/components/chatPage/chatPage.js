@@ -7,6 +7,7 @@ import NotificationSnackbar from '@/components/snackBar/notificationSnackbar'
 import ChatBox from './chatBox'
 import ChatHeader from './chatHeader'
 import ChatList from './chatList'
+import ErrorNotification from './errorNotification'
 
 const ChatPage = () => {
   const theme = useTheme()
@@ -25,6 +26,10 @@ const ChatPage = () => {
   })
   const [page, setPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
+  const [waitingResponse, setWaitingResponse] = useState(false)
+  const [sendError, setSendError] = useState(false)
+  const [lastMessage, setLastMessage] = useState(null)
+  const [lastFile, setLastFile] = useState(null)
 
   const fetchChat = useCallback(
     async (pageNumber = 1) => {
@@ -42,18 +47,24 @@ const ChatPage = () => {
 
         if (pageNumber === 1) {
           setChats(newChats)
+          setTopicName(newChats[0].topicName)
         } else {
           setChats((prevChats) => [...prevChats, ...newChats])
         }
 
-        setTopicName('Basic Addition: Sum of 1 and 1')
         setHasMore(metadata.currentPage < metadata.totalPages)
         setPage(metadata.currentPage)
       } catch (error) {
-        console.error('Error fetching chat:', error)
-        setError('Failed to fetch chat. Please try again.')
-        showSnackbar('Error fetching chat', 'error')
-        setNotExist(true)
+        console.error('Error fetching chat:', error.response.data.status)
+        if (pageNumber === 1) {
+          setError('Chat not found')
+          showSnackbar('Chat not found', 'error')
+          setNotExist(true)
+        } else {
+          console.error('Error fetching chat:', error)
+          setError('Failed to fetch chat. Please try again.')
+          showSnackbar('Error fetching chat', 'error')
+        }
       } finally {
         setLoading(false)
       }
@@ -92,6 +103,17 @@ const ChatPage = () => {
     }
   }
 
+  const handleDelete = async (newTopicName) => {
+    try {
+      await api.delete(`/chats/topics/${id}`, { authRequired: true })
+      showSnackbar('Topic deleted successfully', 'success')
+      router.push('/assistant')
+    } catch (error) {
+      console.error('Error saving topic name:', error)
+      showSnackbar('Failed to delete the chat. Please try again.', 'error')
+    }
+  }
+
   const handleSendMessage = async (newMessage, file) => {
     const newChat = {
       id: chats.length + 1,
@@ -101,11 +123,12 @@ const ChatPage = () => {
       file: file ? { fileName: file.name } : null,
     }
     setChats([...chats, newChat])
+    setWaitingResponse(true)
     const formData = new FormData()
     formData.append('message', newMessage)
     formData.append('topicId', id)
     if (file) {
-      formData.append('file', file)
+      formData.append('document', file)
     }
     try {
       const response = await api.post('/chats', formData, { authRequired: true })
@@ -117,10 +140,44 @@ const ChatPage = () => {
       }
       setChats((prevChats) => [...prevChats, assistantAnswer])
     } catch (error) {
-      console.error('Error creating chat:', error)
-      setSnackbarNotifSeverity('error')
-      setSnackbarNotif('Error while creating chat.')
-      setSnackbarNotifOpen(true)
+      setLastMessage(newMessage)
+      setLastFile(file)
+      console.error('Error generating chat:', error)
+      setSendError(true)
+      showSnackbar('Error generating chat', 'error')
+    } finally {
+      setWaitingResponse(false)
+    }
+  }
+
+  const handleRetry = async () => {
+    setWaitingResponse(true)
+    const formData = new FormData()
+    formData.append('message', lastMessage)
+    formData.append('topicId', id)
+    if (lastFile) {
+      formData.append('document', lastFile)
+    }
+    try {
+      const response = await api.post('/chats', formData, { authRequired: true })
+      const res = response.data
+      console.log(res)
+      const assistantAnswer = {
+        id: chats.length + 1,
+        message: res.answer,
+      }
+      setChats((prevChats) => [...prevChats, assistantAnswer])
+      setSendError(false)
+      setLastMessage(null)
+      setLastFile(null)
+    } catch (error) {
+      setLastMessage(lastMessage)
+      setLastFile(lastFile)
+      console.error('Error generating chat:', error)
+      setSendError(true)
+      showSnackbar('Error generating chat', 'error')
+    } finally {
+      setWaitingResponse(false)
     }
   }
 
@@ -144,7 +201,11 @@ const ChatPage = () => {
 
   return (
     <Box display="flex" flexDirection="column" height="80vh" width="100%" overflow="hidden">
-      <ChatHeader topicName={topicName} onSaveClick={handleSaveClick} />
+      <ChatHeader
+        topicName={topicName}
+        onSaveClick={handleSaveClick}
+        onDeleteClick={handleDelete}
+      />
       <Box
         flexGrow={1}
         display="flex"
@@ -166,19 +227,34 @@ const ChatPage = () => {
             loadMoreChats={loadMoreChats}
             hasMore={hasMore}
             loading={loading}
+            waitingResponse={waitingResponse}
           />
         </Box>
-        <Box
-          width={isMobile ? '90%' : '70%'}
-          display="flex"
-          flexDirection="column"
-          padding={2}
-          borderRadius="10px"
-          boxShadow={3}
-          bgcolor="#fff"
-        >
-          <ChatBox sendChat={handleSendMessage} />
-        </Box>
+        {sendError ? (
+          <Box
+            width={isMobile ? '90%' : '70%'}
+            display="flex"
+            flexDirection="column"
+            padding={2}
+            borderRadius="10px"
+            boxShadow={3}
+            bgcolor="#fff"
+          >
+            <ErrorNotification onRetry={handleRetry} />
+          </Box>
+        ) : (
+          <Box
+            width={isMobile ? '90%' : '70%'}
+            display="flex"
+            flexDirection="column"
+            padding={2}
+            borderRadius="10px"
+            boxShadow={3}
+            bgcolor="#fff"
+          >
+            <ChatBox sendChat={handleSendMessage} />
+          </Box>
+        )}
       </Box>
       <NotificationSnackbar
         open={snackbar.open}
