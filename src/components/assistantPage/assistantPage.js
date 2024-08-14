@@ -119,7 +119,7 @@ const AssistantPage = () => {
           <ChatInterface createChat={handleCreateChat} />
         </StyledPaper>
 
-        <Typography variant="h5" sx={{ mb: 2, fontWeight: 'medium' }}>
+        <Typography variant="h5" sx={{ mb: 2, fontWeight: 'bold' }}>
           Your recent chats
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>

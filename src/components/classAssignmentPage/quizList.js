@@ -70,7 +70,7 @@ const QuizList = ({ classAssignmentId, reload, setReload }) => {
       >
         <Box>
           <Typography variant="h4" component="h1" sx={{ marginBottom: '16px' }}>
-            Generated Quizzes
+            Quizzes
           </Typography>
         </Box>
       </Box>

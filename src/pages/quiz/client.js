@@ -17,7 +17,8 @@ import { BLUE, GRAY } from '@/theme/palette'
 import CustomSnackbar from '@/components/snackBar/customSnackBar'
 import MessageBox from '@/components/box/messageBox'
 import { useRouter } from 'next/router'
-
+import { sortBy } from 'underscore'
+import NotificationSnackbar from '@/components/snackBar/notificationSnackbar'
 export const QuizPage = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen is mobile-sized
@@ -38,6 +39,8 @@ export const QuizPage = () => {
           page: page,
           limit: itemsPerPage,
           search: searchQuery, // Include search query in params if provided
+          sortBy: 'createdAt', // Sort by createdAt field
+          sortDirection: 'DESC', // Order in descending order
         },
       })
       const { items, meta } = response.data
@@ -54,6 +57,40 @@ export const QuizPage = () => {
     }
   }
 
+  const addNewQuestion = async (quizId) => {
+    const formData = new FormData()
+    formData.append('quizId', quizId)
+    formData.append('questionText', 'New Question')
+    formData.append('questionType', 'MULTIPLE_CHOICE')
+    formData.append('timeLimitInSecond', 20)
+
+    const choices = ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
+    const correctAnswers = ['Answer 1']
+    formData.append('choices', choices)
+    formData.append('correctAnswers', correctAnswers)
+
+    try {
+      const response = await api.post('/questions', formData, { authRequired: true })
+      console.log('New question created successfully:', response.data)
+      const newQuestion = {
+        id: response.data.id,
+        text: 'New Question',
+        type: 'MULTIPLE_CHOICE',
+        timing: 20,
+        correctAnswer: [0],
+        image: null,
+        answers: ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4'],
+      }
+    } catch (error) {
+      console.error(
+        'Error creating new question:',
+        error.response ? error.response.data : error.message
+      )
+      setErrorMessage('Error in creating a new question. Try again later!')
+      setSnackbarOpen(true)
+    }
+  }
+
   const handleCreateQuiz = async () => {
     try {
       setLoading(true) // Set loading state to true when starting the API call
@@ -64,7 +101,6 @@ export const QuizPage = () => {
         {
           name: 'Untitled Quiz',
           description: 'Random description',
-          classId: 1,
         },
         {
           authRequired: true, // Include authRequired: true in the options
@@ -72,7 +108,9 @@ export const QuizPage = () => {
       )
 
       console.log('Quiz created:', response.data)
-      // await fetchData(); // Fetch data again to update quiz list
+      await addNewQuestion(response.data.id)
+
+      await fetchData() // Fetch data again to update quiz list
       router.push(`/quiz/${response.data.id}`) // Redirect to the newly created quiz
     } catch (error) {
       console.error('Error creating quiz:', error)
@@ -111,6 +149,7 @@ export const QuizPage = () => {
         flexDirection={isMobile ? 'column' : 'row'}
         justifyContent="space-between"
         alignItems="center"
+        marginTop="20px"
         marginBottom="32px"
       >
         <Typography
@@ -118,7 +157,7 @@ export const QuizPage = () => {
           gutterBottom
           sx={{ fontWeight: '600', marginBottom: isMobile ? '16px' : '0' }}
         >
-          Quiz List
+          Quizzes
         </Typography>
         <Box
           display="flex"
@@ -126,7 +165,9 @@ export const QuizPage = () => {
           flexDirection={isMobile ? 'column' : 'row'}
           justifyContent="space-between"
         >
-          <SearchBar placeholder="Search quizzes..." onSearch={handleSearch} />{' '}
+          <Box sx={{ margin: 2 }}>
+            <SearchBar placeholder="Search quizzes..." onSearch={handleSearch} />{' '}
+          </Box>
           {/* Pass handleSearch function as prop */}
           <ButtonComponent
             onClick={handleCreateQuiz}
@@ -146,12 +187,18 @@ export const QuizPage = () => {
           </ButtonComponent>
         </Box>
       </Box>
-      <CustomSnackbar
+      <NotificationSnackbar
+        open={openSnackbar}
+        message={errorMessage}
+        type={'error'}
+        onClose={handleCloseSnackbar}
+      />
+      {/* <CustomSnackbar
         open={openSnackbar}
         handleClose={handleCloseSnackbar}
         message={errorMessage}
         severity="error"
-      />
+      /> */}
       {quizzes.length === 0 ? (
         <MessageBox message="No quizzes found." />
       ) : (

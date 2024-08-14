@@ -43,13 +43,21 @@ const ChatItem = ({ chat, onDelete }) => {
         <Box display="flex" flexDirection="column">
           <Typography
             variant="h6"
-            sx={{ fontWeight: '500', fontSize: isMobile ? '1.1rem' : '1.5rem' }}
+            sx={{
+              fontWeight: '500',
+              fontSize: isMobile ? '1.1rem' : '1.5rem',
+              overflow: 'hidden',
+              display: '-webkit-box',
+              WebkitLineClamp: 3,
+              WebkitBoxOrient: 'vertical',
+              textOverflow: 'ellipsis',
+            }}
           >
             {chat.topicName}
           </Typography>
           <Typography
             variant="subtitle2"
-            sx={{ fontWeight: '400', fontSize: isMobile ? '0.85rem' : '1rem', color: 'grey.600' }}
+            sx={{ fontWeight: '400', fontSize: isMobile ? '0.85rem' : '1rem', color: BLUE.main }}
           >
             {formattedDate}
           </Typography>
@@ -80,14 +88,14 @@ const ChatItem = ({ chat, onDelete }) => {
             onClick={onViewClick}
             sx={{
               marginLeft: '16px',
-              borderColor: '#90caf9', // Border color similar to the example
-              borderRadius: '8px', // Rounded corners
-              padding: '5px 12px', // Reduced padding for a thinner appearance
-              width: '7rem', // Specific width to make the button longer
-              color: BLUE.main, // Text color similar to the example
+              borderColor: '#90caf9',
+              borderRadius: '8px',
+              padding: '5px 12px',
+              width: '7rem',
+              color: BLUE.main,
               '&:hover': {
-                backgroundColor: '#e3f2fd', // Light blue background on hover
-                borderColor: '#90caf9', // Keep border color on hover
+                backgroundColor: '#e3f2fd',
+                borderColor: '#90caf9',
               },
             }}
           >

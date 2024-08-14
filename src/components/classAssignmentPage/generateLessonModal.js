@@ -19,7 +19,6 @@ const promptSuggestions = [
   'Improve critical thinking skills',
   'Introduce computer programming',
   'Teach essay writing techniques',
-  'Custom prompt',
 ]
 
 const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
@@ -49,11 +48,7 @@ const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
   }
 
   const handleSuggestionSelect = (suggestion) => {
-    if (suggestion === 'Custom prompt') {
-      setPrompt('')
-    } else {
-      setPrompt(`Generate a lesson to ${suggestion.toLowerCase()}`)
-    }
+    setPrompt(`Generate a lesson to ${suggestion.toLowerCase()}`)
   }
 
   return (

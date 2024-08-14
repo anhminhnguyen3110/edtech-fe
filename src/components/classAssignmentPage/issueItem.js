@@ -22,9 +22,8 @@ const IssueItem = ({ issue, maxAssignments, isEditing, onEditIssue, onDeleteIssu
   const parentRef = useRef(null)
 
   useEffect(() => {
-    if (!isEditing) {
-      setIsEditMode(false)
-    }
+    setIsEditMode(isEditing)
+    setShowDescription(isEditing)
   }, [isEditing])
 
   useEffect(() => {
@@ -55,7 +54,6 @@ const IssueItem = ({ issue, maxAssignments, isEditing, onEditIssue, onDeleteIssu
 
   const handleDoneClick = (event) => {
     event.stopPropagation()
-    setIsEditMode(false)
     onEditIssue(editedIssue)
   }
 
@@ -107,7 +105,7 @@ const IssueItem = ({ issue, maxAssignments, isEditing, onEditIssue, onDeleteIssu
         </Stack>
         <Stack direction="row" spacing={1}>
           <Button variant="contained" color="primary" onClick={handleDoneClick} size="small">
-            Done
+            Save
           </Button>
           <Button variant="contained" color="error" onClick={handleDeleteClick} size="small">
             Delete
@@ -151,7 +149,7 @@ const IssueItem = ({ issue, maxAssignments, isEditing, onEditIssue, onDeleteIssu
           </Stack>
           <CircularProgressWithLabel value={issue.studentRate} size={42} thickness={4} />
         </Stack>
-        {isEditing && (
+        {/* {isEditing && (
           <Box display="flex" justifyContent={isMobile ? 'center' : 'flex-end'} width="100%">
             <Button
               variant="outlined"
@@ -173,7 +171,7 @@ const IssueItem = ({ issue, maxAssignments, isEditing, onEditIssue, onDeleteIssu
               EDIT / REMOVE
             </Button>
           </Box>
-        )}
+        )} */}
       </Stack>
     </Stack>
   )

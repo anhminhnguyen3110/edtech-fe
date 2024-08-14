@@ -5,13 +5,13 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <meta name="description" content="Edtech Assistant" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/edtech-favicon.png" />
         <meta
           name="description"
           content="Language Confidence is a tool for language learners to evaluate their proficiency in a given language. Experience our product and learn how to use it."
         />
         <meta name="keywords" content="web3,trading,decentralized,ethereum,blockchain" />
-        <meta name="author" content="DeXy team" />
+        <meta name="author" content="Edtech Assistant" />
 
         {/* Google font */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />

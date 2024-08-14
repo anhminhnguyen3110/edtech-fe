@@ -19,7 +19,8 @@ const promptSuggestions = [
   'Assess understanding of world history',
   'Evaluate science concepts',
   'Check grammar and vocabulary skills',
-  'Custom prompt',
+  'Test knowledge of animal biology',
+  'Analyze literary themes in classic novels',
 ]
 
 const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
@@ -77,11 +78,7 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
   }
 
   const handleSuggestionSelect = (suggestion) => {
-    if (suggestion === 'Custom prompt') {
-      setPrompt('')
-    } else {
-      setPrompt(`Generate a quiz to ${suggestion.toLowerCase()}`)
-    }
+    setPrompt(`Generate a quiz to ${suggestion.toLowerCase()}`)
   }
 
   return (

@@ -14,6 +14,7 @@ import {
 import { useAuth } from '../../context/authContext'
 import withNonAuth from '../../hoc/withNonAuth'
 import { BLUE } from '@/theme/palette'
+import Link from 'next/link'
 
 const CombinedAuth = () => {
   const theme = useTheme()
@@ -31,7 +32,12 @@ const CombinedAuth = () => {
 
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue)
+    setInformation('')
     setError('')
+    setName('')
+    setConfirmPassword('')
+    setEmail('')
+    setPassword('')
   }
 
   const handleSubmit = async (event) => {
@@ -130,16 +136,18 @@ const CombinedAuth = () => {
         <Grid container spacing={2} alignItems="center">
           <Grid item xs={12} md={7}>
             <Box display="flex" justifyContent="center" alignItems="center" height="100%">
-              <Box
-                component="img"
-                src="/edtech-logo-full.png"
-                alt="edtech logo"
-                sx={{
-                  width: '100%',
-                  maxWidth: isMobile ? '150px' : '300px',
-                  height: 'auto',
-                }}
-              />
+              <Link href="/" passHref>
+                <Box
+                  component="img"
+                  src="/edtech-logo-full.png"
+                  alt="edtech logo"
+                  sx={{
+                    width: '100%',
+                    maxWidth: isMobile ? '150px' : '300px',
+                    height: 'auto',
+                  }}
+                />
+              </Link>
             </Box>
           </Grid>
           <Grid item xs={12} md={5}>

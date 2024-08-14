@@ -38,7 +38,7 @@ const ChatPage = () => {
         const response = await api.get(`/chats/topics/${id}`, {
           params: {
             page: pageNumber,
-            limit: 6,
+            limit: 9,
           },
           authRequired: true,
         })
@@ -49,13 +49,25 @@ const ChatPage = () => {
           setChats(newChats)
           setTopicName(newChats[0].topicName)
         } else {
-          setChats((prevChats) => [...prevChats, ...newChats])
+          setChats((prevChats) => {
+            // Filter out duplicate chats to ensure uniqueness
+            const uniqueChats = newChats.filter(
+              (newChat) => !prevChats.some((chat) => chat.id === newChat.id)
+            )
+
+            if (pageNumber === 1) {
+              setTopicName(uniqueChats.length > 0 ? uniqueChats[0].topicName : '')
+              return uniqueChats
+            } else {
+              return [...prevChats, ...uniqueChats]
+            }
+          })
         }
 
         setHasMore(metadata.currentPage < metadata.totalPages)
         setPage(metadata.currentPage)
       } catch (error) {
-        console.error('Error fetching chat:', error.response.data.status)
+        console.error('Error fetching chat:', error.response.data)
         if (pageNumber === 1) {
           setError('Chat not found')
           showSnackbar('Chat not found', 'error')
@@ -200,7 +212,14 @@ const ChatPage = () => {
   }
 
   return (
-    <Box display="flex" flexDirection="column" height="80vh" width="100%" overflow="hidden">
+    <Box
+      display="flex"
+      flexDirection="column"
+      height="91.6vh"
+      width="100%"
+      overflow="hidden"
+      marginTop="20px"
+    >
       <ChatHeader
         topicName={topicName}
         onSaveClick={handleSaveClick}
@@ -212,14 +231,14 @@ const ChatPage = () => {
         flexDirection="column"
         justifyContent="space-between"
         alignItems="center"
-        pb={2}
         overflow="hidden"
+        maxWidth="98vw"
       >
         <Box
           width={isMobile ? '90%' : '70%'}
           padding={2}
           borderRadius="10px"
-          height="calc(100vh - 200px)" // Adjust as needed
+          height="calc(100vh - 10px)" // Adjust as needed
           overflow="hidden" // This will clip the content to the box boundaries
         >
           <ChatList
@@ -247,10 +266,11 @@ const ChatPage = () => {
             width={isMobile ? '90%' : '70%'}
             display="flex"
             flexDirection="column"
-            padding={2}
+            padding={1}
+            paddingLeft={1}
+            paddingRight={1}
             borderRadius="10px"
-            boxShadow={3}
-            bgcolor="#fff"
+            marginBottom={0.5}
           >
             <ChatBox sendChat={handleSendMessage} />
           </Box>

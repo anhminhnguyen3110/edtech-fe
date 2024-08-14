@@ -30,11 +30,10 @@ const SearchBar = ({ placeholder = 'Search', onSearch }) => {
           ),
         }}
         sx={{
-          margin: 2,
           width: '17rem', // Adjust the width to make the bar longer
           '& .MuiOutlinedInput-root': {
             '& fieldset': {
-              borderColor: GRAY.light, // Default border color
+              borderColor: GRAY.dark, // Default border color
             },
             '&:hover fieldset': {
               borderColor: BLUE.main, // Border color on hover

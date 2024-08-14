@@ -1,5 +1,15 @@
 import React, { useState } from 'react'
-import { Box, Typography, IconButton, TextField, Menu, MenuItem } from '@mui/material'
+import {
+  Box,
+  Typography,
+  IconButton,
+  TextField,
+  Menu,
+  MenuItem,
+  useMediaQuery,
+  useTheme,
+  Tooltip,
+} from '@mui/material'
 import EditIcon from '@mui/icons-material/Edit'
 import CheckIcon from '@mui/icons-material/Check'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
@@ -12,6 +22,8 @@ const ChatHeader = ({ topicName, onSaveClick, onDeleteClick }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [editableTopicName, setEditableTopicName] = useState(topicName)
   const [anchorEl, setAnchorEl] = useState(null)
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
 
   const handleEditClick = () => {
     setIsEditing(true)
@@ -36,52 +48,70 @@ const ChatHeader = ({ topicName, onSaveClick, onDeleteClick }) => {
   }
 
   return (
-    <Box p={2} display="flex" alignItems="center" justifyContent="space-between">
-      <IconButton onClick={() => router.push('/assistant')}>
+    <Box
+      px={2}
+      py={1}
+      display="flex"
+      alignItems="center"
+      width="100%"
+      maxWidth="90vw"
+      margin="auto"
+      padding="0"
+      marginLeft={3}
+    >
+      <IconButton onClick={() => router.push('/assistant')} edge="start">
         <ArrowBackIcon />
       </IconButton>
-      <Box display="flex" alignItems="center" flexGrow={1} justifyContent="center">
+      <Box
+        display="flex"
+        alignItems="center"
+        flexGrow={1}
+        mx={2}
+        sx={{ flexShrink: 1 }} // Allow this box to shrink
+      >
         {isEditing ? (
           <TextField
             value={editableTopicName}
             onChange={handleTopicNameChange}
             variant="outlined"
-            size="small"
-            style={{ width: '300px' }}
+            size={isMobile ? 'small' : 'medium'}
+            fullWidth
+            sx={{ maxWidth: '300px' }}
           />
         ) : (
-          <Typography variant="h4" component="div">
-            {topicName}
-          </Typography>
+          <Tooltip title={topicName} enterDelay={500} leaveDelay={200}>
+            <Typography
+              variant={isMobile ? 'body1' : 'h6'}
+              component="div"
+              sx={{
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                maxWidth: '68vw',
+                fontWeight: 'bold',
+              }}
+            >
+              {topicName}
+            </Typography>
+          </Tooltip>
         )}
-        {isEditing ? (
-          <IconButton onClick={handleSaveClick} sx={{ ml: 1 }}>
-            <CheckIcon />
-          </IconButton>
-        ) : (
-          <IconButton
-            onClick={handleMenuClick}
-            sx={{
-              ml: 1,
-              padding: '8px',
-              '& .MuiSvgIcon-root': {
-                fontSize: '1.5rem',
-              },
-            }}
-          >
-            <MoreVertIcon />
-          </IconButton>
-        )}
-        <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
-          <MenuItem onClick={handleEditClick}>
-            <EditIcon sx={{ mr: 1 }} /> Edit
-          </MenuItem>
-          <MenuItem onClick={onDeleteClick}>
-            <DeleteIcon sx={{ mr: 1 }} /> Delete
-          </MenuItem>
-        </Menu>
+        <IconButton
+          onClick={isEditing ? handleSaveClick : handleMenuClick}
+          edge="end"
+          sx={{ ml: 1 }} // Add a small margin to the left for spacing
+        >
+          {isEditing ? <CheckIcon /> : <MoreVertIcon />}
+        </IconButton>
       </Box>
-      <Box width={40} /> {/* This box acts as a placeholder for alignment */}
+
+      <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleCloseMenu}>
+        <MenuItem onClick={handleEditClick}>
+          <EditIcon sx={{ mr: 1 }} /> Edit
+        </MenuItem>
+        <MenuItem onClick={onDeleteClick}>
+          <DeleteIcon sx={{ mr: 1 }} /> Delete
+        </MenuItem>
+      </Menu>
     </Box>
   )
 }

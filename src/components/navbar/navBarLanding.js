@@ -31,7 +31,6 @@ function NavBarLanding() {
     <div>
       <List>
         {[
-          { text: 'Overview', link: '/' },
           { text: 'Join Quiz', link: '/' },
           { text: 'Sign In', link: '/auth' },
         ].map((item, index) => (
@@ -54,16 +53,17 @@ function NavBarLanding() {
             component="div"
             sx={{ flexGrow: 1, display: { xs: 'block', sm: 'block' } }}
           >
-            <Box
-              component="img"
-              src="./edtech-logo.png"
-              alt="edtech logo"
-              sx={{ height: { xs: '30px', md: '40px' } }}
-            />
+            <Link href="/" passHref>
+              <Box
+                component="img"
+                src="./edtech-logo.png"
+                alt="edtech logo"
+                sx={{ height: { xs: '30px', md: '40px' }, cursor: 'pointer' }}
+              />
+            </Link>
           </Typography>
           {/* Display the links centered */}
           <Stack direction="row" spacing={4} sx={{ display: { xs: 'none', sm: 'flex' } }}>
-            <NavItem text="Overview" active={true} link="/" />
             <NavItem text="Join Quiz" active={false} link="/join" />
             <NavItem text="Sign In" active={false} link="/auth" />
           </Stack>

@@ -3,6 +3,7 @@ import { TextField, Button, Box, Typography, useMediaQuery, useTheme } from '@mu
 import { BLUE } from '@/theme/palette'
 import { useRouter } from 'next/router'
 import { usePlayerWebSocket } from '@/context/playerWebSocketProvider'
+import Link from 'next/link'
 
 const customTextFieldStyle = {
   marginBottom: '10px',
@@ -133,15 +134,17 @@ const JoinPage = () => {
           alignItems: 'center',
         }}
       >
-        <Box
-          component="img"
-          src="/edtech-logo-full.png"
-          alt="edtech logo"
-          sx={{
-            width: isMobile ? '150px' : '100px',
-            height: 'auto',
-          }}
-        />
+        <Link href="/" passHref>
+          <Box
+            component="img"
+            src="/edtech-logo-full.png"
+            alt="edtech logo"
+            sx={{
+              width: isMobile ? '150px' : '100px',
+              height: 'auto',
+            }}
+          />
+        </Link>
         <Typography
           variant="h6"
           component="h1"

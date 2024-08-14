@@ -13,8 +13,6 @@ const CommonIssueList = ({ issues, maxAssignments, onEditIssue, onDeleteIssue, o
   const [currentPage, setCurrentPage] = useState(1)
   const [isEditing, setIsEditing] = useState(false) // General edit state
   const [openModal, setOpenModal] = useState(false) // State to control the modal
-  const itemsPerPage = 4
-  const totalPages = Math.ceil(issues.length / itemsPerPage)
 
   const handleChange = (event, value) => {
     setCurrentPage(value)
@@ -32,9 +30,6 @@ const CommonIssueList = ({ issues, maxAssignments, onEditIssue, onDeleteIssue, o
     setIsEditing((prev) => !prev) // Toggle the edit state
   }
 
-  const startIndex = (currentPage - 1) * itemsPerPage
-  const currentIssues = issues.slice(startIndex, startIndex + itemsPerPage)
-
   return (
     <Box
       sx={{ padding: '24px', boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.2)', borderRadius: '8px' }}
@@ -43,7 +38,7 @@ const CommonIssueList = ({ issues, maxAssignments, onEditIssue, onDeleteIssue, o
         <Grid container alignItems="center" justifyContent="space-between" spacing={2}>
           <Grid item xs={12} sm={8}>
             <Typography variant="h4" component="h1" sx={{ marginBottom: '16px' }}>
-              Common Issues
+              Issues
             </Typography>
           </Grid>
           <Grid
@@ -75,7 +70,7 @@ const CommonIssueList = ({ issues, maxAssignments, onEditIssue, onDeleteIssue, o
         <MessageBox message="There are no issues to display. Extract to continue!" />
       ) : (
         <>
-          {currentIssues.map((issue) => (
+          {issues.map((issue) => (
             <IssueItem
               key={issue.id}
               issue={issue}
@@ -85,9 +80,6 @@ const CommonIssueList = ({ issues, maxAssignments, onEditIssue, onDeleteIssue, o
               onDeleteIssue={onDeleteIssue}
             />
           ))}
-          <Box marginTop="32px" display="flex" justifyContent="center">
-            <PaginationComponent count={totalPages} page={currentPage} onChange={handleChange} />
-          </Box>
         </>
       )}
       <AddIssueModal

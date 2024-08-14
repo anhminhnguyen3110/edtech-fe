@@ -7,11 +7,13 @@ import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SchoolIcon from '@mui/icons-material/School'
+import CodeBlock from './codeBlock' // Import the new CodeBlock component
 
 const ChatMessage = ({ message, role, file }) => {
   const isUser = role === 'user'
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'))
   const cleanedMessage = message
     .replace('Reference: [No relevant document context provided]', '')
     .replace(/\n/g, '  \n')
@@ -21,9 +23,10 @@ const ChatMessage = ({ message, role, file }) => {
       display="flex"
       flexDirection={isUser ? 'row-reverse' : 'row'}
       alignItems="flex-start"
+      maxWidth="100%"
       mb={2}
     >
-      {!isMobile && (
+      {!isTablet && (
         <Avatar
           sx={{
             bgcolor: isUser ? BLUE.main : GRAY.main,
@@ -65,7 +68,8 @@ const ChatMessage = ({ message, role, file }) => {
         <Box
           maxWidth="100%"
           width="fit-content"
-          bgcolor={isUser ? BLUE.light : '#e2e3e5'}
+          bgcolor={isUser ? BLUE.dark : '#f0f0f0'}
+          color={isUser ? 'white' : 'black'}
           borderRadius="10px"
           p={2}
           sx={{
@@ -97,6 +101,7 @@ const ChatMessage = ({ message, role, file }) => {
               ol: ({ node, ...props }) => (
                 <ol {...props} style={{ margin: 0, paddingLeft: '1.2em' }} />
               ),
+              code: CodeBlock, // Use the new CodeBlock component here
             }}
           >
             {cleanedMessage}

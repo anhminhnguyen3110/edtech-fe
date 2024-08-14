@@ -2,10 +2,9 @@ import React, { useState, useRef } from 'react'
 import {
   Box,
   Typography,
-  Button,
+  IconButton,
   TextField,
   Grid,
-  IconButton,
   Tooltip,
   CircularProgress,
 } from '@mui/material'
@@ -13,6 +12,7 @@ import AttachFileIcon from '@mui/icons-material/AttachFile'
 import SendIcon from '@mui/icons-material/Send'
 import CloseIcon from '@mui/icons-material/Close'
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile'
+import AddCircleOutlinedIcon from '@mui/icons-material/AddCircleOutlined'
 import { BLUE, GRAY } from '@/theme/palette'
 
 const ChatBox = ({ sendChat }) => {
@@ -72,77 +72,63 @@ const ChatBox = ({ sendChat }) => {
       container
       spacing={2}
       alignItems="flex-start"
-      sx={{ borderRadius: '20px', overflow: 'hidden', padding: '3px' }}
+      sx={{ borderRadius: '20px', overflow: 'hidden' }}
     >
       {file && (
         <Grid item xs={12}>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              bgcolor: GRAY.light,
-              borderRadius: '12px',
-              p: 1.5,
-              mb: 2,
-              maxWidth: 'fit-content',
-              transition: 'all 0.3s ease',
-              '&:hover': {
-                bgcolor: GRAY.homePage,
-              },
-            }}
-          >
-            <InsertDriveFileIcon sx={{ color: BLUE.main, mr: 1 }} />
-            <Typography
-              variant="body2"
+          <Box sx={{ display: 'flex', alignItems: 'center', marginLeft: '48px' }}>
+            {' '}
+            {/* Add marginLeft to align with the input */}
+            <Box
               sx={{
-                flexGrow: 1,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
+                display: 'flex',
+                alignItems: 'center',
+                bgcolor: GRAY.light,
+                borderRadius: '12px',
+                p: 1.5,
+                maxWidth: '100%',
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  bgcolor: GRAY.homePage,
+                },
               }}
             >
-              {file.name}
-            </Typography>
-            <Tooltip title="Remove file">
-              <IconButton size="small" onClick={handleRemoveFile}>
-                <CloseIcon fontSize="small" />
-              </IconButton>
-            </Tooltip>
+              <InsertDriveFileIcon sx={{ color: BLUE.main, mr: 1 }} />
+              <Typography
+                variant="body2"
+                sx={{
+                  flexGrow: 1,
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {file.name}
+              </Typography>
+              <Tooltip title="Remove file">
+                <IconButton size="small" onClick={handleRemoveFile}>
+                  <CloseIcon fontSize="small" />
+                </IconButton>
+              </Tooltip>
+            </Box>
           </Box>
         </Grid>
       )}
       <Grid item xs={12}>
-        <TextField
-          fullWidth
-          multiline
-          variant="outlined"
-          placeholder="Type your message here..."
-          disabled={isLoading}
-          maxRows={5}
-          value={message}
-          onChange={handleMessageChange}
-          onKeyDown={handleKeyDown}
-          sx={{
-            '& .MuiOutlinedInput-root': {
-              borderRadius: '15px',
-            },
-            '& .MuiInputBase-inputMultiline': {
-              overflowY: 'auto',
-            },
-          }}
-        />
-      </Grid>
-      <Grid item xs={12}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, marginTop: 0 }}>
           <Tooltip title="Attach PDF file">
-            <Button
-              variant="outlined"
+            <IconButton
               component="label"
-              startIcon={<AttachFileIcon />}
-              sx={{ borderRadius: '28px' }}
+              sx={{
+                borderRadius: '50%',
+                padding: '6px', // Reduce padding to make it smaller
+                background: GRAY.main,
+                '&:hover': { backgroundColor: GRAY.dark },
+              }}
               disabled={isLoading}
             >
-              Attach file
+              <AddCircleOutlinedIcon sx={{ color: BLUE.dark, fontSize: '35px' }} />{' '}
+              {/* Reduced icon size */}
               <input
                 type="file"
                 hidden
@@ -150,22 +136,49 @@ const ChatBox = ({ sendChat }) => {
                 onChange={handleFileChange}
                 ref={fileInputRef}
               />
-            </Button>
+            </IconButton>
           </Tooltip>
-          <Button
-            variant="contained"
-            endIcon={isLoading ? <CircularProgress size={20} color="inherit" /> : <SendIcon />}
+          <TextField
+            fullWidth
+            multiline
+            variant="outlined"
+            placeholder="Type your message here..."
+            disabled={isLoading}
+            maxRows={5}
+            value={message}
+            onChange={handleMessageChange}
+            onKeyDown={handleKeyDown}
+            sx={{
+              '& .MuiOutlinedInput-root': {
+                borderRadius: '20px',
+                padding: '4px', // Adjust this value to reduce height
+              },
+              '& .MuiInputBase-inputMultiline': {
+                padding: '8px', // Reduce padding to make the field less tall
+                overflowY: 'auto',
+              },
+            }}
+          />
+          <IconButton
             onClick={handleSend}
             disabled={!message.trim() || isLoading}
             sx={{
-              borderRadius: '28px',
-              background: BLUE.main,
-              '&:hover': { backgroundColor: BLUE.dark },
+              borderRadius: '50%',
+              padding: '6px', // Reduce padding to match the other IconButton
               transition: 'all 0.3s ease',
             }}
           >
-            {isLoading ? 'Sending...' : 'Send'}
-          </Button>
+            {isLoading ? (
+              <CircularProgress size={20} color="inherit" />
+            ) : (
+              <SendIcon
+                sx={{
+                  color: message.trim() && !isLoading ? BLUE.dark : GRAY.darker,
+                  fontSize: '32px',
+                }}
+              />
+            )}
+          </IconButton>
         </Box>
       </Grid>
     </Grid>
