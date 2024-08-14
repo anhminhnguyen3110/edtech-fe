@@ -65,6 +65,7 @@ const ChatList = ({ chats, loadMoreChats, hasMore, loading, waitingResponse }) =
       overflow="auto"
       p={2}
       height="100%" // Use full height of parent
+      maxWidth="100%" // Use full width of parent
     >
       {loading && chats.length === 0 && (
         <Box display="flex" justifyContent="center" alignItems="center" height="100%">

@@ -89,7 +89,7 @@ export const AssessmentPage = () => {
   }, [])
 
   return (
-    <Container>
+    <Container sx={{ marginTop: '40px' }}>
       <Box
         display="flex"
         flexDirection={isMobile ? 'column' : 'row'}
@@ -109,6 +109,7 @@ export const AssessmentPage = () => {
           alignItems="center"
           flexDirection={isMobile ? 'column' : 'row'}
           justifyContent="space-between"
+          marginRight={isMobile ? '0' : '0px'}
         >
           <SearchBar placeholder="Search assignments..." onSearch={handleSearch} />
         </Box>

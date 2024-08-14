@@ -1,24 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Box, Typography, Button, TextField, useMediaQuery, useTheme } from '@mui/material'
 import DownloadIcon from '@mui/icons-material/Download'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import SaveIcon from '@mui/icons-material/Save'
 
-const LessonItem = ({ lesson, isEditing, onEditLesson, onDeleteLesson }) => {
+const LessonItem = ({ lesson, onEditLesson, onDeleteLesson }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [isNameEditable, setIsNameEditable] = useState(false)
   const [lessonName, setLessonName] = useState(lesson.name)
-
-  useEffect(() => {
-    if (!isEditing) {
-      setIsNameEditable(false)
-    }
-  }, [isEditing])
+  const [isEditing, setIsEditing] = useState(false)
 
   const handleEditClick = () => {
     setIsNameEditable(true)
+    setIsEditing(true)
   }
 
   const handleNameChange = (event) => {
@@ -27,6 +23,7 @@ const LessonItem = ({ lesson, isEditing, onEditLesson, onDeleteLesson }) => {
 
   const handleSaveClick = () => {
     setIsNameEditable(false)
+    setIsEditing(false)
     onEditLesson({ ...lesson, name: lessonName })
   }
 
@@ -111,46 +108,64 @@ const LessonItem = ({ lesson, isEditing, onEditLesson, onDeleteLesson }) => {
         }}
       >
         {isEditing ? (
-          isNameEditable ? (
-            <>
-              <Button
-                variant="outlined"
-                startIcon={<SaveIcon />}
-                onClick={handleSaveClick}
-                sx={{
-                  textTransform: 'none',
-                  color: '#4CAF50',
+          <>
+            <Button
+              variant="outlined"
+              startIcon={<SaveIcon />}
+              onClick={handleSaveClick}
+              sx={{
+                textTransform: 'none',
+                color: '#4CAF50',
+                borderColor: '#4CAF50',
+                backgroundColor: '#E8F5E9',
+                '&:hover': {
+                  backgroundColor: '#4CAF50',
+                  color: '#FFFFFF',
                   borderColor: '#4CAF50',
-                  backgroundColor: '#E8F5E9',
-                  '&:hover': {
-                    backgroundColor: '#4CAF50',
-                    color: '#FFFFFF',
-                    borderColor: '#4CAF50',
-                  },
-                }}
-              >
-                Save
-              </Button>
-              <Button
-                variant="outlined"
-                startIcon={<DeleteIcon />}
-                onClick={handleDeleteClick}
-                sx={{
-                  textTransform: 'none',
-                  color: '#FF5252',
+                },
+              }}
+            >
+              Save
+            </Button>
+            <Button
+              variant="outlined"
+              startIcon={<DeleteIcon />}
+              onClick={handleDeleteClick}
+              sx={{
+                textTransform: 'none',
+                color: '#FF5252',
+                borderColor: '#FF5252',
+                backgroundColor: '#FFE6E6',
+                '&:hover': {
+                  backgroundColor: '#FF5252',
+                  color: '#FFFFFF',
                   borderColor: '#FF5252',
-                  backgroundColor: '#FFE6E6',
-                  '&:hover': {
-                    backgroundColor: '#FF5252',
-                    color: '#FFFFFF',
-                    borderColor: '#FF5252',
-                  },
-                }}
-              >
-                Delete
-              </Button>
-            </>
-          ) : (
+                },
+              }}
+            >
+              Delete
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              variant="outlined"
+              startIcon={<DownloadIcon />}
+              onClick={handleDownloadClick}
+              sx={{
+                textTransform: 'none',
+                color: '#2196F3',
+                borderColor: '#2196F3',
+                backgroundColor: 'white',
+                '&:hover': {
+                  backgroundColor: '#2196F3',
+                  color: '#FFFFFF',
+                  borderColor: '#2196F3',
+                },
+              }}
+            >
+              Download
+            </Button>
             <Button
               variant="outlined"
               startIcon={<EditIcon />}
@@ -159,7 +174,7 @@ const LessonItem = ({ lesson, isEditing, onEditLesson, onDeleteLesson }) => {
                 textTransform: 'none',
                 color: '#2196F3',
                 borderColor: '#2196F3',
-                backgroundColor: '#E3F2FD',
+                backgroundColor: 'white',
                 '&:hover': {
                   backgroundColor: '#2196F3',
                   color: '#FFFFFF',
@@ -169,16 +184,7 @@ const LessonItem = ({ lesson, isEditing, onEditLesson, onDeleteLesson }) => {
             >
               Edit
             </Button>
-          )
-        ) : (
-          <Button
-            variant="outlined"
-            startIcon={<DownloadIcon />}
-            onClick={handleDownloadClick}
-            sx={{ textTransform: 'none', backgroundColor: 'white' }}
-          >
-            Download
-          </Button>
+          </>
         )}
       </Box>
     </Box>

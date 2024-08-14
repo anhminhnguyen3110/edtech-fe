@@ -188,12 +188,15 @@ const ClassAssignmentDetail = () => {
               : issue
           ),
         }))
+        setSnackbarNotifMessage('Issue updated successfully!')
+        setSnackbarNotifSeverity('success')
+        setSnackbarNotifOpen(true)
       }
     } catch (error) {
       console.error('Failed to update the issue:', error)
-      setSnackbarMessage('Failed to update the issue.')
-      setSnackbarSeverity('error')
-      setSnackbarOpen(true)
+      setSnackbarNotifMessage('Error while updating the issue!')
+      setSnackbarNotifSeverity('error')
+      setSnackbarNotifOpen(true)
     }
   }
 
@@ -283,9 +286,9 @@ const ClassAssignmentDetail = () => {
       }
     } catch (error) {
       console.error('Failed to delete the issue:', error)
-      setSnackbarMessage('Failed to delete the issue.')
-      setSnackbarSeverity('error')
-      setSnackbarOpen(true)
+      setSnackbarNotifMessage('Fail to delete the issue!')
+      setSnackbarNotifSeverity('error')
+      setSnackbarNotifOpen(true)
     }
   }
 
@@ -353,10 +356,16 @@ const ClassAssignmentDetail = () => {
         }))
       }
     } catch (error) {
+      if (error.response.status === 400) {
+        setSnackbarNotifMessage(error.response.data.message)
+        setSnackbarNotifSeverity('error')
+        setSnackbarNotifOpen(true)
+        return
+      }
       console.error('Failed to add the issue:', error)
-      setSnackbarMessage('Failed to add the issue.')
-      setSnackbarSeverity('error')
-      setSnackbarOpen(true)
+      setSnackbarNotifMessage('Failed to add the issue!')
+      setSnackbarNotifSeverity('error')
+      setSnackbarNotifOpen(true)
     }
   }
 

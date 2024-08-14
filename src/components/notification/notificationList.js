@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {
   List,
   ListItem,
   ListItemText,
+  Typography,
   Box,
   Avatar,
   ListItemAvatar,
@@ -11,6 +12,7 @@ import {
   CircularProgress,
   Divider,
 } from '@mui/material'
+import AutoShrinkText from './autoShrinkText'
 
 const NotificationList = ({
   notifications,
@@ -44,8 +46,8 @@ const NotificationList = ({
   }, [hasMore, loading])
 
   return (
-    <Box sx={{ p: 2, width: 300, borderRadius: '30px' }}>
-      <Box id="notification-list" sx={{ maxHeight: 300, overflowY: 'auto' }}>
+    <Box sx={{ p: 2, width: 400, borderRadius: '30px' }}>
+      <Box id="notification-list" sx={{ maxHeight: 300, overflowY: 'auto', overflowX: 'hidden' }}>
         <List>
           {notificationArray.length === 0 ? (
             <ListItem>
@@ -66,10 +68,14 @@ const NotificationList = ({
                   }}
                 >
                   <ListItemAvatar>
-                    <Avatar src="/noti.png" alt="Notification Icon" />
+                    <Avatar
+                      src="/noti.png"
+                      alt="Notification Icon"
+                      sx={{ width: '4rem', height: '4rem', marginRight: '3px' }}
+                    />
                   </ListItemAvatar>
                   <ListItemText
-                    primary={notification.message}
+                    primary={<AutoShrinkText text={notification.message} />}
                     secondary={new Date(notification.createdAt).toLocaleString()}
                   />
                   {!notification.isRead && (
@@ -89,6 +95,7 @@ const NotificationList = ({
               </Box>
             ))
           )}
+
           {loading && (
             <Box sx={{ display: 'flex', justifyContent: 'center', py: 2 }}>
               <CircularProgress size={24} />

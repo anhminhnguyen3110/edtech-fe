@@ -4,7 +4,6 @@ import { useAuth } from '../../context/authContext'
 import AppBarMain from '../navbar/appBarMain'
 import DrawerContent from '../navbar/drawerContent'
 import withAuth from '../../hoc/withAuth'
-import Footer from '@/components/footer/footer'
 
 const drawerWidth = 200
 
@@ -35,17 +34,17 @@ const AuthorizedLayout = ({ children }) => {
         <main
           style={{
             flexGrow: 1,
-            padding: isMobile ? '10px' : '24px',
+            paddingTop: '50px',
+            paddingBottom: '8px',
             marginLeft: isMobile || open ? '0px' : '0px',
             display: 'flex',
             flexDirection: 'column',
           }}
         >
-          <Toolbar />
+          {/* <Toolbar /> */}
           <div style={{ flexGrow: 1 }}>{children}</div>
         </main>
       </div>
-      <Footer />
     </div>
   )
 }
