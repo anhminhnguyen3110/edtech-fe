@@ -8,7 +8,7 @@ const LandingBody = () => {
     <Box
       sx={{
         backgroundColor: '#FEE1D9',
-        minHeight: '85vh',
+        minHeight: '95vh',
         display: 'flex',
         alignItems: 'center',
         padding: { xs: '2rem 1rem', md: '2rem 0' },

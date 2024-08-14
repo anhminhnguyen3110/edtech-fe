@@ -13,7 +13,7 @@ import {
   Divider,
 } from '@mui/material'
 import AutoShrinkText from './autoShrinkText'
-
+import { BLUE } from '@/theme/palette'
 const NotificationList = ({
   notifications,
   loadMoreNotifications,
@@ -35,6 +35,25 @@ const NotificationList = ({
 
   const handleNotificationClick = (notification) => {
     onNotificationRead(notification) // Mark as read when clicked
+  }
+
+  function formatDate(dateString) {
+    const date = new Date(dateString)
+    const today = new Date()
+
+    // Calculate the difference in time
+    const timeDiff = today - date
+
+    // Calculate the difference in days
+    const daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24))
+
+    // Return the appropriate string based on the days difference
+    if (daysDiff === 0) return 'Today'
+    if (daysDiff === 1) return 'Yesterday'
+    if (daysDiff > 1 && daysDiff <= 7) return `${daysDiff} days ago`
+
+    // For dates older than 7 days, return the full date
+    return date.toLocaleDateString()
   }
 
   useEffect(() => {
@@ -76,7 +95,9 @@ const NotificationList = ({
                   </ListItemAvatar>
                   <ListItemText
                     primary={<AutoShrinkText text={notification.message} />}
-                    secondary={new Date(notification.createdAt).toLocaleString()}
+                    secondary={
+                      <span style={{ color: BLUE.main }}>{formatDate(notification.createdAt)}</span>
+                    }
                   />
                   {!notification.isRead && (
                     <Badge variant="dot" color="primary" sx={{ ml: 2 }} overlap="circular" />

@@ -91,7 +91,7 @@ const AppBarMain = ({ open, toggleDrawer, logout }) => {
           {!open ? <ToggleIcon src="/toggle-icon.png" alt="Toggle" /> : <ArrowBackIcon />}
         </IconButton>
         <Typography variant="h6" noWrap>
-          EDTech Assistant
+          EdTech Assistant
         </Typography>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
           <Notification />
