@@ -5,7 +5,6 @@ const HomePage = () => (
   <div className="app">
     <NavBarLanding />
     <LandingBody />
-    <Footer />
   </div>
 )
 
