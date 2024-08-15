@@ -184,7 +184,7 @@ const CombinedAuth = () => {
               />
               {activeTab === 1 && (
                 <TextField
-                  label="name"
+                  label="Name"
                   variant="outlined"
                   margin="normal"
                   fullWidth

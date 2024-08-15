@@ -73,7 +73,7 @@ const ChatInterface = ({ createChat }) => {
       </Grid>
       <Grid item xs>
         <Typography variant="h5" sx={{ mb: 2, fontWeight: 'medium' }}>
-          How can Edtech Assistant assist you today?
+          How can EdTech Assistant assist you today?
         </Typography>
         <TextField
           fullWidth
@@ -82,7 +82,7 @@ const ChatInterface = ({ createChat }) => {
           variant="outlined"
           disabled={isLoading}
           onKeyDown={handleKeyDown}
-          placeholder="Chat with Edtech Assistant..."
+          placeholder="Chat with EdTech Assistant..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           sx={{ mb: 2, borderRadius: '10px' }}
