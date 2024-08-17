@@ -66,9 +66,10 @@ const ClassAssignmentDetail = () => {
     } catch (error) {
       console.error('Error fetching assignment data:', error)
       setError(true)
-      setSnackbarMessage('No assignment found.')
-      setSnackbarSeverity('error')
-      setSnackbarOpen(true)
+      const message = error.response?.data?.message || 'Failed to fetch assignment data.'
+      setSnackbarNotifMessage(message)
+      setSnackbarNotifSeverity('error')
+      setSnackbarNotifOpen(true)
     } finally {
       setLoading(false)
     }
@@ -104,17 +105,16 @@ const ClassAssignmentDetail = () => {
         { authRequired: true }
       )
       if (response.status === 201) {
-        const createdQuiz = response.data
-        console.log('Created quiz:', createdQuiz)
-        setSnackbarMessage(createdQuiz.message)
-        setSnackbarSeverity('info')
-        setSnackbarOpen(true)
+        const message = response.data.message
+        setSnackbarNotifMessage(message)
+        setSnackbarNotifSeverity('success')
+        setSnackbarNotifOpen(true)
       }
     } catch (error) {
-      console.error('Failed to generate quiz:', error)
-      setSnackbarMessage('Failed to generate quiz.')
-      setSnackbarSeverity('error')
-      setSnackbarOpen(true)
+      const message = error.response?.data?.message || 'Failed to generate quiz.'
+      setSnackbarNotifMessage(message)
+      setSnackbarNotifSeverity('error')
+      setSnackbarNotifOpen(true)
     }
   }
   const handleGenerateLesson = async (name, prompt) => {
@@ -132,17 +132,16 @@ const ClassAssignmentDetail = () => {
         { authRequired: true }
       )
       if (response.status === 200) {
-        const createAssignment = response.data
-        console.log('Created assignment:', createAssignment)
-        setSnackbarMessage(createAssignment.message)
-        setSnackbarSeverity('info')
-        setSnackbarOpen(true)
+        const message = response.data.message
+        setSnackbarNotifMessage(message)
+        setSnackbarNotifSeverity('success')
+        setSnackbarNotifOpen(true)
       }
     } catch (error) {
-      console.error('Failed to generate quiz:', error)
-      setSnackbarMessage('Failed to generate quiz.')
-      setSnackbarSeverity('error')
-      setSnackbarOpen(true)
+      const message = error.response?.data?.message || 'Failed to generate lesson.'
+      setSnackbarNotifMessage(message)
+      setSnackbarNotifSeverity('error')
+      setSnackbarNotifOpen(true)
     }
   }
 
@@ -158,15 +157,15 @@ const ClassAssignmentDetail = () => {
       if (response.status === 200) {
         const extractIssue = response.data
         console.log('Extract Issue:', extractIssue)
-        setSnackbarMessage('Request successfully sent. Please wait for the result.')
-        setSnackbarSeverity('info')
-        setSnackbarOpen(true)
+        setSnackbarNotifMessage('Request successfully sent. Please wait for the result.')
+        setSnackbarNotifSeverity('success')
+        setSnackbarNotifOpen(true)
       }
     } catch (error) {
-      console.error('Failed to generate quiz:', error)
-      setSnackbarMessage('Failed to generate quiz.')
-      setSnackbarSeverity('error')
-      setSnackbarOpen(true)
+      const message = error.response?.data?.message || 'Failed to extract issue.'
+      setSnackbarNotifMessage(message)
+      setSnackbarNotifSeverity('error')
+      setSnackbarNotifOpen(true)
     }
   }
 
@@ -283,6 +282,9 @@ const ClassAssignmentDetail = () => {
           ...prev,
           issues: prev.issues.filter((issue) => issue.id !== issueId),
         }))
+        setSnackbarNotifMessage('Deleted issue successfully!')
+        setSnackbarNotifSeverity('success')
+        setSnackbarNotifOpen(true)
       }
     } catch (error) {
       console.error('Failed to delete the issue:', error)
@@ -318,10 +320,10 @@ const ClassAssignmentDetail = () => {
         }))
       }
     } catch (error) {
-      console.error('Failed to update the lesson:', error)
-      setSnackbarMessage('Failed to update the lesson.')
-      setSnackbarSeverity('error')
-      setSnackbarOpen(true)
+      const message = error.response?.data?.message || 'Failed to update lesson.'
+      setSnackbarNotifMessage(message)
+      setSnackbarNotifSeverity('error')
+      setSnackbarNotifOpen(true)
     }
   }
 
@@ -336,10 +338,10 @@ const ClassAssignmentDetail = () => {
         }))
       }
     } catch (error) {
-      console.error('Failed to delete the lesson:', error)
-      setSnackbarMessage('Failed to delete the lesson.')
-      setSnackbarSeverity('error')
-      setSnackbarOpen(true)
+      const message = error.response?.data?.message || 'Failed to delete lesson.'
+      setSnackbarNotifMessage(message)
+      setSnackbarNotifSeverity('error')
+      setSnackbarNotifOpen(true)
     }
   }
 

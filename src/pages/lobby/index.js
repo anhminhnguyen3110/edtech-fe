@@ -16,7 +16,7 @@ import { BLUE } from '@/theme/palette'
 
 const Lobby = () => {
   const router = useRouter()
-  const socket = useHostWebSocket()
+  const { socket, resetSocket } = useHostWebSocket()
   const [players, setPlayers] = useState([])
   const { gameCode, gameId } = router.query
   const { gameStatus, setGameStatus } = useGameStatus(gameCode, gameId)
@@ -26,6 +26,7 @@ const Lobby = () => {
     event.preventDefault()
     event.returnValue = 'Are you sure you want to leave? Your game will be terminated.'
     // Update the game status to terminated
+    resetSocket()
     api
       .patch(`/games/${gameId}`, { gameStatus: 'TERMINATED' }, { authRequired: true })
       .then(() => {
@@ -82,6 +83,7 @@ const Lobby = () => {
     }
 
     window.addEventListener('beforeunload', handleBeforeUnload)
+    window.addEventListener('popstate', handleBeforeUnload)
 
     return () => {
       socket.off('UPDATE_PLAYERS_IN_LOBBY', updatePlayers)
@@ -91,6 +93,7 @@ const Lobby = () => {
 
       if (!isNavigatingToGame.current) {
         window.removeEventListener('beforeunload', handleBeforeUnload)
+        window.removeEventListener('popstate', handleBeforeUnload)
       }
     }
   }, [socket, gameStatus.status, gameStatus.gameCode, setGameStatus])

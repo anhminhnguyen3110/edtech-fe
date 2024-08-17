@@ -2,21 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Box, Typography, CircularProgress } from '@mui/material'
 import { BLUE, GRAY } from '@/theme/palette'
 
-const CountdownTimer = ({ totalTime, onComplete, width = 120 }) => {
-  const [countdown, setCountdown] = useState(totalTime)
-  const [isComplete, setIsComplete] = useState(false) // New state to track completion
-
-  useEffect(() => {
-    if (countdown > 0) {
-      const timer = setTimeout(() => setCountdown(countdown - 1), 1000)
-      return () => clearTimeout(timer)
-    } else if (!isComplete) {
-      // Ensure onComplete is only called once
-      setIsComplete(true)
-      if (onComplete) onComplete()
-    }
-  }, [countdown, onComplete, isComplete])
-
+const CountdownTimer = ({ totalTime, width = 120 }) => {
   return (
     <Box
       display="flex"
@@ -41,7 +27,7 @@ const CountdownTimer = ({ totalTime, onComplete, width = 120 }) => {
       />
       <CircularProgress
         variant="determinate"
-        value={(countdown / totalTime) * 100}
+        value={100}
         size={width}
         thickness={4}
         sx={{
@@ -50,17 +36,17 @@ const CountdownTimer = ({ totalTime, onComplete, width = 120 }) => {
         }}
       />
       <Typography
-        variant="h2"
         component="div"
         fontWeight="bold"
         sx={{
+          fontSize: '14px',
           position: 'absolute',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
         }}
       >
-        {countdown}
+        {totalTime}
       </Typography>
     </Box>
   )

@@ -63,7 +63,7 @@ const Play = () => {
 
     const handlePlayerReceiveQuestionOptions = (data) => {
       console.log('PLAYER_RECEIVE_QUESTION_OPTIONS', data)
-      setGameState('PLAYING')
+      setGameState('WAITING')
       setCurrentQuestion(data)
     }
 
@@ -146,6 +146,10 @@ const Play = () => {
     setGameState('WAIT_RESULT')
   }
 
+  const handleMoveToAnswer = () => {
+    setGameState('PLAYING')
+  }
+
   const renderDisconnected = () => (
     <>
       <Typography
@@ -194,7 +198,12 @@ const Play = () => {
 
   const renderGameContent = () => (
     <Box display="flex" flexDirection="column" alignItems="center" height="100vh">
-      {gameState === 'WAITING' && <Ready />}
+      {gameState === 'WAITING' && (
+        <Ready
+          timeQuestionStart={currentQuestion ? currentQuestion.timeQuestionStart : null}
+          moveToAnswer={handleMoveToAnswer}
+        />
+      )}
       {gameState === 'PLAYING' && (
         <Answer
           question={currentQuestion}

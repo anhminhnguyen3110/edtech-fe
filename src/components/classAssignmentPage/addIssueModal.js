@@ -6,7 +6,7 @@ import ButtonComponent from '@/components/button/buttonComponent' // Ensure the 
 const AddIssueModal = ({ open, handleClose, maxAssignments, onAddIssue }) => {
   const [issueName, setIssueName] = useState('')
   const [description, setDescription] = useState('')
-  const [studentCount, setStudentCount] = useState(2)
+  const [studentCount, setStudentCount] = useState('')
   const [error, setError] = useState('')
   const [issueError, setIssueError] = useState('')
   const [descriptionError, setDescriptionError] = useState('')
@@ -47,11 +47,19 @@ const AddIssueModal = ({ open, handleClose, maxAssignments, onAddIssue }) => {
   }
 
   const handleStudentCountChange = (e) => {
-    const value = e.target.value
-    if (value >= 1 && value <= maxAssignments) {
-      setStudentCount(value)
-      setError('')
+    const number = Number(e.target.value)
+    // Allow empty strings to let the user delete and retype
+    if (
+      e.target.value !== '' &&
+      (isNaN(number) || !Number.isInteger(number) || number <= 0 || number > maxAssignments)
+    ) {
+      setError(
+        `Please enter a valid student count. It should be a positive number between 1 and ${maxAssignments}.`
+      )
+      return // Stop further execution if the value is invalid
     }
+    setError('') // Clear the error if the value is valid
+    setStudentCount(number)
   }
 
   return (
@@ -118,7 +126,6 @@ const AddIssueModal = ({ open, handleClose, maxAssignments, onAddIssue }) => {
             <TextField
               label="Student Count"
               variant="outlined"
-              type="number"
               fullWidth
               value={studentCount}
               onChange={handleStudentCountChange}

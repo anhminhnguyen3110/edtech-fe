@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
     setAccessToken(accessToken)
     setRefreshToken(refreshToken)
     setIsAuthenticated(true)
-    Router.push('/quiz')
+    Router.push('/assignment')
   }
 
   const logout = () => {
