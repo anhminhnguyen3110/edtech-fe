@@ -31,7 +31,7 @@ function NavBarLanding() {
     <div>
       <List>
         {[
-          { text: 'Join Quiz', link: '/' },
+          { text: 'Join Quiz', link: '/join' },
           { text: 'Sign In', link: '/auth' },
         ].map((item, index) => (
           <Link href={item.link} passHref key={index}>
