@@ -4,8 +4,7 @@ import { BLUE } from '@/theme/palette'
 import CountdownTimer from '@/components/countDown/countDownTimer'
 
 const Ready = ({ quiz, handleStart }) => {
-  const totalTime = process.env.NEXT_PUBLIC_QUIZ_WAITING_TIME || 20
-
+  const totalTime = 3
   return (
     <Box
       display="flex"

@@ -1,7 +1,33 @@
-import React, { useState } from 'react'
-import { Box, Typography, Button, Container, Paper } from '@mui/material'
+import React, { useState, useEffect } from 'react'
+import { Box, Typography, Container, Paper } from '@mui/material'
 import { BLUE } from '@/theme/palette'
-const Ready = () => {
+
+const Ready = ({ timeQuestionStart, moveToAnswer }) => {
+  const [timeLeft, setTimeLeft] = useState(null)
+
+  useEffect(() => {
+    // Convert timeQuestionStart to the user's local time
+    if (!timeQuestionStart) return
+    const targetTime = new Date(timeQuestionStart).getTime()
+
+    // Update the time left every 100 milliseconds for higher precision
+    const interval = setInterval(() => {
+      const now = new Date().getTime()
+      const timeRemaining = targetTime - now
+
+      if (timeRemaining <= 0) {
+        clearInterval(interval)
+        setTimeLeft(0)
+        moveToAnswer() // Trigger the function when time is up
+      } else {
+        setTimeLeft(timeRemaining)
+      }
+    }, 100) // Checking every 100 milliseconds for more precision
+
+    // Cleanup the interval on component unmount
+    return () => clearInterval(interval)
+  }, [timeQuestionStart, moveToAnswer])
+
   return (
     <Box
       display="flex"

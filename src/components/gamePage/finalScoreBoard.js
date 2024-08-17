@@ -1,7 +1,7 @@
 import React from 'react'
-import { Box, Typography, Avatar } from '@mui/material'
-
-const FinalScoreBoard = ({ scoreboard, quizName }) => {
+import { Box, Typography, Avatar, Button } from '@mui/material'
+import { BLUE } from '@/theme/palette'
+const FinalScoreBoard = ({ scoreboard, quizName, onReturn }) => {
   // Sort the scoreboard based on playerRank and take the top 3
   const sortedScoreboard = scoreboard.sort((a, b) => a.rank - b.rank).slice(0, 3)
   console.log(sortedScoreboard)
@@ -137,6 +137,21 @@ const FinalScoreBoard = ({ scoreboard, quizName }) => {
                 </Typography>
               </Box>
             )}
+            <Button
+              variant="contained"
+              onClick={onReturn}
+              sx={{
+                backgroundColor: BLUE.main,
+                position: 'absolute',
+                bottom: '2rem',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                padding: '10px 20px',
+                fontSize: '1.2rem',
+              }}
+            >
+              Return to Home
+            </Button>
           </>
         )}
       </Box>

@@ -144,7 +144,7 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
                   lineHeight: 1.2,
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center',
+                  justifyContent: 'flex-start',
                 }}
               >
                 <Typography
