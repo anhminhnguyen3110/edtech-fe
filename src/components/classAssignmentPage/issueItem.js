@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect } from 'react'
 import {
   Box,
@@ -19,11 +20,13 @@ const IssueItem = ({ issue, maxAssignments, isEditing, onEditIssue, onDeleteIssu
   const [boxHeight, setBoxHeight] = useState('4rem')
   const [isEditMode, setIsEditMode] = useState(false)
   const [editedIssue, setEditedIssue] = useState(issue)
+  const [error, setError] = useState('')
   const parentRef = useRef(null)
 
   useEffect(() => {
     setIsEditMode(isEditing)
     setShowDescription(isEditing)
+    setEditedIssue(issue)
   }, [isEditing])
 
   useEffect(() => {
@@ -53,7 +56,12 @@ const IssueItem = ({ issue, maxAssignments, isEditing, onEditIssue, onDeleteIssu
   }
 
   const handleDoneClick = (event) => {
+    setError('')
     event.stopPropagation()
+    if (editedIssue['studentCount'] === '') {
+      setError('Please enter a valid student count')
+      return
+    }
     onEditIssue(editedIssue)
   }
 
@@ -63,10 +71,27 @@ const IssueItem = ({ issue, maxAssignments, isEditing, onEditIssue, onDeleteIssu
   }
 
   const handleChange = (event) => {
-    const { name, value } = event.target
-    if (name === 'studentCount' && (value <= 0 || value > maxAssignments || value === '')) {
-      return // Prevent changes if studentCount is less than or equal to 0 or empty
+    let { name, value } = event.target
+
+    if (name === 'studentCount') {
+      // Convert the value to a number
+      const number = Number(value)
+
+      // Prevent changes if the value is invalid
+      if (
+        value !== '' &&
+        (isNaN(number) || !Number.isInteger(number) || number <= 0 || number > maxAssignments)
+      ) {
+        setError(
+          `Please enter a valid student count. It should be a positive number between 1 and ${maxAssignments}.`
+        )
+        return // Stop further execution if the value is invalid
+      }
+      value = number // Update the value to the valid number
     }
+    setError('') // Clear the error if the value is valid
+
+    // Update the state with the valid value
     setEditedIssue((prev) => ({
       ...prev,
       [name]: value,
@@ -100,8 +125,13 @@ const IssueItem = ({ issue, maxAssignments, isEditing, onEditIssue, onDeleteIssu
             variant="outlined"
             size="small"
             sx={{ width: '80px' }}
-            inputProps={{ type: 'number' }}
+            // inputProps={{ type: 'number' }}
           />
+          {error && (
+            <Typography variant="body2" color="error">
+              {error}
+            </Typography>
+          )}
         </Stack>
         <Stack direction="row" spacing={1}>
           <Button variant="contained" color="primary" onClick={handleDoneClick} size="small">

@@ -1,5 +1,4 @@
-// context/hostWebSocketProvider.js
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useRef, useState, useCallback } from 'react'
 import { io } from 'socket.io-client'
 
 const WebSocketContext = createContext(null)
@@ -9,9 +8,14 @@ export const useHostWebSocket = () => {
 }
 
 export const HostWebSocketProvider = ({ children }) => {
-  const [socket, setSocket] = useState(null)
+  const socketRef = useRef(null)
+  const [, setSocket] = useState(null) // Use state to trigger re-renders if necessary
 
-  useEffect(() => {
+  const initializeSocket = useCallback(() => {
+    if (socketRef.current) {
+      socketRef.current.disconnect()
+    }
+
     const socketInstance = io(process.env.NEXT_PUBLIC_QUIZ_WEB_SOCKET_URL, {
       transports: ['websocket'],
     })
@@ -33,14 +37,23 @@ export const HostWebSocketProvider = ({ children }) => {
       console.log('HOST_DISCONNECTED', data)
     })
 
-    setSocket(socketInstance)
-
-    return () => {
-      if (socketInstance) {
-        socketInstance.disconnect()
-      }
-    }
+    socketRef.current = socketInstance
+    setSocket(socketInstance) // Update state to trigger re-renders if needed
   }, [])
 
-  return <WebSocketContext.Provider value={socket}>{children}</WebSocketContext.Provider>
+  useEffect(() => {
+    initializeSocket()
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect()
+      }
+    }
+  }, [initializeSocket])
+
+  return (
+    <WebSocketContext.Provider value={{ socket: socketRef.current, resetSocket: initializeSocket }}>
+      {children}
+    </WebSocketContext.Provider>
+  )
 }

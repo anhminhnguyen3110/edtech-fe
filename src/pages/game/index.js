@@ -13,10 +13,11 @@ import Ready from '@/components/gamePage/ready'
 import Playing from '@/components/gamePage/playing'
 import GameScoreboard from '@/components/gamePage/gameScoreboard'
 import FinalScoreBoard from '@/components/gamePage/finalScoreBoard'
+import WaitForGame from '@/components/gamePage/waitForGame'
 
 const Game = () => {
   const router = useRouter()
-  const socket = useHostWebSocket()
+  const { socket, resetSocket } = useHostWebSocket()
   const [loading, setLoading] = useState(true)
   const [gameNotFound, setGameNotFound] = useState(false)
   const [gameState, setGameState] = useState(null)
@@ -25,27 +26,52 @@ const Game = () => {
   const [playersAnswered, setPlayersAnswered] = useState(0)
   const [gameScoreboard, setGameScoreboard] = useState(null)
   const [finalResult, setFinalResult] = useState(null)
+  const delayTime = 5
 
   const hasInitializedRef = useRef(false) // Add a ref to track initialization
 
+  if (typeof window !== 'undefined') {
+    window.history.pushState(null, document.title, window.location.href)
+  }
+
+  const handleGameTermination = () => {
+    console.log('gameState', gameState)
+    resetSocket()
+    const gameId = sessionStorage.getItem('gameId')
+    if (gameState !== 'END') {
+      console.log(gameState)
+      console.log('Game terminated successfully')
+      api
+        .patch(
+          `/games/${sessionStorage.getItem('gameId')}`,
+          { gameStatus: 'TERMINATED' },
+          { authRequired: true }
+        )
+        .then(() => {
+          console.log('Game terminated successfully')
+        })
+        .catch((e) => {
+          console.log('Error terminating game:', e)
+        })
+    }
+    sessionStorage.clear()
+  }
   const handleBeforeUnload = (event) => {
     if (gameNotFound) return
     event.preventDefault()
     event.returnValue = 'Are you sure you want to leave? Your game will be terminated.'
-    // Update the game status to terminated
-    api
-      .patch(
-        `/games/${sessionStorage.getItem('gameId')}`,
-        { gameStatus: 'TERMINATED' },
-        { authRequired: true }
-      )
-      .then(() => {
-        console.log('Game terminated successfully')
-      })
-      .catch((e) => {
-        console.log('Error terminating game:', e)
-      })
-    sessionStorage.clear()
+    handleGameTermination()
+  }
+
+  const handlePopState = () => {
+    // if (gameNotFound) return;
+    console.log('Pop state')
+    if (window.confirm('Are you sure you want to leave? Your game will be terminated.')) {
+      handleGameTermination()
+    } else {
+      // Push the current state back to prevent the popstate navigation
+      window.history.back()
+    }
   }
 
   useEffect(() => {
@@ -62,7 +88,7 @@ const Game = () => {
         setGameNotFound(true)
       } else {
         setGameNotFound(false)
-        setGameState('READY')
+        setGameState('START')
         setQuiz(JSON.parse(quizData))
       }
       setLoading(false)
@@ -90,6 +116,7 @@ const Game = () => {
 
         // Add event listener for beforeunload
         window.addEventListener('beforeunload', handleBeforeUnload)
+        window.addEventListener('popstate', handlePopState)
 
         hasInitializedRef.current = true // Mark as initialized
       }
@@ -102,6 +129,7 @@ const Game = () => {
           socket.off('QUESTION_HOST_NEXT')
         }
         window.removeEventListener('beforeunload', handleBeforeUnload)
+        window.removeEventListener('popstate', handlePopState)
       }
     }
   }, [socket])
@@ -112,15 +140,7 @@ const Game = () => {
 
   const handleStartGame = () => {
     console.log('Start Game')
-    socket.emit('HOST_GET_QUESTION', {
-      gameCode: sessionStorage.getItem('gameCode'),
-      questionIndexInQuiz: questionIndex,
-    })
-    socket.on('UPDATE_PLAYERS_ANSWERED', (data) => {
-      console.log('UPDATE_PLAYERS_ANSWERED', data)
-      setPlayersAnswered((prev) => prev + 1) // Increment playersAnswered
-    })
-    setGameState('PLAYING')
+    setGameState('READY')
   }
 
   const handleEndQuestion = () => {
@@ -142,19 +162,58 @@ const Game = () => {
     console.log('Next Question')
     setQuestionIndex((prev) => prev + 1)
     setPlayersAnswered(0)
-    socket.emit('HOST_GET_QUESTION', {
-      gameCode: sessionStorage.getItem('gameCode'),
-      questionIndexInQuiz: questionIndex + 1,
-    })
     console.log('Question Index', questionIndex)
     if (questionIndex === quiz.questions.length - 1) {
+      socket.emit('HOST_GET_QUESTION', {
+        gameCode: sessionStorage.getItem('gameCode'),
+        questionIndexInQuiz: questionIndex + 1,
+        delayTimeInSeconds: delayTime,
+      })
       socket.on('GAME_END', (data) => {
         console.log('GAME_END', data)
         setGameState('END')
+        api
+          .patch(
+            `/games/${sessionStorage.getItem('gameId')}`,
+            { gameStatus: 'COMPLETE' },
+            { authRequired: true }
+          )
+          .then(() => {
+            console.log('Game terminated successfully')
+          })
+          .catch((e) => {
+            console.log('Error terminating game:', e)
+          })
       })
     } else {
-      setGameState('PLAYING')
+      setGameState('READY')
     }
+  }
+
+  const handleSwitchPlaying = () => {
+    setGameState('PLAYING')
+  }
+
+  const handleSendQuestion = () => {
+    console.log('Send Question')
+    socket.emit('HOST_GET_QUESTION', {
+      gameCode: sessionStorage.getItem('gameCode'),
+      questionIndexInQuiz: questionIndex,
+      delayTimeInSeconds: delayTime,
+    })
+    console.log('Question Index', questionIndex)
+    if (questionIndex === 0) {
+      socket.on('UPDATE_PLAYERS_ANSWERED', (data) => {
+        console.log('UPDATE_PLAYERS_ANSWERED', data)
+        setPlayersAnswered((prev) => prev + 1) // Increment playersAnswered
+      })
+    }
+  }
+
+  const handleReturnToLobby = () => {
+    resetSocket()
+    sessionStorage.clear()
+    router.push('/quiz')
   }
 
   if (loading) {
@@ -191,7 +250,14 @@ const Game = () => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center" height="100vh">
       {/* Render your main game content here */}
-      {gameState === 'READY' && <Ready quiz={quiz} handleStart={handleStartGame} />}
+      {gameState === 'START' && <Ready quiz={quiz} handleStart={handleStartGame} />}
+      {gameState === 'READY' && (
+        <WaitForGame
+          question={quiz.questions[questionIndex]}
+          startGetQuestions={handleSendQuestion}
+          moveToQuestion={handleSwitchPlaying}
+        />
+      )}
       {gameState === 'PLAYING' && (
         <Playing
           question={quiz.questions[questionIndex]}
@@ -202,7 +268,13 @@ const Game = () => {
       {gameState === 'SCOREBOARD' && gameScoreboard !== null && (
         <GameScoreboard result={gameScoreboard} handleNext={handleNextQuestion} />
       )}
-      {gameState === 'END' && <FinalScoreBoard scoreboard={gameScoreboard} quizName={quiz.name} />}
+      {gameState === 'END' && (
+        <FinalScoreBoard
+          scoreboard={gameScoreboard}
+          quizName={quiz.name}
+          onReturn={handleReturnToLobby}
+        />
+      )}
     </Box>
   )
 }

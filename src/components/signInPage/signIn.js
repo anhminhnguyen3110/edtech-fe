@@ -44,6 +44,8 @@ const CombinedAuth = () => {
     event.preventDefault()
 
     const trimmedEmail = email.trim()
+    setError('')
+    setInformation('')
 
     if (!trimmedEmail || !password) {
       setError('Please enter both email and password')

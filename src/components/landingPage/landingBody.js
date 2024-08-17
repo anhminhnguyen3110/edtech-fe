@@ -42,7 +42,7 @@ const LandingBody = () => {
               gutterBottom
               sx={{ fontSize: { xs: '1.5rem', md: '2rem', lg: '3rem' }, fontWeight: 300 }}
             >
-              Intelligent EdTech Assistant
+              EdTech Assistant
             </Typography>
             <Typography
               variant="body1"
