@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Typography, Box, Stack } from '@mui/material'
 import Image from 'next/image'
-import welcomeImage from '../../../public/study.png' // Adjust the path according to your project structure
+import welcomeImage from '../../../public/edtech-getty-removebg.webp' // Adjust the path according to your project structure
 
 const LandingBody = () => {
   return (
@@ -54,15 +54,15 @@ const LandingBody = () => {
               interactive, personalized educational experiences.
             </Typography>
           </Box>
-          <Box sx={{ textAlign: 'center', flex: 1 }}>
+          <Box sx={{ textAlign: 'center', flex: 1, marginLeft: '30px' }}>
             <Image
               src={welcomeImage}
               alt="Welcome Image"
-              width={500}
-              height={500}
+              width={700}
+              height={700}
               style={{
                 width: '100%',
-                maxWidth: '500px',
+                // maxWidth: '700px',
                 height: 'auto',
               }}
             />

@@ -58,7 +58,7 @@ function NavBarLanding() {
                 component="img"
                 src="./edtech-logo.png"
                 alt="edtech logo"
-                sx={{ height: { xs: '30px', md: '40px' }, cursor: 'pointer' }}
+                sx={{ height: { xs: '40px', md: '55px' }, cursor: 'pointer' }}
               />
             </Link>
           </Typography>
