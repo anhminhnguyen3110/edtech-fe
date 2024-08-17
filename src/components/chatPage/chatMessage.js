@@ -5,9 +5,17 @@ import { BLUE, GRAY } from '@/theme/palette'
 import ReactMarkdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
 import rehypeSanitize from 'rehype-sanitize'
+import remarkGfm from 'remark-gfm'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import SchoolIcon from '@mui/icons-material/School'
-import CodeBlock from './codeBlock' // Import the new CodeBlock component
+import CodeBlock from './codeBlock'
+import {
+  MarkdownTable,
+  MarkdownTableHead,
+  MarkdownTableBody,
+  MarkdownTableRow,
+  MarkdownTableCell,
+} from './markDownTable' // Import the new MarkdownTable component
 
 const ChatMessage = ({ message, role, file }) => {
   const isUser = role === 'user'
@@ -85,6 +93,7 @@ const ChatMessage = ({ message, role, file }) => {
         >
           <ReactMarkdown
             rehypePlugins={[rehypeRaw, rehypeSanitize]}
+            remarkPlugins={[remarkGfm]}
             components={{
               p: ({ node, ...props }) => <Typography variant="body1" {...props} />,
               h1: ({ node, ...props }) => <Typography variant="h5" component="h1" {...props} />,
@@ -101,7 +110,13 @@ const ChatMessage = ({ message, role, file }) => {
               ol: ({ node, ...props }) => (
                 <ol {...props} style={{ margin: 0, paddingLeft: '1.2em' }} />
               ),
-              code: CodeBlock, // Use the new CodeBlock component here
+              code: CodeBlock,
+              table: MarkdownTable,
+              thead: MarkdownTableHead,
+              tbody: MarkdownTableBody,
+              tr: MarkdownTableRow,
+              th: (props) => <MarkdownTableCell isHeader {...props} />,
+              td: (props) => <MarkdownTableCell {...props} />,
             }}
           >
             {cleanedMessage}
