@@ -117,6 +117,16 @@ const ChatMessage = ({ message, role, file }) => {
               tr: MarkdownTableRow,
               th: (props) => <MarkdownTableCell isHeader {...props} />,
               td: (props) => <MarkdownTableCell {...props} />,
+              a: ({ node, ...props }) => (
+                <Link
+                  {...props}
+                  target="_blank"
+                  sx={{
+                    color: BLUE.main,
+                    textDecoration: 'underline',
+                  }}
+                />
+              ),
             }}
           >
             {cleanedMessage}

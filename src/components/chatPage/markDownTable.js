@@ -11,11 +11,12 @@ import {
 import { styled } from '@mui/material/styles'
 
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+  maxWidth: '90vw',
   overflowX: 'auto',
   marginTop: theme.spacing(4),
   marginBottom: theme.spacing(4),
   borderRadius: theme.shape.borderRadius * 2,
-  maxWidth: '100%', // Ensure the container doesn't exceed the parent width
+  width: '100%', // Ensure the container doesn't exceed the parent width
   '& .MuiTable-root': {
     borderCollapse: 'separate',
     borderSpacing: 0,
@@ -32,6 +33,9 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   '& .MuiTableCell-body': {
     fontSize: 14,
     whiteSpace: 'normal', // Allow wrapping in body cells
+    maxWidth: '200px',
+    wordBreak: 'break-word', // Break long words
+    overflowWrap: 'break-word', // Ensure content wraps within the cell
     padding: theme.spacing(2),
   },
   '& .MuiTableRow-root': {
@@ -50,20 +54,32 @@ const MarkdownTable = ({ children, ...props }) => {
 }
 
 const MarkdownTableHead = ({ children, ...props }) => {
-  return <TableHead {...props}>{children}</TableHead>
+  return (
+    <TableHead sx={{ maxWidth: '90vw' }} {...props}>
+      {children}
+    </TableHead>
+  )
 }
 
 const MarkdownTableBody = ({ children, ...props }) => {
-  return <TableBody {...props}>{children}</TableBody>
+  return (
+    <TableBody sx={{ maxWidth: '90vw' }} {...props}>
+      {children}
+    </TableBody>
+  )
 }
 
 const MarkdownTableRow = ({ children, ...props }) => {
-  return <TableRow {...props}>{children}</TableRow>
+  return (
+    <TableRow sx={{ maxWidth: '90vw' }} {...props}>
+      {children}
+    </TableRow>
+  )
 }
 
 const MarkdownTableCell = ({ isHeader = false, children, ...props }) => {
   return (
-    <TableCell component={isHeader ? 'th' : 'td'} {...props}>
+    <TableCell sx={{ maxWidth: '90vw' }} component={isHeader ? 'th' : 'td'} {...props}>
       {children}
     </TableCell>
   )

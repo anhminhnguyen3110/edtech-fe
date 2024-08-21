@@ -72,6 +72,16 @@ const JoinPage = () => {
       setError(data.message)
     })
 
+    socket.on('GAME_ALREADY_COMPLETED', (data) => {
+      console.log('Game already completed', data)
+      setError(data.message)
+    })
+
+    socket.on('GAME_ALREADY_STARTED', (data) => {
+      console.log('Game already started', data)
+      setError(data.message)
+    })
+
     socket.on('HOST_DISCONNECTED', (data) => {
       console.log('HOST_DISCONNECTED ', data)
       setError(data.message)
@@ -85,6 +95,8 @@ const JoinPage = () => {
       socket.off('GAME_ALREADY_FULL')
       socket.off('PLAYER_NICKNAME_TAKEN')
       socket.off('GAME_NOT_STARTED')
+      socket.off('GAME_ALREADY_STARTED')
+      socket.off('GAME_ALREADY_COMPLETED')
       socket.off('HOST_DISCONNECTED')
     }
   }, [socket, router])

@@ -1,16 +1,30 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
-import { Box, Button, Grid } from '@mui/material'
+import { Box, Button, Grid, useMediaQuery } from '@mui/material'
 import { BACKGROUND_ANSWER, TRUE_FALSE_ANSWER } from '@/theme/palette'
 import CustomTickButton from '../quizPage/customTickButton'
 import { BLUE } from '@/theme/palette'
+import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked'
+import CropSquareIcon from '@mui/icons-material/CropSquare'
+import StarBorderIcon from '@mui/icons-material/StarBorder'
+import AcUnitIcon from '@mui/icons-material/AcUnit'
 
 const Answer = ({ question, answerQuestion, handleTimesUp }) => {
   const { choices, questionType, timeLimitInSecond } = question
   const [selectedAnswers, setSelectedAnswers] = useState([])
   const [remainingTime, setRemainingTime] = useState(timeLimitInSecond)
 
-  const maxAnswerLength = Math.max(...choices.map((choice) => choice.length))
+  const isSmallScreen = useMediaQuery('(max-width:600px)')
+  const isMediumScreen = useMediaQuery('(max-width:900px)')
+
+  const iconSize = isSmallScreen ? '3rem' : isMediumScreen ? '4rem' : '6rem'
+
+  const icons = [
+    <RadioButtonUncheckedIcon key={1} sx={{ fontSize: iconSize }} />,
+    <CropSquareIcon key={2} sx={{ fontSize: iconSize }} />,
+    <AcUnitIcon key={3} sx={{ fontSize: iconSize }} />,
+    <StarBorderIcon key={4} sx={{ fontSize: iconSize }} />,
+  ]
 
   const handleSelectAnswer = (choice) => {
     if (questionType === 'MULTIPLE_OPTIONS') {
@@ -94,7 +108,7 @@ const Answer = ({ question, answerQuestion, handleTimesUp }) => {
                 position: 'relative',
               }}
             >
-              {choice}
+              {icons[index]}
             </Button>
             {questionType === 'MULTIPLE_OPTIONS' && (
               <Box sx={{ position: 'absolute', top: 8, left: 8 }}>
