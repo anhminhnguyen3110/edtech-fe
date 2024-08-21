@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-// pages/lobby.js
+// pages/game/index.js
 import React, { useEffect, useState, useRef } from 'react'
 import { Box, Typography, Button } from '@mui/material'
 import { useRouter } from 'next/router'
@@ -26,6 +26,7 @@ const Game = () => {
   const [playersAnswered, setPlayersAnswered] = useState(0)
   const [gameScoreboard, setGameScoreboard] = useState(null)
   const [finalResult, setFinalResult] = useState(null)
+  const [error, setError] = useState(null)
   const delayTime = 5
 
   const hasInitializedRef = useRef(false) // Add a ref to track initialization
@@ -57,7 +58,7 @@ const Game = () => {
     sessionStorage.clear()
   }
   const handleBeforeUnload = (event) => {
-    if (gameNotFound) return
+    if (gameNotFound || gameState === 'ERROR') return
     event.preventDefault()
     event.returnValue = 'Are you sure you want to leave? Your game will be terminated.'
     handleGameTermination()
@@ -104,6 +105,12 @@ const Game = () => {
 
         socket.on('HOST_RECEIVE_QUESTION_DETAIL', (data) => {
           console.log('HOST_RECEIVE_QUESTION_DETAIL', data)
+        })
+        socket.on('ERROR', (data) => {
+          console.log('ERROR', data)
+          handleGameTermination()
+          setGameNotFound(true)
+          setError(true)
         })
 
         socket.on('QUESTION_HOST_RESULT', (data) => {
@@ -211,6 +218,7 @@ const Game = () => {
   }
 
   const handleReturnToLobby = () => {
+    setGameNotFound(true)
     resetSocket()
     sessionStorage.clear()
     router.push('/quiz')
@@ -230,7 +238,9 @@ const Game = () => {
         p={3}
         sx={{ paddingTop: '5rem', paddingLeft: '0rem', paddingRight: '0rem' }}
       >
-        <GameNotFound message="Game not found or invalid game data." />
+        <GameNotFound
+          message={error ? 'Encounter Error!' : 'Game not found or invalid game data.'}
+        />
         <Button
           variant="contained"
           sx={{

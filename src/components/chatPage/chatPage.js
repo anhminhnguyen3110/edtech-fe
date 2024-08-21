@@ -12,6 +12,7 @@ import ErrorNotification from './errorNotification'
 const ChatPage = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'))
   const router = useRouter()
   const { id } = router.query
   const [chats, setChats] = useState([])
@@ -215,10 +216,12 @@ const ChatPage = () => {
     <Box
       display="flex"
       flexDirection="column"
-      height="91.6vh"
+      height="91vh"
       width="100%"
       overflow="hidden"
       marginTop="20px"
+      maxHeight="calc(97vh - 60px)"
+      maxWidth={isMobile ? '100vw' : isTablet ? '88vw' : '90vw'}
     >
       <ChatHeader
         topicName={topicName}
@@ -238,8 +241,9 @@ const ChatPage = () => {
           width={isMobile ? '90%' : '70%'}
           padding={2}
           borderRadius="10px"
-          height="calc(100vh - 10px)" // Adjust as needed
+          height="95vh" // Adjust as needed
           overflow="hidden" // This will clip the content to the box boundaries
+          maxWidth={isMobile ? '100%' : '70%'}
         >
           <ChatList
             chats={chats}
@@ -270,7 +274,6 @@ const ChatPage = () => {
             paddingLeft={1}
             paddingRight={1}
             borderRadius="10px"
-            marginBottom={0.5}
           >
             <ChatBox sendChat={handleSendMessage} />
           </Box>
