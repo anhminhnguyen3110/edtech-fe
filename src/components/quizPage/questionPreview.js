@@ -19,7 +19,12 @@ const QuestionPreview = ({ question, anchorEl, open, onClose }) => {
       disableRestoreFocus
     >
       <Paper
-        sx={{ p: 2, width: `${popoverWidth}px`, height: `${popoverHeight}px`, overflow: 'hidden' }}
+        sx={{
+          p: 2,
+          width: `${popoverWidth}px`,
+          height: `${popoverHeight}px`,
+          overflow: 'hidden',
+        }}
       >
         <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
           {/* Question section - 55% of height */}
@@ -47,10 +52,21 @@ const QuestionPreview = ({ question, anchorEl, open, onClose }) => {
             </Typography>
 
             <Box
-              sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mt: 1 }}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                mt: 1,
+              }}
             >
               {/* Answer Number Component */}
-              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                }}
+              >
                 <Typography variant="h6" mb={0.5}>
                   0
                 </Typography>
@@ -127,6 +143,7 @@ const QuestionPreview = ({ question, anchorEl, open, onClose }) => {
                     alignItems: 'center',
                     justifyContent: 'flex-start',
                     fontWeight: question.correctAnswer.includes(index) ? 'bold' : 'normal',
+                    textOverflow: 'ellipsis',
                     width: '100%',
                     height: '100%',
                   }}

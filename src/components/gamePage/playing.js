@@ -56,14 +56,26 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
         <Typography
           variant="h4"
           gutterBottom
-          sx={{ textAlign: 'left', mb: 10, width: '80%', mx: 'auto' }}
+          sx={{ textAlign: 'center', mb: 10, width: '80%', mx: 'auto' }}
         >
           {questionText}
         </Typography>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mb: 4,
+          }}
+        >
           {/* Players Answered - Left */}
           <Box
-            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '20%' }}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '20%',
+            }}
           >
             <Typography variant="h3" mb={1}>
               {playersAnswered}
@@ -106,7 +118,12 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
                 component="img"
                 src={imageFileUrl}
                 alt="Question"
-                sx={{ width: '100%', height: 'auto', maxHeight: '40vh', objectFit: 'contain' }}
+                sx={{
+                  width: '100%',
+                  height: 'auto',
+                  maxHeight: '40vh',
+                  objectFit: 'contain',
+                }}
               />
             )}
           </Box>

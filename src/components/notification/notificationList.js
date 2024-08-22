@@ -78,6 +78,7 @@ const NotificationList = ({
                 <ListItem
                   onClick={() => handleNotificationClick(notification)}
                   sx={{
+                    cursor: notification.isRead ? '' : 'pointer',
                     mb: 0,
                     display: 'flex',
                     alignItems: 'center',
@@ -90,7 +91,11 @@ const NotificationList = ({
                     <Avatar
                       src="/noti.png"
                       alt="Notification Icon"
-                      sx={{ width: '4rem', height: '4rem', marginRight: '3px' }}
+                      sx={{
+                        width: '4rem',
+                        height: '4rem',
+                        marginRight: '3px',
+                      }}
                     />
                   </ListItemAvatar>
                   <ListItemText

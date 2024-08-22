@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import SearchBar from '@/components/searchBar/searchBar'
 import PaginationComponent from '@/components/pagination/pagination'
 import QuizItem from '@/components/quizPage/quizItem'
@@ -19,6 +19,12 @@ import MessageBox from '@/components/box/messageBox'
 import { useRouter } from 'next/router'
 import { sortBy } from 'underscore'
 import NotificationSnackbar from '@/components/snackBar/notificationSnackbar'
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset'
+import GenerateQuizModal from '@/components/quizPage/generateQuizModal'
+import AddIcon from '@mui/icons-material/Add'
+import { io } from 'socket.io-client'
+import { useAuth } from '@/context/authContext'
+
 export const QuizPage = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen is mobile-sized
@@ -28,8 +34,12 @@ export const QuizPage = () => {
   const itemsPerPage = 4 // Items per page
   const [errorMessage, setErrorMessage] = useState(null) // State to hold error message
   const [openSnackbar, setOpenSnackbar] = useState(false) // State to control Snackbar open state
+  const [severity, setSeverity] = useState('error') // State to control Snackbar severity
   const [loading, setLoading] = useState(false) // State to manage loading state
   const router = useRouter()
+  const [openQuizModal, setOpenQuizModal] = useState(false) // State to control modal open state
+  const { accessToken } = useAuth()
+  const socket = useRef(null)
 
   const fetchData = async (page = 1, searchQuery = '') => {
     try {
@@ -49,10 +59,10 @@ export const QuizPage = () => {
       setQuizzes(items) // Set fetched quizzes
       setTotalPages(meta.totalPages) // Update total pages from meta data
       setCurrentPage(meta.currentPage) // Update current page from meta data
-      setErrorMessage(null) // Clear any previous errors
     } catch (error) {
       console.error('Error fetching data:', error)
       setErrorMessage('Error while fetching data.') // Set error message state
+      setSeverity('error')
       setOpenSnackbar(true) // Open Snackbar on error
     }
   }
@@ -91,6 +101,40 @@ export const QuizPage = () => {
     }
   }
 
+  const handleOpenQuizModal = () => {
+    setOpenQuizModal(true)
+  }
+
+  const handleCloseQuizModal = () => {
+    setOpenQuizModal(false)
+  }
+
+  const handleGenerateQuiz = async (prompt, multipleChoice, trueFalse, multipleAnswer) => {
+    try {
+      const response = await api.post(
+        `/quizzes/generate`,
+        {
+          prompt: prompt,
+          numberOfMultipleChoiceQuestions: multipleChoice,
+          numberOfTrueFalseQuestions: trueFalse,
+          numberOfMultipleAnswerQuestions: multipleAnswer,
+        },
+        { authRequired: true }
+      )
+      if (response.status === 201) {
+        const message = response.data.message
+        setErrorMessage(message)
+        setSeverity('success')
+        setOpenSnackbar(true)
+      }
+    } catch (error) {
+      const message = error.response?.data?.message || 'Failed to generate quiz.'
+      setErrorMessage(message)
+      setSeverity('error')
+      setOpenSnackbar(true)
+    }
+  }
+
   const handleCreateQuiz = async () => {
     try {
       setLoading(true) // Set loading state to true when starting the API call
@@ -115,6 +159,7 @@ export const QuizPage = () => {
     } catch (error) {
       console.error('Error creating quiz:', error)
       setErrorMessage('Error while creating quiz.')
+      setSeverity('error')
       setOpenSnackbar(true)
     } finally {
       setLoading(false) // Set loading state to false regardless of success or failure
@@ -137,6 +182,66 @@ export const QuizPage = () => {
     }
     setOpenSnackbar(false) // Close Snackbar
   }
+
+  useEffect(() => {
+    if (!accessToken) {
+      return
+    }
+
+    socket.current = io(process.env.NEXT_PUBLIC_NOTIFICATION_WEB_SOCKET_URL, {
+      transports: ['websocket'],
+      auth: {
+        token: `${accessToken}`,
+      },
+    })
+
+    socket.current.on('connect', () => {
+      console.log('Socket connected successfully')
+    })
+
+    socket.current.on('disconnect', (reason) => {
+      console.log('Socket disconnected:', reason)
+    })
+
+    socket.current.on('connect_error', (err) => {
+      console.error('Socket connection error:', err)
+    })
+
+    const successEventTypes = ['GENERATE_QUIZ_SUCCESS']
+
+    const failedEventTypes = ['GENERATE_QUIZ_FAILED']
+
+    successEventTypes.forEach((eventType) => {
+      socket.current.on(eventType, (data) => {
+        console.log(`Received event type in page: ${eventType}`, data)
+        console.log(data.message)
+        setErrorMessage(data.message)
+        setSeverity('success')
+        setOpenSnackbar(true)
+        fetchData()
+        setCurrentPage(1)
+      })
+    })
+
+    failedEventTypes.forEach((eventType) => {
+      socket.current.on(eventType, (data) => {
+        console.log(`Received event: ${eventType}`, data)
+        setErrorMessage(data.message)
+        setSeverity('fail')
+        setOpenSnackbar(true)
+      })
+    })
+
+    return () => {
+      successEventTypes.forEach((eventType) => {
+        socket.current.off(eventType)
+      })
+      failedEventTypes.forEach((eventType) => {
+        socket.current.off(eventType)
+      })
+      socket.current.disconnect()
+    }
+  }, [accessToken])
 
   useEffect(() => {
     fetchData() // Fetch initial data on component mount
@@ -162,10 +267,12 @@ export const QuizPage = () => {
         <Box
           display="flex"
           alignItems="center"
+          gap={2}
           flexDirection={isMobile ? 'column' : 'row'}
+          marginTop={2}
           justifyContent="space-between"
         >
-          <Box sx={{ margin: 2 }}>
+          <Box sx={{}}>
             <SearchBar placeholder="Search quizzes..." onSearch={handleSearch} />{' '}
           </Box>
           {/* Pass handleSearch function as prop */}
@@ -173,32 +280,35 @@ export const QuizPage = () => {
             onClick={handleCreateQuiz}
             variant="contained"
             disabled={loading} // Disable button when loading
-            sx={{
-              marginLeft: isMobile ? '0' : '16px',
-              marginBottom: isMobile ? '16px' : '0',
-              marginTop: isMobile ? '16px' : '0',
-            }}
+            style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
           >
             {loading && (
               <CircularProgress size={24} sx={{ color: '#ffffff', marginRight: '5px' }} />
-            )}{' '}
-            {/* Show CircularProgress when loading */}
-            Create Quiz
+            )}
+            {!loading && <AddIcon />}
+            <span>Create Quiz</span>
+          </ButtonComponent>
+          <ButtonComponent
+            onClick={handleOpenQuizModal}
+            variant="contained"
+            style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+          >
+            <VideogameAssetIcon />
+            Generate Quiz
           </ButtonComponent>
         </Box>
       </Box>
       <NotificationSnackbar
         open={openSnackbar}
         message={errorMessage}
-        type={'error'}
+        type={severity}
         onClose={handleCloseSnackbar}
       />
-      {/* <CustomSnackbar
-        open={openSnackbar}
-        handleClose={handleCloseSnackbar}
-        message={errorMessage}
-        severity="error"
-      /> */}
+      <GenerateQuizModal
+        open={openQuizModal}
+        handleClose={handleCloseQuizModal}
+        generateQuiz={handleGenerateQuiz}
+      />
       {quizzes.length === 0 ? (
         <MessageBox message="No quizzes found." />
       ) : (

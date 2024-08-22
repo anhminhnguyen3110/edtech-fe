@@ -21,7 +21,7 @@ const NotificationSnackbar = ({ open, message, type, onClose }) => {
       autoHideDuration={2000} // Increased auto-hide duration
       onClose={onClose}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-      sx={{ transform: 'translateY(50px)', zIndex: 1400 }} // Removed incorrect bottom positioning
+      sx={{ transform: 'translateY(50px)', zIndex: 1400, maxWidth: 600 }} // Removed incorrect bottom positioning
     >
       <Box
         sx={{

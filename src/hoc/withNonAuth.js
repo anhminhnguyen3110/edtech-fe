@@ -11,7 +11,7 @@ const withNonAuth = (WrappedComponent) => {
     useEffect(() => {
       if (!loading) {
         if (isAuthenticated) {
-          Router.replace('/assignment')
+          Router.replace('/assistant')
         } else {
           setIsCheckingAuth(false)
         }

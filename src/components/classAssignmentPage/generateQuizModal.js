@@ -1,30 +1,10 @@
 import React, { useState } from 'react'
-import {
-  Box,
-  Typography,
-  Modal,
-  Backdrop,
-  Fade,
-  TextField,
-  IconButton,
-  Chip,
-  Tooltip,
-} from '@mui/material'
+import { Box, Typography, Modal, Backdrop, Fade, TextField, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import AddIcon from '@mui/icons-material/Add'
 import ButtonComponent from '@/components/button/buttonComponent' // Ensure the correct import path
 
-const promptSuggestions = [
-  'Improve student issues',
-  'Assess understanding of world history',
-  'Evaluate science concepts',
-  'Check grammar and vocabulary skills',
-  'Test knowledge of animal biology',
-  'Analyze literary themes in classic novels',
-]
-
 const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
-  const [prompt, setPrompt] = useState('')
   const [numberOfMultipleChoiceQuestions, setNumberOfMultipleChoiceQuestions] = useState(0)
   const [numberOfTrueFalseQuestions, setNumberOfTrueFalseQuestions] = useState(0)
   const [numberOfMultipleAnswerQuestions, setNumberOfMultipleAnswerQuestions] = useState(0)
@@ -32,7 +12,6 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
 
   const onClose = () => {
     setError('')
-    setPrompt('')
     setNumberOfMultipleChoiceQuestions(0)
     setNumberOfTrueFalseQuestions(0)
     setNumberOfMultipleAnswerQuestions(0)
@@ -40,10 +19,6 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
   }
 
   const handleGenerateQuiz = () => {
-    if (prompt.trim() === '') {
-      setError('Prompt cannot be blank')
-      return
-    }
     const totalQuestions =
       numberOfMultipleChoiceQuestions + numberOfTrueFalseQuestions + numberOfMultipleAnswerQuestions
     if (totalQuestions <= 0) {
@@ -59,7 +34,7 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
 
     try {
       generateQuiz(
-        prompt,
+        '',
         numberOfMultipleChoiceQuestions,
         numberOfTrueFalseQuestions,
         numberOfMultipleAnswerQuestions
@@ -75,10 +50,6 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
     if (value >= 0) {
       setter(value)
     }
-  }
-
-  const handleSuggestionSelect = (suggestion) => {
-    setPrompt(`Generate a quiz to ${suggestion.toLowerCase()}`)
   }
 
   return (
@@ -125,37 +96,10 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
           </Typography>
           <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <Box>
-              <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 'medium' }}>
-                Prompt Suggestions
+              <Typography variant="subtitle1" sx={{ fontWeight: 'medium' }}>
+                Customize your quiz to address student issues!
               </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                {promptSuggestions.map((suggestion, index) => (
-                  <Tooltip title={`Use: "${suggestion}"`} key={index}>
-                    <Chip
-                      label={suggestion}
-                      onClick={() => handleSuggestionSelect(suggestion)}
-                      color={prompt.includes(suggestion.toLowerCase()) ? 'primary' : 'default'}
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: 'primary.main',
-                          color: 'primary.contrastText',
-                        },
-                      }}
-                    />
-                  </Tooltip>
-                ))}
-              </Box>
             </Box>
-            <TextField
-              label="Prompt"
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              fullWidth
-              multiline
-              rows={3}
-              placeholder="Describe the quiz you want to generate..."
-              variant="outlined"
-            />
             <Box sx={{ display: 'flex', gap: 2 }}>
               <TextField
                 label="Multiple Choice"

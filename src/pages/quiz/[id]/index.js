@@ -1,10 +1,14 @@
 // pages/quiz/index.js
 import AuthorizedLayout from '@/components/layout/AuthorizedLayout'
 import QuizCreator from './client'
-export default function Quiz() {
+import Page from '@/components/page'
+export default function QuizDetail() {
   return (
-    <AuthorizedLayout>
-      <QuizCreator />
-    </AuthorizedLayout>
+    <>
+      <Page title="Quiz Detail" description="Quiz detail page" />
+      <AuthorizedLayout>
+        <QuizCreator />
+      </AuthorizedLayout>
+    </>
   )
 }

@@ -8,7 +8,11 @@ import ChatBox from './chatBox'
 import ChatHeader from './chatHeader'
 import ChatList from './chatList'
 import ErrorNotification from './errorNotification'
-
+import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates'
+import IconButton from '@mui/material/IconButton'
+import SuggestionModal from './suggestionModal'
+import { BLUE } from '@/theme/palette'
+import useModal from './useModal'
 const ChatPage = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
@@ -31,6 +35,8 @@ const ChatPage = () => {
   const [sendError, setSendError] = useState(false)
   const [lastMessage, setLastMessage] = useState(null)
   const [lastFile, setLastFile] = useState(null)
+  const [boxHeight, setBoxHeight] = useState('97vh')
+  const { isOpen, openModal, closeModal } = useModal()
 
   const fetchChat = useCallback(
     async (pageNumber = 1) => {
@@ -86,6 +92,22 @@ const ChatPage = () => {
   )
 
   useEffect(() => {
+    const handleResize = () => {
+      const newHeight = window.innerHeight < 600 ? 'calc(97vh - 70px)' : 'calc(97vh - 60px)' // Adjust 600 to your desired threshold
+      setBoxHeight(newHeight)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    // Call handleResize once to set the initial state based on the current window size
+    handleResize()
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
     if (id) {
       fetchChat()
     }
@@ -124,6 +146,40 @@ const ChatPage = () => {
     } catch (error) {
       console.error('Error saving topic name:', error)
       showSnackbar('Failed to delete the chat. Please try again.', 'error')
+    }
+  }
+
+  const handleSendSuggestion = async (suggestion) => {
+    console.log('Suggestion:', suggestion)
+    const newChat = {
+      id: chats.length + 1,
+      message: suggestion,
+      role: 'user',
+      updatedAt: new Date().toISOString(),
+      file: null,
+    }
+    console.log(newChat)
+    setChats([...chats, newChat])
+    setWaitingResponse(true)
+    const formData = new FormData()
+    formData.append('message', suggestion)
+    formData.append('topicId', id)
+    try {
+      const response = await api.post('/chats', formData, { authRequired: true })
+      const res = response.data
+      console.log(res)
+      const assistantAnswer = {
+        id: chats.length + 1,
+        message: res.answer,
+      }
+      setChats((prevChats) => [...prevChats, assistantAnswer])
+    } catch (error) {
+      setLastMessage(suggestion)
+      console.error('Error generating chat:', error)
+      setSendError(true)
+      showSnackbar('Error generating chat', 'error')
+    } finally {
+      setWaitingResponse(false)
     }
   }
 
@@ -216,12 +272,12 @@ const ChatPage = () => {
     <Box
       display="flex"
       flexDirection="column"
-      height="91vh"
+      height="97vh"
       width="100%"
       overflow="hidden"
       marginTop="20px"
-      maxHeight="calc(97vh - 60px)"
-      maxWidth={isMobile ? '100vw' : isTablet ? '88vw' : '90vw'}
+      maxHeight={boxHeight}
+      maxWidth={isMobile ? '95vw' : isTablet ? '88vw' : '90vw'}
     >
       <ChatHeader
         topicName={topicName}
@@ -241,7 +297,7 @@ const ChatPage = () => {
           width={isMobile ? '90%' : '70%'}
           padding={2}
           borderRadius="10px"
-          height="95vh" // Adjust as needed
+          height="97vh" // Adjust as needed
           overflow="hidden" // This will clip the content to the box boundaries
           maxWidth={isMobile ? '100%' : '70%'}
         >
@@ -270,7 +326,6 @@ const ChatPage = () => {
             width={isMobile ? '90%' : '70%'}
             display="flex"
             flexDirection="column"
-            padding={1}
             paddingLeft={1}
             paddingRight={1}
             borderRadius="10px"
@@ -285,6 +340,26 @@ const ChatPage = () => {
         type={snackbar.severity}
         onClose={handleCloseSnackbar}
       />
+      <SuggestionModal
+        open={isOpen}
+        handleClose={closeModal}
+        sendSuggestion={handleSendSuggestion}
+      />
+      {/* Button for suggestion modal */}
+      <IconButton
+        color="primary"
+        sx={{
+          position: 'absolute',
+          bottom: 32,
+          right: 32,
+          bgcolor: 'background.paper',
+          boxShadow: 3,
+          padding: 1.4,
+        }}
+        onClick={openModal} // Replace with your actual click handler
+      >
+        <TipsAndUpdatesIcon sx={{ fontSize: '2rem' }} />
+      </IconButton>
     </Box>
   )
 }

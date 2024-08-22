@@ -18,9 +18,9 @@ import AssistantIcon from '@mui/icons-material/Assistant'
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
 const navItems = [
   {
-    name: 'Assignment',
-    icon: <AssessmentIcon sx={{ fontSize: '2rem' }} />,
-    path: '/assignment',
+    name: 'AI Assistant',
+    icon: <ChatOutlinedIcon sx={{ fontSize: '2rem' }} />,
+    path: '/assistant',
   },
   {
     name: 'Quiz',
@@ -28,9 +28,9 @@ const navItems = [
     path: '/quiz',
   },
   {
-    name: 'AI Assistant',
-    icon: <ChatOutlinedIcon sx={{ fontSize: '2rem' }} />,
-    path: '/assistant',
+    name: 'Assignment',
+    icon: <AssessmentIcon sx={{ fontSize: '2rem' }} />,
+    path: '/assignment',
   },
 ]
 

@@ -16,7 +16,10 @@ export default function Document() {
           name="description"
           content="Language Confidence is a tool for language learners to evaluate their proficiency in a given language. Experience our product and learn how to use it."
         />
-        <meta name="keywords" content="web3,trading,decentralized,ethereum,blockchain" />
+        <meta
+          name="keywords"
+          content="edtech assistant,education,chat application,real-time quiz,education tool"
+        />
         <meta name="author" content="EdTech Assistant" />
 
         {/* Google font */}

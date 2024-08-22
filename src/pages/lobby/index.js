@@ -23,9 +23,13 @@ const Lobby = () => {
   const isNavigatingToGame = useRef(false)
 
   const handleBeforeUnload = (event) => {
-    event.preventDefault()
-    event.returnValue = 'Are you sure you want to leave? Your game will be terminated.'
-    // Update the game status to terminated
+    if (!isNavigatingToGame.current) {
+      event.preventDefault()
+      event.returnValue = 'Are you sure you want to leave? Your game will be terminated.'
+    }
+  }
+
+  const handleUnloadConfirmed = () => {
     resetSocket()
     api
       .patch(`/games/${gameId}`, { gameStatus: 'TERMINATED' }, { authRequired: true })
@@ -52,6 +56,11 @@ const Lobby = () => {
 
   useEffect(() => {
     if (!socket) return
+    const unloadCallback = () => {
+      if (!isNavigatingToGame.current) {
+        handleUnloadConfirmed()
+      }
+    }
 
     const updatePlayers = (data) => {
       console.log('Players in lobby:', data)
@@ -83,18 +92,15 @@ const Lobby = () => {
     }
 
     window.addEventListener('beforeunload', handleBeforeUnload)
-    window.addEventListener('popstate', handleBeforeUnload)
+    window.addEventListener('unload', unloadCallback)
 
     return () => {
       socket.off('UPDATE_PLAYERS_IN_LOBBY', updatePlayers)
       socket.off('PLAYER_DISCONNECTED', playerDisconnected)
       socket.off('HOST_JOINED_SUCCESSFULLY', hostJoinedSuccessfully)
       socket.off('GAME_NOT_FOUND', gameNotFound)
-
-      if (!isNavigatingToGame.current) {
-        window.removeEventListener('beforeunload', handleBeforeUnload)
-        window.removeEventListener('popstate', handleBeforeUnload)
-      }
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+      window.removeEventListener('unload', unloadCallback)
     }
   }, [socket, gameStatus.status, gameStatus.gameCode, setGameStatus])
 

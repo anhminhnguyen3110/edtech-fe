@@ -23,7 +23,12 @@ const GameScoreboard = ({ result, handleNext }) => {
       <Button
         variant="contained"
         onClick={handleNext}
-        sx={{ position: 'absolute', top: '20px', right: '20px', backgroundColor: BLUE.main }}
+        sx={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          backgroundColor: BLUE.main,
+        }}
       >
         Next
       </Button>
