@@ -72,7 +72,7 @@ const ChatBox = ({ sendChat }) => {
       container
       spacing={2}
       alignItems="flex-start"
-      sx={{ borderRadius: '20px', overflow: 'hidden' }}
+      sx={{ borderRadius: '20px', overflow: 'hidden', paddingTop: '0px !important' }}
     >
       {file && (
         <Grid item xs={12}>
@@ -114,8 +114,16 @@ const ChatBox = ({ sendChat }) => {
           </Box>
         </Grid>
       )}
-      <Grid item xs={12}>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, marginTop: 0 }}>
+      <Grid item xs={12} sx={{ paddingTop: '8px !important' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1,
+            marginTop: 0,
+            paddingTop: 0,
+          }}
+        >
           <Tooltip title="Attach PDF file">
             <IconButton
               component="label"
@@ -124,11 +132,12 @@ const ChatBox = ({ sendChat }) => {
                 padding: '6px', // Reduce padding to make it smaller
                 background: GRAY.main,
                 '&:hover': { backgroundColor: GRAY.dark },
+                marginTop: 0,
+                paddingTop: 0,
               }}
               disabled={isLoading}
             >
               <AddCircleOutlinedIcon sx={{ color: BLUE.dark, fontSize: '35px' }} />{' '}
-              {/* Reduced icon size */}
               <input
                 type="file"
                 hidden
@@ -149,6 +158,8 @@ const ChatBox = ({ sendChat }) => {
             onChange={handleMessageChange}
             onKeyDown={handleKeyDown}
             sx={{
+              marginTop: 0,
+              paddingTop: 0,
               '& .MuiOutlinedInput-root': {
                 borderRadius: '20px',
                 padding: '4px', // Adjust this value to reduce height
@@ -163,6 +174,8 @@ const ChatBox = ({ sendChat }) => {
             onClick={handleSend}
             disabled={!message.trim() || isLoading}
             sx={{
+              marginTop: 0,
+              paddingTop: 0,
               borderRadius: '50%',
               padding: '6px', // Reduce padding to match the other IconButton
               transition: 'all 0.3s ease',

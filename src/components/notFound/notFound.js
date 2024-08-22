@@ -61,7 +61,11 @@ const NotFound = () => {
               variant="contained"
               component={Link}
               href="/"
-              sx={{ textTransform: 'none', backgroundColor: BLUE.main, fontSize: '1.5rem' }}
+              sx={{
+                textTransform: 'none',
+                backgroundColor: BLUE.main,
+                fontSize: '1.5rem',
+              }}
             >
               Go back home
             </Button>

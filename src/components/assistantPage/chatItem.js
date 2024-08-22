@@ -57,7 +57,11 @@ const ChatItem = ({ chat, onDelete }) => {
           </Typography>
           <Typography
             variant="subtitle2"
-            sx={{ fontWeight: '400', fontSize: isMobile ? '0.85rem' : '1rem', color: BLUE.main }}
+            sx={{
+              fontWeight: '400',
+              fontSize: isMobile ? '0.85rem' : '1rem',
+              color: BLUE.main,
+            }}
           >
             {formattedDate}
           </Typography>

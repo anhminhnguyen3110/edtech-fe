@@ -89,12 +89,6 @@ const Play = () => {
     socket.on('GAME_END', (data) => {
       console.log('GAME_END', data)
       console.log('Player ID:', sessionStorage.getItem('playerId'))
-      // const player = data.players.filter(player => player.playerId === parseInt(sessionStorage.getItem('playerId')))[0];
-      // const playerInformation = {
-      //   score: player.score,
-      //   rank: player.rank
-      // }
-      // setPlayerRank(playerInformation);
       setGameState('END')
     })
 

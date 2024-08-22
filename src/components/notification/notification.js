@@ -17,6 +17,7 @@ const Notification = () => {
   const fetchingRef = useRef(false)
   const socket = useRef(null)
   const [loading, setLoading] = useState(false)
+  const [unreadCount, setUnreadCount] = useState(0)
 
   const handleNotificationClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -46,6 +47,9 @@ const Notification = () => {
         (newNotification) =>
           !notificationsRef.current.some((notification) => notification.id === newNotification.id)
       )
+      if (pageNum === 1) {
+        setUnreadCount(newNotifications[0].numberOfUnreadNotifications)
+      }
       setNotifications((prevNotifications) => {
         const updatedNotifications = [...prevNotifications, ...newNotifications]
         notificationsRef.current = updatedNotifications
@@ -156,6 +160,7 @@ const Notification = () => {
           notification.id === notificationId ? { ...notification, isRead: true } : notification
         )
       )
+      setUnreadCount((prevUnreadCount) => prevUnreadCount - 1)
     } catch (error) {
       console.error('Failed to mark notification as read:', error)
     }
@@ -169,8 +174,6 @@ const Notification = () => {
 
   const open = Boolean(anchorEl)
   const id = open ? 'notification-popover' : undefined
-
-  const unreadCount = notifications.filter((notification) => !notification.isRead).length
 
   return (
     <>

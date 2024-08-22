@@ -20,7 +20,12 @@ const AuthorizedLayout = ({ children }) => {
 
   return (
     <div
-      style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', position: 'relative' }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+        position: 'relative',
+      }}
     >
       <CssBaseline />
       <AppBarMain open={open} toggleDrawer={toggleDrawer} logout={logout} />

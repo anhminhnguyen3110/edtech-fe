@@ -32,7 +32,10 @@ const LandingBody = () => {
               variant="h3"
               component="h1"
               gutterBottom
-              sx={{ fontSize: { xs: '2rem', md: '3rem', lg: '4rem' }, fontWeight: 400 }}
+              sx={{
+                fontSize: { xs: '2rem', md: '3rem', lg: '4rem' },
+                fontWeight: 400,
+              }}
             >
               Welcome to
             </Typography>
@@ -40,14 +43,20 @@ const LandingBody = () => {
               variant="h4"
               component="h2"
               gutterBottom
-              sx={{ fontSize: { xs: '1.5rem', md: '2rem', lg: '3rem' }, fontWeight: 300 }}
+              sx={{
+                fontSize: { xs: '1.5rem', md: '2rem', lg: '3rem' },
+                fontWeight: 300,
+              }}
             >
               EdTech Assistant
             </Typography>
             <Typography
               variant="body1"
               gutterBottom
-              sx={{ fontSize: { xs: '1rem', md: '1.25rem', lg: '1.5rem' }, fontWeight: 200 }}
+              sx={{
+                fontSize: { xs: '1rem', md: '1.25rem', lg: '1.5rem' },
+                fontWeight: 200,
+              }}
             >
               Experience the future of education. Our platform empowers students and educators with
               cutting-edge tools to enhance learning and teaching. Dive in and discover a world of

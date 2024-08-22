@@ -41,7 +41,7 @@ const Game = () => {
     const gameId = sessionStorage.getItem('gameId')
     if (gameState !== 'END') {
       console.log(gameState)
-      console.log('Game terminated successfully')
+      console.log('Game termination triggered successfully')
       api
         .patch(
           `/games/${sessionStorage.getItem('gameId')}`,
@@ -54,24 +54,34 @@ const Game = () => {
         .catch((e) => {
           console.log('Error terminating game:', e)
         })
+    } else {
+      api
+        .patch(
+          `/games/${sessionStorage.getItem('gameId')}`,
+          { gameStatus: 'COMPLETE' },
+          { authRequired: true }
+        )
+        .then(() => {
+          console.log('Game terminated successfully')
+        })
+        .catch((e) => {
+          console.log('Error terminating game:', e)
+        })
     }
     sessionStorage.clear()
   }
+
   const handleBeforeUnload = (event) => {
     if (gameNotFound || gameState === 'ERROR') return
     event.preventDefault()
     event.returnValue = 'Are you sure you want to leave? Your game will be terminated.'
-    handleGameTermination()
   }
 
   const handlePopState = () => {
-    // if (gameNotFound) return;
-    console.log('Pop state')
     if (window.confirm('Are you sure you want to leave? Your game will be terminated.')) {
       handleGameTermination()
     } else {
-      // Push the current state back to prevent the popstate navigation
-      window.history.back()
+      window.history.pushState(null, document.title, window.location.href)
     }
   }
 
@@ -120,24 +130,23 @@ const Game = () => {
         socket.on('QUESTION_HOST_NEXT', (data) => {
           console.log('QUESTION_HOST_NEXT', data)
         })
-
         // Add event listener for beforeunload
-        window.addEventListener('beforeunload', handleBeforeUnload)
-        window.addEventListener('popstate', handlePopState)
-
         hasInitializedRef.current = true // Mark as initialized
       }
-
-      return () => {
-        if (socket) {
-          socket.off('HOST_RECEIVE_QUESTION_DETAIL')
-          socket.off('UPDATE_PLAYERS_ANSWERED')
-          socket.off('QUESTION_HOST_RESULT')
-          socket.off('QUESTION_HOST_NEXT')
-        }
-        window.removeEventListener('beforeunload', handleBeforeUnload)
-        window.removeEventListener('popstate', handlePopState)
+    }
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    window.addEventListener('unload', handleGameTermination) // Handles termination when unloading
+    window.addEventListener('popstate', handlePopState)
+    return () => {
+      if (socket) {
+        socket.off('HOST_RECEIVE_QUESTION_DETAIL')
+        socket.off('UPDATE_PLAYERS_ANSWERED')
+        socket.off('QUESTION_HOST_RESULT')
+        socket.off('QUESTION_HOST_NEXT')
       }
+      window.removeEventListener('beforeunload', handleBeforeUnload)
+      window.removeEventListener('unload', handleGameTermination)
+      window.removeEventListener('popstate', handlePopState)
     }
   }, [socket])
 

@@ -31,7 +31,11 @@ const useGameStatus = (gameCode, gameId) => {
                 gameCode: null,
               })
             } else {
-              setGameStatus({ status: 'NOT_FOUND', message: 'Game not found', gameCode: null })
+              setGameStatus({
+                status: 'NOT_FOUND',
+                message: 'Game not found',
+                gameCode: null,
+              })
             }
 
             if (status === 'ACTIVE') {
@@ -48,10 +52,18 @@ const useGameStatus = (gameCode, gameId) => {
               }
             }
           } else {
-            setGameStatus({ status: 'NOT_FOUND', message: 'Game not found', gameCode: null })
+            setGameStatus({
+              status: 'NOT_FOUND',
+              message: 'Game not found',
+              gameCode: null,
+            })
           }
         } catch (error) {
-          setGameStatus({ status: 'NOT_FOUND', message: 'Game not found', gameCode: null })
+          setGameStatus({
+            status: 'NOT_FOUND',
+            message: 'Game not found',
+            gameCode: null,
+          })
         }
       }
     }

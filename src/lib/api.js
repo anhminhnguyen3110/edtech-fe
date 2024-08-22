@@ -32,7 +32,9 @@ api.interceptors.request.use(
             const { accessToken, expiresInMinutes } = response.data
             const newExpiryDate = new Date(new Date().getTime() + expiresInMinutes * 60 * 1000)
 
-            Cookies.set('accessToken', accessToken, { expires: expiresInMinutes / 1440 })
+            Cookies.set('accessToken', accessToken, {
+              expires: expiresInMinutes / 1440,
+            })
             Cookies.set('accessTokenExpiry', newExpiryDate.toISOString())
 
             config.headers['Authorization'] = `Bearer ${accessToken}`

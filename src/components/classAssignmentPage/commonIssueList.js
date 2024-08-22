@@ -32,7 +32,11 @@ const CommonIssueList = ({ issues, maxAssignments, onEditIssue, onDeleteIssue, o
 
   return (
     <Box
-      sx={{ padding: '24px', boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.2)', borderRadius: '8px' }}
+      sx={{
+        padding: '24px',
+        boxShadow: '0px 8px 24px rgba(0, 0, 0, 0.2)',
+        borderRadius: '8px',
+      }}
     >
       <Box>
         <Grid container alignItems="center" justifyContent="space-between" spacing={2}>
@@ -45,7 +49,11 @@ const CommonIssueList = ({ issues, maxAssignments, onEditIssue, onDeleteIssue, o
             item
             xs={12}
             sm="auto"
-            sx={{ display: 'flex', justifyContent: { xs: 'center', sm: 'flex-end' }, gap: 2 }}
+            sx={{
+              display: 'flex',
+              justifyContent: { xs: 'center', sm: 'flex-end' },
+              gap: 2,
+            }}
           >
             <ButtonComponent
               onClick={handleOpenModal}
