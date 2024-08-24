@@ -24,7 +24,8 @@ const QuizList = ({ classAssignmentId, reload, setReload }) => {
         params: {
           limit: itemsPerPage,
           page: page,
-          sortDirection: 'ASC',
+          sortBy: 'createdAt', // Sort by createdAt field
+          sortDirection: 'DESC', // Order in descending order
           classAssignmentId: id,
         },
         authRequired: true,

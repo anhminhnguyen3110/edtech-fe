@@ -34,7 +34,7 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
 
     try {
       generateQuiz(
-        '',
+        'create quiz to mitigate student issue',
         numberOfMultipleChoiceQuestions,
         numberOfTrueFalseQuestions,
         numberOfMultipleAnswerQuestions
@@ -45,10 +45,33 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
     }
   }
 
+  const handleStudentCountChange = (e) => {
+    const number = Number(e.target.value)
+    // Allow empty strings to let the user delete and retype
+    if (
+      e.target.value !== '' &&
+      (isNaN(number) || !Number.isInteger(number) || number <= 0 || number > maxAssignments)
+    ) {
+      setError(
+        `Please enter a valid student count. It should be a positive number between 1 and ${maxAssignments}.`
+      )
+      return // Stop further execution if the value is invalid
+    }
+    setError('') // Clear the error if the value is valid
+    setStudentCount(number)
+  }
+
   const handleNumberOfQuestionsChange = (setter) => (e) => {
-    const value = Number(e.target.value)
-    if (value >= 0) {
-      setter(value)
+    const number = Number(e.target.value)
+    // Allow empty strings to let the user delete and retype
+    if (e.target.value !== '' && (isNaN(number) || !Number.isInteger(number) || number <= 0)) {
+      setError(`Please enter a valid student count. It should be a positive number.`)
+      return // Stop further execution if the value is invalid
+    }
+    setError('') // Clear the error if the value is valid
+
+    if (number >= 0) {
+      setter(number)
     }
   }
 
@@ -70,7 +93,9 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 600,
+            width: '90%', // Use percentage for responsive width
+            maxWidth: 600, // Set a maximum width
+            minWidth: 320, // Set a minimum width for smaller screens
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
@@ -103,7 +128,6 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
             <Box sx={{ display: 'flex', gap: 2 }}>
               <TextField
                 label="Multiple Choice"
-                type="number"
                 value={numberOfMultipleChoiceQuestions}
                 onChange={handleNumberOfQuestionsChange(setNumberOfMultipleChoiceQuestions)}
                 fullWidth
@@ -111,7 +135,6 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
               />
               <TextField
                 label="True/False"
-                type="number"
                 value={numberOfTrueFalseQuestions}
                 onChange={handleNumberOfQuestionsChange(setNumberOfTrueFalseQuestions)}
                 fullWidth
@@ -119,7 +142,6 @@ const GenerateQuizModal = ({ open, handleClose, generateQuiz }) => {
               />
               <TextField
                 label="Multiple Answer"
-                type="number"
                 value={numberOfMultipleAnswerQuestions}
                 onChange={handleNumberOfQuestionsChange(setNumberOfMultipleAnswerQuestions)}
                 fullWidth

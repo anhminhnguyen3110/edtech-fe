@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import { Paper, Typography, Box, Grid } from '@mui/material'
 import QuestionPreview from './questionPreview' // Import the new component
 import { BACKGROUND_ANSWER, TRUE_FALSE_ANSWER } from '@/theme/palette' // Ensure this import is correct
+import useActive from './useActive'
 
+const HOVER_DELAY = 1000 // 3 minutes in milliseconds
 const QuestionItem = ({ question, selected, onSelect }) => {
   const [anchorEl, setAnchorEl] = useState(null)
+  const { active, startTimer, resetTimer } = useActive(HOVER_DELAY)
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget)
@@ -124,12 +127,7 @@ const QuestionItem = ({ question, selected, onSelect }) => {
         </Grid>
       </Paper>
 
-      <QuestionPreview
-        question={question}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handlePopoverClose}
-      />
+      <QuestionPreview question={question} anchorEl={anchorEl} open={active} onClose={resetTimer} />
     </>
   )
 }

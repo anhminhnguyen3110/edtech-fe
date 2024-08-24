@@ -160,7 +160,10 @@ const Notification = () => {
           notification.id === notificationId ? { ...notification, isRead: true } : notification
         )
       )
-      setUnreadCount((prevUnreadCount) => prevUnreadCount - 1)
+      setUnreadCount((prevUnreadCount) => {
+        if (prevUnreadCount <= 0) return 0
+        return prevUnreadCount - 1
+      })
     } catch (error) {
       console.error('Failed to mark notification as read:', error)
     }
