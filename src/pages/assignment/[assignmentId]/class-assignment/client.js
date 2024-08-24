@@ -312,6 +312,7 @@ const ClassAssignmentDetail = () => {
       )
 
       if (response.status === 200) {
+        editedLesson.fileUrl = response.data.fileUrl
         setClassAssignment((prev) => ({
           ...prev,
           lessons: prev.lessons.map((lesson) =>

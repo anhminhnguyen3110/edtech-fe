@@ -78,7 +78,7 @@ const Play = () => {
     }
 
     console.log('Adding event listeners')
-
+    socket.on('disconnect', handleHostDisconnected)
     socket.on('HOST_DISCONNECTED', handleHostDisconnected)
     socket.on('GAME_NOT_FOUND', handleGameNotFound)
     socket.on('PLAYER_NOT_FOUND', handlePlayerNotFound)

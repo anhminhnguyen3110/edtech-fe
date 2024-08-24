@@ -80,7 +80,9 @@ const AddIssueModal = ({ open, handleClose, maxAssignments, onAddIssue }) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            width: '90%', // Use percentage for responsive width
+            maxWidth: 400, // Set a maximum width
+            minWidth: 320, // Set a minimum width for smaller screens
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
