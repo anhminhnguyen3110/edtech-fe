@@ -78,6 +78,7 @@ const Play = () => {
     }
 
     console.log('Adding event listeners')
+    socket.off('disconnect')
     socket.on('disconnect', handleHostDisconnected)
     socket.on('HOST_DISCONNECTED', handleHostDisconnected)
     socket.on('GAME_NOT_FOUND', handleGameNotFound)
@@ -105,18 +106,22 @@ const Play = () => {
   useEffect(() => {
     const handleBeforeUnload = (event) => {
       event.preventDefault()
-      event.returnValue = ''
+      event.returnValue = 'Are you sure you want to leave? Your game will be terminated.'
+    }
+    const handleGameTermination = () => {
       if (socket) {
         socket.disconnect()
       }
       sessionStorage.clear()
-      return ''
     }
 
+    // window.addEventListener('beforeunload', handleBeforeUnload)
     window.addEventListener('beforeunload', handleBeforeUnload)
+    window.addEventListener('unload', handleGameTermination) // Handles termination when unloading
 
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload)
+      window.addEventListener('unload', handleGameTermination)
     }
   }, [socket])
 

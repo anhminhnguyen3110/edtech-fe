@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Box, Button, Typography, Grid } from '@mui/material'
+import { Box, Button, Typography, Grid, useTheme, useMediaQuery } from '@mui/material'
 import CountdownTimer from '@/components/countDown/countDownTimer'
 import { BACKGROUND_ANSWER, TRUE_FALSE_ANSWER, BLUE } from '@/theme/palette'
 import CustomCheckIcon from '@/components/quizPage/customCheckIcon'
 import ThickerClearOutlinedIcon from '@/components/icons/thickerClearOutlinedIcon'
-
+import AutoShrinkText from './autoShrinkText'
 const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
   const { choices, questionText, timeLimitInSecond, imageFileUrl, questionType, correctAnswers } =
     question
@@ -12,7 +12,8 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
   const isTrueFalse = questionType === 'TRUE_FALSE'
   const [showCorrectAnswer, setShowCorrectAnswer] = useState(false)
   const [buttonText, setButtonText] = useState('Skip')
-
+  const theme = useTheme()
+  const smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
   const calculateFontSize = (text) => {
     const baseSize = isTrueFalse ? 2.7 : 2.2
     const minSize = 1.3
@@ -66,6 +67,7 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             mb: 4,
+            flexWrap: 'wrap', // Allows wrapping items on smaller screens
           }}
         >
           {/* Players Answered - Left */}
@@ -74,18 +76,30 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
-              width: '20%',
+              width: { xs: '100%', sm: '20%' }, // Adjust width based on screen size
+              mb: { xs: 2, sm: 0 }, // Margin bottom on small screens
             }}
           >
-            <Typography variant="h3" mb={1}>
+            <Typography
+              variant="h3"
+              mb={1}
+              sx={{
+                fontSize: {
+                  xs: '2rem', // Smaller font size on extra small screens
+                  sm: '2.5rem', // Slightly larger font size on small screens
+                  md: '3rem', // Default size for medium screens and up
+                },
+                textAlign: 'center',
+              }}
+            >
               {playersAnswered}
             </Typography>
             <Button
               variant="contained"
               sx={{
                 borderRadius: '20px',
-                width: '150px',
-                fontSize: '1.2rem',
+                width: { xs: '120px', sm: '150px' }, // Adjust button width based on screen size
+                fontSize: { xs: '1rem', sm: '1.2rem' }, // Adjust font size based on screen size
                 background: BLUE.main,
                 '&:hover': {
                   background: BLUE.dark,
@@ -112,7 +126,14 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
           </Box>
 
           {/* Image - Center */}
-          <Box sx={{ width: '50%', display: 'flex', justifyContent: 'center' }}>
+          <Box
+            sx={{
+              width: { xs: '100%', sm: '50%' }, // Adjust width based on screen size
+              display: 'flex',
+              justifyContent: 'center',
+              mb: { xs: 2, sm: 0 }, // Margin bottom on small screens
+            }}
+          >
             {imageFileUrl && (
               <Box
                 component="img"
@@ -121,7 +142,7 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
                 sx={{
                   width: '100%',
                   height: 'auto',
-                  maxHeight: '40vh',
+                  maxHeight: { xs: '30vh', sm: '40vh' }, // Adjust height based on screen size
                   objectFit: 'contain',
                 }}
               />
@@ -129,8 +150,18 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
           </Box>
 
           {/* Countdown Timer - Right */}
-          <Box sx={{ width: '20%', display: 'flex', justifyContent: 'flex-end' }}>
-            <CountdownTimer totalTime={timeCounter} onComplete={handleTimerComplete} />
+          <Box
+            sx={{
+              width: { xs: '100%', sm: '20%' }, // Adjust width based on screen size
+              display: 'flex',
+              justifyContent: { xs: 'center', sm: 'flex-end' }, // Center on small screens
+            }}
+          >
+            <CountdownTimer
+              totalTime={timeCounter}
+              onComplete={handleTimerComplete}
+              width={smallScreen ? 80 : 120} // Reduce width for small screens
+            />
           </Box>
         </Box>
       </Box>
@@ -164,30 +195,7 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
                   justifyContent: 'flex-start',
                 }}
               >
-                <Typography
-                  sx={{
-                    fontSize: `${calculateFontSize(choice)}rem`,
-                    '@media (max-width: 600px)': {
-                      fontSize: `${Math.max(calculateFontSize(choice) - 0.3, 1.5)}rem`,
-                    },
-                    fontWeight: 'bold',
-                    overflow: 'hidden',
-                    textOverflow: 'ellipsis',
-                    display: '-webkit-box',
-                    WebkitLineClamp: 3,
-                    WebkitBoxOrient: 'vertical',
-                  }}
-                >
-                  {showCorrectAnswer ? (
-                    correctAnswers.includes(choice) ? (
-                      <CustomCheckIcon sx={{ fontSize: '4rem' }} />
-                    ) : (
-                      <ThickerClearOutlinedIcon sx={{ fontSize: '4rem' }} />
-                    )
-                  ) : (
-                    choice
-                  )}
-                </Typography>
+                <AutoShrinkText text={choice} />
               </Button>
             </Grid>
           ))}

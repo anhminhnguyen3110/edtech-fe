@@ -27,7 +27,7 @@ import { useAuth } from '@/context/authContext'
 
 export const QuizPage = () => {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen is mobile-sized
+  const isMobile = useMediaQuery(theme.breakpoints.down('md')) // Check if the screen is mobile-sized
   const [quizzes, setQuizzes] = useState([]) // State to hold quizzes data
   const [totalPages, setTotalPages] = useState(1) // Total number of pages
   const [currentPage, setCurrentPage] = useState(1) // Current page
@@ -313,7 +313,7 @@ export const QuizPage = () => {
         <MessageBox message="No quizzes found." />
       ) : (
         <>
-          <Box marginTop="32px">
+          <Box marginTop="32px" sx={{ maxWidth: '90vw' }}>
             {quizzes.map((quiz) => (
               <QuizItem key={quiz.id} quiz={quiz} />
             ))}

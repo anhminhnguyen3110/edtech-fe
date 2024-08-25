@@ -25,12 +25,12 @@ const WaitForGame = ({ question = defaultQuestion, startGetQuestions, moveToQues
 
   useEffect(() => {
     const interval = setInterval(() => {
+      if (counter.current === 0) {
+        startGetQuestions()
+      }
       counter.current += 1
 
       // Check if 5 seconds have passed
-      if (counter.current === 1) {
-        startGetQuestions()
-      }
     }, 1000) // Update every second
 
     return () => clearInterval(interval)

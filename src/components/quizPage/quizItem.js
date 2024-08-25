@@ -18,7 +18,8 @@ import api from '@/lib/api'
 
 const QuizItem = ({ quiz }) => {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen is mobile-sized
+  const isAllowedHost = useMediaQuery(theme.breakpoints.down('sm')) // Check if the screen is mobile-sized
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const router = useRouter()
 
   const [snackbarOpen, setSnackbarOpen] = useState(false)
@@ -29,7 +30,6 @@ const QuizItem = ({ quiz }) => {
     router.push(`/quiz/${quiz.id}`)
   }
 
-  // Function to truncate the quiz name if it exceeds 15 characters
   const truncateText = (text, maxLength) => {
     if (text.length > maxLength) {
       return text.slice(0, maxLength) + '...'
@@ -42,7 +42,7 @@ const QuizItem = ({ quiz }) => {
     try {
       const response = await api.post('/games', { quizId: quiz.id }, { authRequired: true })
       const gameCode = response.data.gameCode
-      const gameId = response.data.id // Assuming 'id' is the key for the gameId in the response
+      const gameId = response.data.id
       router.push(`/lobby?gameCode=${gameCode}&gameId=${gameId}`)
     } catch (error) {
       const errorMessage = error.response?.data?.message || 'Failed to host live game'
@@ -59,10 +59,23 @@ const QuizItem = ({ quiz }) => {
 
   return (
     <CustomBox>
-      <Box display="flex" alignItems="center" justifyContent="space-between" padding="16px">
-        <Box display="flex" alignItems="center" flex="1" minWidth="0">
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        padding="16px"
+        flexDirection={isMobile ? 'column' : 'row'}
+      >
+        <Box
+          display="flex"
+          alignItems="center"
+          flex="1"
+          maxWidth="80%"
+          minWidth="0"
+          justifyContent={isMobile ? 'center' : 'flex-start'}
+        >
           <RocketLaunchIcon
-            style={{
+            sx={{
               marginRight: '16px',
               fontSize: isMobile ? '1.2rem' : '2rem',
               fontWeight: 'bold',
@@ -73,41 +86,47 @@ const QuizItem = ({ quiz }) => {
             sx={{
               fontWeight: '500',
               fontSize: isMobile ? '1.1rem' : '1.5rem',
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              flex: '1',
-              minWidth: '0',
+              wordBreak: 'break-word', // Ensures long words break to fit within the container
+              textAlign: isMobile ? 'center' : 'left',
             }}
           >
-            {isMobile ? truncateText(quiz.name, 12) : quiz.name}
+            {quiz.name}
           </Typography>
         </Box>
-        <Box display="flex" alignItems="center" flexShrink="0">
+        <Box
+          display="flex"
+          alignItems="center"
+          flexShrink="0"
+          justifyContent={isMobile ? 'center' : 'flex-end'}
+          mt={isMobile ? '16px' : '0'}
+        >
           <IconButton onClick={onEditClick}>
             <EditIcon sx={{ fontSize: isMobile ? '1.2rem' : '1.5rem', fontWeight: 'bold' }} />
           </IconButton>
-          <ButtonComponent
-            onClick={handleHostLive}
-            variant="contained"
-            style={{ marginLeft: '16px' }}
-            disabled={loading}
-          >
-            {loading ? (
-              <Box display="flex" alignItems="center">
-                <CircularProgress size={24} color="inherit" style={{ marginRight: '8px' }} />
+          {!isAllowedHost && (
+            <ButtonComponent
+              onClick={handleHostLive}
+              variant="contained"
+              sx={{ marginLeft: '16px', maxWidth: '100%' }}
+              disabled={loading}
+            >
+              {loading ? (
+                <Box display="flex" alignItems="center">
+                  <CircularProgress size={24} color="inherit" sx={{ marginRight: '8px' }} />
+                  <Typography variant="h6" sx={{ fontSize: isMobile ? '0.65rem' : '1.1rem' }}>
+                    Creating Game
+                  </Typography>
+                </Box>
+              ) : (
                 <Typography variant="h6" sx={{ fontSize: isMobile ? '0.65rem' : '1.1rem' }}>
-                  Creating Game
+                  Host Live
                 </Typography>
-              </Box>
-            ) : (
-              <Typography variant="h6" sx={{ fontSize: isMobile ? '0.65rem' : '1.1rem' }}>
-                Host Live
-              </Typography>
-            )}
-          </ButtonComponent>
+              )}
+            </ButtonComponent>
+          )}
         </Box>
       </Box>
+
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={6000}

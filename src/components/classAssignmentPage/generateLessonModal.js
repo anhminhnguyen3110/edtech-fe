@@ -22,7 +22,7 @@ const promptSuggestions = [
 ]
 
 const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
-  const [prompt, setPrompt] = useState('')
+  const [prompt, setPrompt] = useState('genereate a lesson to improve student issues')
   const [name, setName] = useState('')
   const [error, setError] = useState('')
 
@@ -34,8 +34,8 @@ const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
   }
 
   const handleGenerateLesson = () => {
-    if (!prompt || !name) {
-      setError('Both fields are required.')
+    if (!name) {
+      setError('Lesson name is required.')
       return
     }
     setError('')
@@ -97,37 +97,10 @@ const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
           </Typography>
           <Box component="form" sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <Box>
-              <Typography variant="subtitle1" sx={{ mb: 1, fontWeight: 'medium' }}>
-                Prompt Suggestions
+              <Typography variant="subtitle1" sx={{ fontWeight: 'medium' }}>
+                Name your lesson to help improve your student issues!
               </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                {promptSuggestions.map((suggestion, index) => (
-                  <Tooltip title={`Use: "${suggestion}"`} key={index}>
-                    <Chip
-                      label={suggestion}
-                      onClick={() => handleSuggestionSelect(suggestion)}
-                      color={prompt.includes(suggestion.toLowerCase()) ? 'primary' : 'default'}
-                      sx={{
-                        '&:hover': {
-                          backgroundColor: 'primary.main',
-                          color: 'primary.contrastText',
-                        },
-                      }}
-                    />
-                  </Tooltip>
-                ))}
-              </Box>
             </Box>
-            <TextField
-              label="Prompt"
-              value={prompt}
-              onChange={handlePromptChange}
-              fullWidth
-              multiline
-              rows={4}
-              placeholder="Describe the lesson you want to generate..."
-              variant="outlined"
-            />
             <TextField
               label="Lesson Name"
               value={name}
