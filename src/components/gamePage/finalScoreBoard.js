@@ -1,10 +1,9 @@
 import React from 'react'
-import { Box, Typography, Avatar, Button } from '@mui/material'
+import { Box, Typography, Button } from '@mui/material'
 import { BLUE } from '@/theme/palette'
+
 const FinalScoreBoard = ({ scoreboard, quizName, onReturn }) => {
-  // Sort the scoreboard based on playerRank and take the top 3
   const sortedScoreboard = scoreboard.sort((a, b) => a.rank - b.rank).slice(0, 3)
-  console.log(sortedScoreboard)
 
   const trophyIcons = {
     1: '/first-trophy.png',
@@ -19,23 +18,24 @@ const FinalScoreBoard = ({ scoreboard, quizName, onReturn }) => {
         height: '100vh',
         display: 'flex',
         flexDirection: 'column',
-        padding: '5rem',
+        padding: { xs: '1rem', sm: '2rem' },
         alignItems: 'center',
+        justifyContent: 'space-between',
         textAlign: 'center',
+        boxSizing: 'border-box',
       }}
     >
-      <Typography variant="h2" gutterBottom sx={{ marginBottom: '7rem' }}>
+      <Typography variant="h4" gutterBottom sx={{ marginBottom: { xs: '1rem', sm: '2rem' } }}>
         {quizName}
-      </Typography>
-      <Typography variant="h3" gutterBottom sx={{ marginBottom: '3rem', fontWeight: 'bold' }}>
-        Winner
       </Typography>
       <Box
         sx={{
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'flex-end',
-          gap: 15,
+          gap: { xs: 2, sm: 10 },
+          flexWrap: 'wrap',
+          maxWidth: '100%',
         }}
       >
         {sortedScoreboard.length >= 3 ? (
@@ -51,10 +51,20 @@ const FinalScoreBoard = ({ scoreboard, quizName, onReturn }) => {
                 component="img"
                 src={trophyIcons[2]}
                 alt="2nd place trophy"
-                sx={{ width: 110, height: 110, mb: 2 }}
+                sx={{
+                  width: { xs: '20vw', sm: '15vw' },
+                  height: 'auto', // Maintain aspect ratio
+                  maxHeight: '15vh',
+                  objectFit: 'contain', // Ensure image is fully visible within bounds
+                  mb: 2,
+                }}
               />
-              <Typography variant="h4">2nd Place</Typography>
-              <Typography variant="h4" fontWeight="bold">
+              <Typography variant="h6">2nd Place</Typography>
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                sx={{ fontSize: { xs: '1rem', sm: '1.5rem', md: '1.8rem', lg: '2.2rem' } }}
+              >
                 {sortedScoreboard[1].playerNickname}
               </Typography>
             </Box>
@@ -69,10 +79,20 @@ const FinalScoreBoard = ({ scoreboard, quizName, onReturn }) => {
                 component="img"
                 src={trophyIcons[1]}
                 alt="1st place trophy"
-                sx={{ width: 150, height: 150, mb: 2 }}
+                sx={{
+                  width: { xs: '25vw', sm: '20vw' },
+                  height: 'auto', // Maintain aspect ratio
+                  maxHeight: '20vh',
+                  objectFit: 'contain',
+                  mb: 2,
+                }}
               />
-              <Typography variant="h4">1st Place</Typography>
-              <Typography variant="h4" fontWeight="bold">
+              <Typography variant="h6">1st Place</Typography>
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                sx={{ fontSize: { xs: '1rem', sm: '1.5rem', md: '1.8rem', lg: '2.2rem' } }}
+              >
                 {sortedScoreboard[0].playerNickname}
               </Typography>
             </Box>
@@ -87,10 +107,20 @@ const FinalScoreBoard = ({ scoreboard, quizName, onReturn }) => {
                 component="img"
                 src={trophyIcons[3]}
                 alt="3rd place trophy"
-                sx={{ width: 80, height: 80, mb: 2 }}
+                sx={{
+                  width: { xs: '15vw', sm: '10vw' },
+                  height: 'auto', // Maintain aspect ratio
+                  maxHeight: '10vh',
+                  objectFit: 'contain',
+                  mb: 2,
+                }}
               />
-              <Typography variant="h4">3rd Place</Typography>
-              <Typography variant="h4" fontWeight="bold">
+              <Typography variant="h6">3rd Place</Typography>
+              <Typography
+                variant="body1"
+                fontWeight="bold"
+                sx={{ fontSize: { xs: '0.9rem', sm: '1.4rem', md: '1.8rem' } }}
+              >
                 {sortedScoreboard[2].playerNickname}
               </Typography>
             </Box>
@@ -109,10 +139,20 @@ const FinalScoreBoard = ({ scoreboard, quizName, onReturn }) => {
                   component="img"
                   src={trophyIcons[1]}
                   alt="1st place trophy"
-                  sx={{ width: 150, height: 150, mb: 2 }}
+                  sx={{
+                    width: { xs: '25vw', sm: '20vw' },
+                    height: 'auto', // Maintain aspect ratio
+                    maxHeight: '20vh',
+                    objectFit: 'contain',
+                    mb: 2,
+                  }}
                 />
-                <Typography variant="h4">1st Place</Typography>
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h6">1st Place</Typography>
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ fontSize: { xs: '1.1rem', sm: '1.5rem', md: '1.8rem', lg: '2.2rem' } }}
+                >
                   {sortedScoreboard[0].playerNickname}
                 </Typography>
               </Box>
@@ -129,31 +169,46 @@ const FinalScoreBoard = ({ scoreboard, quizName, onReturn }) => {
                   component="img"
                   src={trophyIcons[2]}
                   alt="2nd place trophy"
-                  sx={{ width: 110, height: 110, mb: 2 }}
+                  sx={{
+                    width: { xs: '20vw', sm: '15vw' },
+                    height: 'auto', // Maintain aspect ratio
+                    maxHeight: '15vh',
+                    objectFit: 'contain',
+                    mb: 2,
+                  }}
                 />
-                <Typography variant="h4">2nd Place</Typography>
-                <Typography variant="h4" fontWeight="bold">
+                <Typography variant="h6">2nd Place</Typography>
+                <Typography
+                  variant="body1"
+                  fontWeight="bold"
+                  sx={{ fontSize: { xs: '0.9rem', sm: '1.2rem', md: '1.5rem' } }}
+                >
                   {sortedScoreboard[1].playerNickname}
                 </Typography>
               </Box>
             )}
-            <Button
-              variant="contained"
-              onClick={onReturn}
-              sx={{
-                backgroundColor: BLUE.main,
-                position: 'absolute',
-                bottom: '2rem',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                padding: '10px 20px',
-                fontSize: '1.2rem',
-              }}
-            >
-              Return to Home
-            </Button>
           </>
         )}
+      </Box>
+      <Box
+        sx={{
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <Button
+          variant="contained"
+          onClick={onReturn}
+          sx={{
+            backgroundColor: BLUE.main,
+            padding: { xs: '8px 16px', sm: '10px 20px' },
+            fontSize: { xs: '0.9rem', sm: '1.2rem' }, // Responsive font size
+          }}
+        >
+          Return to Home
+        </Button>
       </Box>
     </Box>
   )

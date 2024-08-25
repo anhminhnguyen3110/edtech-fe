@@ -27,7 +27,7 @@ const Game = () => {
   const [gameScoreboard, setGameScoreboard] = useState(null)
   const [finalResult, setFinalResult] = useState(null)
   const [error, setError] = useState(null)
-  const delayTime = 5
+  const delayTime = 6
 
   const hasInitializedRef = useRef(false) // Add a ref to track initialization
 

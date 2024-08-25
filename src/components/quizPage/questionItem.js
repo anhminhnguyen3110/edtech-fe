@@ -4,20 +4,20 @@ import QuestionPreview from './questionPreview' // Import the new component
 import { BACKGROUND_ANSWER, TRUE_FALSE_ANSWER } from '@/theme/palette' // Ensure this import is correct
 import useActive from './useActive'
 
-const HOVER_DELAY = 1000 // 3 minutes in milliseconds
+const HOVER_DELAY = 1000 // 1 second in milliseconds
 const QuestionItem = ({ question, selected, onSelect }) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const { active, startTimer, resetTimer } = useActive(HOVER_DELAY)
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget)
+    startTimer() // Start the timer on mouse enter
   }
 
   const handlePopoverClose = () => {
+    resetTimer() // Reset the timer on mouse leave
     setAnchorEl(null)
   }
-
-  const open = Boolean(anchorEl)
 
   return (
     <>
@@ -127,7 +127,12 @@ const QuestionItem = ({ question, selected, onSelect }) => {
         </Grid>
       </Paper>
 
-      <QuestionPreview question={question} anchorEl={anchorEl} open={active} onClose={resetTimer} />
+      <QuestionPreview
+        question={question}
+        anchorEl={anchorEl}
+        open={active && Boolean(anchorEl)} // Check both active and anchorEl
+        onClose={handlePopoverClose} // Use the same close handler
+      />
     </>
   )
 }

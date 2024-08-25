@@ -2,6 +2,7 @@ import React from 'react'
 import { Paper, Typography, Box, Grid, Popover, Button } from '@mui/material'
 import { BACKGROUND_ANSWER, TRUE_FALSE_ANSWER, BLUE } from '@/theme/palette'
 import CountdownTimer from './countDownCircle'
+import AutoShrinkText from './autoShrinkText'
 
 const QuestionPreview = ({ question, anchorEl, open, onClose }) => {
   const popoverWidth = 450
@@ -124,8 +125,7 @@ const QuestionPreview = ({ question, anchorEl, open, onClose }) => {
                 key={index}
                 sx={{ height: question.type === 'TRUE_FALSE' ? '70%' : '50%' }}
               >
-                <Typography
-                  variant="body2"
+                <Box
                   sx={{
                     backgroundColor:
                       question.type === 'TRUE_FALSE'
@@ -135,21 +135,20 @@ const QuestionPreview = ({ question, anchorEl, open, onClose }) => {
                     border: '1px solid #ccc',
                     borderRadius: 1,
                     p: 1,
-                    textAlign: 'left',
-                    fontSize: { xs: '0.7rem', sm: '1rem' },
-                    whiteSpace: 'normal',
-                    overflow: 'hidden',
+                    height: '100%',
+                    width: '100%',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'flex-start',
-                    fontWeight: question.correctAnswer.includes(index) ? 'bold' : 'normal',
-                    textOverflow: 'ellipsis',
-                    width: '100%',
-                    height: '100%',
+                    justifyContent: 'center',
                   }}
                 >
-                  {answer}
-                </Typography>
+                  <AutoShrinkText
+                    text={answer}
+                    minFontSize={10}
+                    maxFontSize={16}
+                    fontWeight={question.correctAnswer.includes(index) ? 'bold' : 'normal'}
+                  />
+                </Box>
               </Grid>
             ))}
           </Grid>

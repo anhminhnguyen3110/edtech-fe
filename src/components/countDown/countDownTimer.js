@@ -17,6 +17,9 @@ const CountdownTimer = ({ totalTime, onComplete, width = 120 }) => {
     }
   }, [countdown, onComplete, isComplete])
 
+  // Calculate font size based on width
+  const fontSize = width * 0.4 // Adjust the multiplier as needed
+
   return (
     <Box
       display="flex"
@@ -58,6 +61,7 @@ const CountdownTimer = ({ totalTime, onComplete, width = 120 }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          fontSize: `${fontSize}px`, // Set dynamic font size
         }}
       >
         {countdown}

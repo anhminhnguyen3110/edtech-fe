@@ -396,13 +396,26 @@ const ClassAssignmentDetail = () => {
             </IconButton>
           </Grid>
           <Grid item xs>
-            <Typography variant="h4" component="h1" sx={{}}>
+            <Typography
+              variant="h6" // Use a smaller variant for better text scaling on small screens
+              component="h1"
+              sx={{ fontSize: { xs: '1.25rem', sm: '1.5rem', md: '2rem' } }}
+            >
               Class {classAssignment ? classAssignment.name : 'Assignment Details'}
             </Typography>
           </Grid>
           {classAssignment && classAssignment.issues.length > 0 && (
-            <Grid item xs="auto">
-              <Box sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <Grid item xs={12} sm="auto">
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' }, // Stack buttons vertically on small screens
+                  justifyContent: { xs: 'center', sm: 'flex-start' }, // Center buttons on small screens
+                  alignItems: 'center',
+                  gap: '10px',
+                  textAlign: { xs: 'center', sm: 'left' }, // Center text on small screens
+                }}
+              >
                 <ButtonComponent
                   onClick={handleOpenQuizModal}
                   style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
@@ -421,8 +434,17 @@ const ClassAssignmentDetail = () => {
             </Grid>
           )}
           {classAssignment && classAssignment.issues.length === 0 && (
-            <Grid item xs="auto">
-              <Box sx={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <Grid item xs={12} sm="auto">
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' }, // Stack buttons vertically on small screens
+                  justifyContent: { xs: 'center', sm: 'flex-start' }, // Center buttons on small screens
+                  alignItems: 'center',
+                  gap: '10px',
+                  textAlign: { xs: 'center', sm: 'left' }, // Center text on small screens
+                }}
+              >
                 <ButtonComponent
                   onClick={handelExtractIssue}
                   style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
@@ -435,6 +457,7 @@ const ClassAssignmentDetail = () => {
           )}
         </Grid>
       </Box>
+
       {loading ? (
         <Box
           sx={{
