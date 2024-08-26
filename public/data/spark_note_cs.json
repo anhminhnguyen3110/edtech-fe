@@ -1,0 +1,139 @@
+[{
+        "title": "1D Arrays: Accessing the Data in a One-Dimensional Array | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/arrays\/2darrays\/summary\/",
+        "domain": "Cs",
+        "question": "What is the index of the last element in an array with 10 elements, and why is it important to understand this when working with arrays in programming?"
+    },
+    {
+        "title": "Arrays: Memory: Summary and Introduction to Arrays in Memory | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/arrays\/memory\/summary\/",
+        "domain": "Cs",
+        "question": "What are some of the low-level details of how C handles arrays in memory that will be covered in this SparkNote?"
+    },
+    {
+        "title": "Pointers and Basic Structures in C++: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/c-plus-plus-fundamentals\/pointersandbasicstructures\/summary\/",
+        "domain": "Cs",
+        "question": "What is the difference between passing a variable by reference and passing a variable by value in C++?"
+    },
+    {
+        "title": "Searches: Efficiency: Problems 2 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/recursion\/whatisrecursion\/summary\/",
+        "domain": "Cs",
+        "question": "What is the asymptotic bound of the function \\( f(n) = 7\\log{n} + 2n^2 + n\\log{n} \\) as \\( n \\) approaches infinity?"
+    },
+    {
+        "title": "Hash Tables: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/searching\/binarysearch\/summary\/",
+        "domain": "Cs",
+        "question": "What is the average time complexity for data storage and retrieval in a hash table, and what are two methods used to handle collisions in hash tables?"
+    },
+    {
+        "title": "What is Recursion?: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/searching\/hashtables\/summary\/",
+        "domain": "Cs",
+        "question": "What are the two essential cases that every recursive function must have, and what roles do they play in the function's execution?"
+    },
+    {
+        "title": "Bubble Sort: Bubble Sort | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/sorting\/merge\/summary\/",
+        "domain": "Cs",
+        "question": "How does the bubble sort algorithm ensure that the largest element in a list is moved to its correct position during the first iteration?"
+    },
+    {
+        "title": "Implementation of Trees: Implementation with Arrays | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/trees\/library\/summary\/",
+        "domain": "Cs",
+        "question": "What is one inherent limitation of using a static array to implement a binary tree in C, and how can this limitation be addressed if the maximum number of nodes is only known at runtime?"
+    },
+    {
+        "title": "Binary Search: Problems  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/c-plus-plus-fundamentals\/classes\/summary\/",
+        "domain": "Cs",
+        "question": "Why won't binary search work on linked lists"
+    },
+    {
+        "title": "1D Arrays: Introduction to One-Dimensional Arrays | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/arrays\/1darrays\/summary\/",
+        "domain": "Cs",
+        "question": "What is the primary characteristic that distinguishes a one-dimensional array from arrays with higher dimensions?"
+    },
+    {
+        "title": "Getting Started in C++: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/c-plus-plus-fundamentals\/gettingstarted\/summary\/",
+        "domain": "Cs",
+        "question": "What is the purpose of the #include statement in a C++ program?"
+    },
+    {
+        "title": "Linear Search: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/searching\/intro\/summary\/",
+        "domain": "Cs",
+        "question": "Why is linear search considered inefficient, and what is its time complexity"
+    },
+    {
+        "title": "Linear Search: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/searching\/linearsearch\/summary\/",
+        "domain": "Cs",
+        "question": "What are the best, worst, and average case time complexities of the sequential search algorithm, and how does its efficiency compare when searching sorted versus unsorted data?"
+    },
+    {
+        "title": "Binary Search in Trees: Searching a Binary Search Tree | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/sorting\/insert\/summary\/",
+        "domain": "Cs",
+        "question": "What is the time complexity of searching for an element in a binary search tree, and why is it beneficial to use a binary search tree for frequently searched data sets?"
+    },
+    {
+        "title": "Implementation of Trees: Implementing Tree | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/trees\/binarysearch\/summary\/",
+        "domain": "Cs",
+        "question": "What are the two different approaches mentioned for implementing a tree structure in C code, and which one is more commonly used?"
+    },
+    {
+        "title": "Select Sort: The Selection Sort Algorithm | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/trees\/implementation\/summary\/",
+        "domain": "Cs",
+        "question": "What is the primary reason that selection sort has a time complexity of O(n^2) regardless of the initial order of the data being sorted?"
+    },
+    {
+        "title": "Introduction to Arrays: Summary and Introduction to Arrays | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/arrays\/intro\/summary\/",
+        "domain": "Cs",
+        "question": "What is an array and how can it be utilized in programming to manage multiple variables of the same data type?"
+    },
+    {
+        "title": "Classes in C++: Problems  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/c-plus-plus-fundamentals\/basiccommands\/summary\/",
+        "domain": "Cs",
+        "question": "Why is it considered good practice to keep data members private in a class"
+    },
+    {
+        "title": "Functions in C++: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/c-plus-plus-fundamentals\/functions\/summary\/",
+        "domain": "Cs",
+        "question": "What are the primary purposes of using functions in a program, and how can they be organized within the code?"
+    },
+    {
+        "title": "Searches: Efficiency: Efficiency and Big-O notation | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/searching\/efficiency\/summary\/",
+        "domain": "Cs",
+        "question": "What is Big-O notation and how is it used to describe the efficiency of an algorithm?"
+    },
+    {
+        "title": "Quick Sort: Quick Sort | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/sorting\/heap\/summary\/",
+        "domain": "Cs",
+        "question": "How does the quicksort algorithm differ from the bubble sort algorithm, and what is the significance of choosing an appropriate pivot value in quicksort?"
+    },
+    {
+        "title": "Binary Search in Trees: Problems 1 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/sorting\/quick\/summary\/",
+        "domain": "Cs",
+        "question": "What is the worst-case scenario for a binary search tree in terms of the complexity for searching for a data element, and how does it compare to the complexity for adding a new data element?"
+    },
+    {
+        "title": "Introduction to Trees: Different Shapes and Characteristics of Trees | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/cs\/trees\/intro\/summary\/",
+        "domain": "Cs",
+        "question": "What is the difference between a balanced tree, a complete tree, and a perfect tree in terms of their structure and leaf arrangement?"
+    }
+]

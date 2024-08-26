@@ -107,6 +107,14 @@ const Game = () => {
       if (socket) {
         socket.emit('HOST_STARTED_GAME', { gameCode: gameCode })
 
+        socket.off('disconnect')
+        socket.on('disconnect', () => {
+          console.log('Socket disconnected')
+          handleGameTermination()
+          setGameNotFound(true)
+          setError(true)
+        })
+
         socket.on('GAME_END', (data) => {
           console.log('GAME_END', data)
           setFinalResult(data.players)

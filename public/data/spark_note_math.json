@@ -1,0 +1,493 @@
+[{
+        "title": "Inequalities: Properties of Inequalities | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/inequalities\/summary\/",
+        "domain": "Math",
+        "question": "What is the formal definition of the inequality relation \\( a < b \\) in terms of the familiar notion of equality?"
+    },
+    {
+        "title": "Discrete Functions: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/discretefunctions\/summary\/",
+        "domain": "Math",
+        "question": "What are the primary types of discrete functions explored in the chapter, and what are their applications in mathematics and other fields?"
+    },
+    {
+        "title": "Operations on Functions: Combining Operations on Graphs | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/systemsofthreeequations\/summary\/",
+        "domain": "Math",
+        "question": "How would you write the equation of a function that is first stretched vertically by a factor of 3, then stretched horizontally by a factor of 6, and finally shifted down 2 units, if the original function is \\( f(x) = 2x^2 \\)?"
+    },
+    {
+        "title": "Definite Integral: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc1\/definiteintegral\/summary\/",
+        "domain": "Math",
+        "question": "How does the concept of a Riemann sum help in defining the area of a region bounded by a function \\( f(x) \\) on the interval \\([a, b]\\), and how does this relate to the definite integral?"
+    },
+    {
+        "title": "Computing Integrals: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc2\/computingintegrals\/summary\/",
+        "domain": "Math",
+        "question": "What are some methods used to simplify the computation of antiderivatives, and how do they relate to differentiation techniques?"
+    },
+    {
+        "title": "Calculus BC: Series: Problems  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc2\/parametricandpolarcurves\/summary\/",
+        "domain": "Math",
+        "question": "What is the reasoning used to show that the series \\( \\sum \\frac{1}{n^2} \\) converges by grouping terms, and how does it relate to the convergence of the series \\( \\sum \\frac{1}{2^n} \\)?"
+    },
+    {
+        "title": "Calculus BC: Series: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc2\/series\/summary\/",
+        "domain": "Math",
+        "question": "What are the primary methods for determining whether a series converges, and how do they apply to different types of series?"
+    },
+    {
+        "title": "The Taylor Series: Problems  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc2\/taylorseries\/summary\/",
+        "domain": "Math",
+        "question": "What is the general form of the Taylor series for the function \\( f(x) = \\frac{1}{1 + x} \\) based on its derivatives at \\( x = 0 \\)?"
+    },
+    {
+        "title": "Geometry: Congruence: Problems 5 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry2\/congruence\/summary\/",
+        "domain": "Math",
+        "question": "Given triangles ABC and DEF, under what conditions can you prove that they are similar using the SAS (Side-Angle-Side) similarity criterion"
+    },
+    {
+        "title": "Geometry: Inductive and Deductive Reasoning: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry3\/axiomsandpostulates\/summary\/",
+        "domain": "Math",
+        "question": "What is the basic role of inductive reasoning in geometry?"
+    },
+    {
+        "title": "Conic Sections Conics Summary & Analysis | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/precalc\/conicsections\/summary\/",
+        "domain": "Math",
+        "question": "What is the primary difference between plane geometry and analytic geometry as described in the text?"
+    },
+    {
+        "title": "Continuity and Limits: Continuity | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/precalc\/continuityandlimits\/summary\/",
+        "domain": "Math",
+        "question": "What are the three conditions that must be met for a function \\( f(x) \\) to be continuous at a point \\( x = a \\)?"
+    },
+    {
+        "title": "Precalculus: Functions: Functions | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/precalc\/functions\/summary\/",
+        "domain": "Math",
+        "question": "What is the primary focus of precalculus, and how does it prepare students for studying calculus?"
+    },
+    {
+        "title": "Trigonometry: Angles: Angles Defined | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/precalc\/trigonometricfunctions\/summary\/",
+        "domain": "Math",
+        "question": "What is the difference between the initial side and the terminal side of an angle in trigonometry?"
+    },
+    {
+        "title": "Solving Oblique Triangles: Area of a Triangle | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/trigonometry\/graphs\/summary\/",
+        "domain": "Math",
+        "question": "What are the three basic situations in which the area of a triangle can be calculated using trigonometric techniques?"
+    },
+    {
+        "title": "Trigonometry: Trigonometric Functions: Problems  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/trigonometry\/trigonometricequations\/summary\/",
+        "domain": "Math",
+        "question": "In which two quadrants is the cosine function always positive?"
+    },
+    {
+        "title": "Trigonometric Identities: Trigonometric Identities | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/trigonometry\/trigonometricidentities\/summary\/",
+        "domain": "Math",
+        "question": "What are the eight fundamental trigonometric identities, and how can they be used to simplify trigonometric expressions?"
+    },
+    {
+        "title": "Applications of Solving Equations: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/applicationsofsolvingequations\/summary\/",
+        "domain": "Math",
+        "question": "What are the three types of problems discussed in this chapter that demonstrate the applications of solving equations?"
+    },
+    {
+        "title": "Exponents: Problems 2 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/exponents\/summary\/",
+        "domain": "Math",
+        "question": "What is the simplified form of the expression \\( 26xy^2z^3 \\)?"
+    },
+    {
+        "title": "Graphing Equations: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/graphingequations\/summary\/",
+        "domain": "Math",
+        "question": "What are the three methods of graphing linear equations discussed in the chapter, and how does each method utilize different aspects of the equation?"
+    },
+    {
+        "title": "Quadratics: The Quadratic Formula | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/quadratics\/summary\/",
+        "domain": "Math",
+        "question": "What is the significance of the discriminant in determining the number of solutions to a quadratic equation?"
+    },
+    {
+        "title": "Scientific Notation: Multiplication and Division in Scientific Notation | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/scientificnotation\/summary\/",
+        "domain": "Math",
+        "question": "What are the steps to multiply and divide two numbers in scientific notation, and how do you handle the coefficients and exponents in each case? Provide an example for both multiplication and division."
+    },
+    {
+        "title": "Algebra I: Variation: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/systemsofequations\/summary\/",
+        "domain": "Math",
+        "question": "What is the difference between direct variation and inverse variation, and how can you write an equation to describe each type of relationship?"
+    },
+    {
+        "title": "Writing Equations: Problems 3 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/variation\/summary\/",
+        "domain": "Math",
+        "question": "Write an equation in general linear form of the line which passes through the points (-16, 0) and (0, -24)."
+    },
+    {
+        "title": "Writing Equations: Converting Among Forms | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/writingequations\/summary\/",
+        "domain": "Math",
+        "question": "What are the steps to convert the equation \\(6y + 4x = 7\\) to slope-intercept form?"
+    },
+    {
+        "title": "Algebra II: Factoring: Problems 3 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/exponentialfunctions\/summary\/",
+        "domain": "Math",
+        "question": "What is the factored form of the polynomial \\( x^6 - y^6 \\)?"
+    },
+    {
+        "title": "Inequalities: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/functions\/summary\/",
+        "domain": "Math",
+        "question": "What is the correct method to graph the inequality \\( y \\leq (x - 3)^2 + 2 \\)?"
+    },
+    {
+        "title": "Logarithmic Functions: Problems 2 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/inequalities\/summary\/",
+        "domain": "Math",
+        "question": "If $800 is put into a bank account that yields 7.16% interest, compounded yearly, about how much money is in the account after 6 years?"
+    },
+    {
+        "title": "Matrices: Problems 2 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/logarithmicfunctions\/summary\/",
+        "domain": "Math",
+        "question": "What is the result of the matrix operation 3A + 2B using the given matrices A and B?"
+    },
+    {
+        "title": "Matrices: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/matrices\/summary\/",
+        "domain": "Math",
+        "question": "What are the conditions required for two matrices to be added or subtracted, and why can't all matrices be added or subtracted from each other?"
+    },
+    {
+        "title": "Operations on Functions: Reflections and Rotations | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/operationsonfunctions\/summary\/",
+        "domain": "Math",
+        "question": "How does reflecting the graph of a function over the y-axis affect the domain of the function?"
+    },
+    {
+        "title": "Rational Expressions: Problems 4 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/polynomials\/summary\/",
+        "domain": "Math",
+        "question": "What is the solution for \\( x \\) in the equation \\( x + 3 = 0 \\)?"
+    },
+    {
+        "title": "Systems of Three Equations: Problems 3 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/specialgraphs\/summary\/",
+        "domain": "Math",
+        "question": "What are the values of \\( x \\) and \\( y \\) in the solution of the system using Cramer's Rule: \\( 2x + 2y + z = 2 \\), \\( x + y + z = 3 \\), \\( 3x + 5y + 2z = 2 \\), given that \\( z = 4 \\)?"
+    },
+    {
+        "title": "Functions, Limits, Continuity: Preview of Functions, Limits, and Continuity | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcab\/functionslimitscontinuity\/summary\/",
+        "domain": "Math",
+        "question": "What are the fundamental concepts and terms introduced in the unit that are essential for understanding calculus?"
+    },
+    {
+        "title": "Introduction to Derivatives: Problems for \"The Concept of the Derivative\" 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcab\/introductiontoderivatives\/summary\/",
+        "domain": "Math",
+        "question": "What is an example of a function that is not differentiable at \\( x = a \\) and why is it not differentiable at that point?"
+    },
+    {
+        "title": "Calculus BC: Applications of the Derivative: Velocity and Acceleration | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcab\/logs\/summary\/",
+        "domain": "Math",
+        "question": "What is the relationship between the first and second derivatives of the position function \\( f(t) \\) in the context of an object's motion along a straight line, and how do these derivatives relate to the concepts of velocity and acceleration?"
+    },
+    {
+        "title": "Definite Integral: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc1\/computingderivatives\/summary\/",
+        "domain": "Math",
+        "question": "What are the values of \\( U_3(f, 0, 3) \\) and \\( L_3(f, 0, 3) \\) for the function \\( f(x) = (x - 2)^2 \\) when the interval \\([0, 3]\\) is subdivided into the three intervals \\([0, 1]\\), \\([1, 2]\\), and \\([2, 3]\\)?"
+    },
+    {
+        "title": "Functions, Limits, and Continuity: Limits and Continuity | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc1\/functionslimitsandcontinuity\/summary\/",
+        "domain": "Math",
+        "question": "What is the definition of a left-hand limit of a function at a point \\( x_0 \\), and how is it denoted?"
+    },
+    {
+        "title": "Applications of the Integral: Average Value of a Function | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc2\/applicationsoftheintegral\/summary\/",
+        "domain": "Math",
+        "question": "What is the significance of the average value of a function on an interval, and how is it related to the Riemann sums and definite integrals?"
+    },
+    {
+        "title": "Geometry: Circles: Introduction to Circles | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry1\/buildingblocks\/summary\/",
+        "domain": "Math",
+        "question": "What is the relationship between the radius and the diameter of a circle, and why are all radii and diameters of a circle considered congruent?"
+    },
+    {
+        "title": "Geometric Surfaces: Problems 3 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry1\/constructions\/summary\/",
+        "domain": "Math",
+        "question": "How does the length of the altitude of a cone compare to the length of any of the segments that compose the lateral surface of the cone"
+    },
+    {
+        "title": "Geometric Surfaces: Geometric Surfaces | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry1\/geometricsurfaces\/summary\/",
+        "domain": "Math",
+        "question": "What is the main difference between geometric figures in different dimensions, and how can understanding a concept in a lower dimension help with understanding it in a higher dimension?"
+    },
+    {
+        "title": "Geometry: 3-D Measurements: Volumes of Polyhedra and Spheres | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry2\/3Dmeasurements\/summary\/",
+        "domain": "Math",
+        "question": "What is the formula for calculating the volume of a pyramid, and how can this formula be used to determine the volume of any polyhedron?"
+    },
+    {
+        "title": "Geometry: Inductive and Deductive Reasoning: Inductive Reasoning | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry3\/logicstatements\/summary\/",
+        "domain": "Math",
+        "question": "What is the primary limitation of inductive reasoning as described in the context, and how can it still be valuable in the study of geometry?"
+    },
+    {
+        "title": "Decimals: Rounding | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/prealgebra\/decimals\/summary\/",
+        "domain": "Math",
+        "question": "What is the result of rounding the number 7,802.45123 to the nearest thousandth, and what is the reasoning behind this result?"
+    },
+    {
+        "title": "Fractions: Proper Fractions, Improper Fractions, and Mixed Numbers | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/prealgebra\/fractions\/summary\/",
+        "domain": "Math",
+        "question": "How do you convert the improper fraction 48\/5 into a mixed number, and what is the resulting mixed number"
+    },
+    {
+        "title": "Percents: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/prealgebra\/operations\/summary\/",
+        "domain": "Math",
+        "question": "What is 78.2% expressed as a decimal?"
+    },
+    {
+        "title": "Perimeter and Area: Problems 3 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/prealgebra\/percents\/summary\/",
+        "domain": "Math",
+        "question": "What is the radius of a circle with a diameter of 8?"
+    },
+    {
+        "title": "Powers, Exponents, and Roots: Problems 4 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/prealgebra\/perimeterarea\/summary\/",
+        "domain": "Math",
+        "question": "What is the result of the expression \\((100\/81)^{1\/2}\\)?"
+    },
+    {
+        "title": "Complex Numbers: Introduction to Complex Numbers | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/prealgebra\/wholenumbers\/summary\/",
+        "domain": "Math",
+        "question": "What is the significance of the imaginary unit in solving quadratic equations that contain a negative radical, and how are complex numbers represented on the complex plane?"
+    },
+    {
+        "title": "Conic Sections Problems 2 Summary & Analysis | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/precalc\/complexnumbers\/summary\/",
+        "domain": "Math",
+        "question": "What are the vertex, focus, axis, and directrix of the parabola given by the equation \\(x^2 - 10x - 2y + 29 = 0\\)?"
+    },
+    {
+        "title": "Exponential and Logarithmic Functions: Exponential and Logarithmic Functions | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/precalc\/exponentialandlogarithmicfunctions\/summary\/",
+        "domain": "Math",
+        "question": "What is the relationship between exponential and logarithmic functions, and how are they defined?"
+    },
+    {
+        "title": "Polynomial Functions: Rational Functions | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/precalc\/polynomialfunctions\/summary\/",
+        "domain": "Math",
+        "question": "What are the conditions under which a rational function has a vertical asymptote, and how is it mathematically represented?"
+    },
+    {
+        "title": "More Trigonometric Identities: Addition and Subtraction Formulas | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/trigonometry\/moreidentities\/summary\/",
+        "domain": "Math",
+        "question": "How can the values of trigonometric functions of the sum of two angles be expressed in terms of the functions of the individual angles?"
+    },
+    {
+        "title": "Expressions and Equations: Variables | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/expressionsandequations\/summary\/",
+        "domain": "Math",
+        "question": "What is the difference between an algebraic expression and an algebraic equation, and how can word statements be translated into these forms?"
+    },
+    {
+        "title": "Polynomials: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/polynomials\/summary\/",
+        "domain": "Math",
+        "question": "What are the two special cases of binomial multiplication discussed in the chapter, and what are the results of each case?"
+    },
+    {
+        "title": "Probability: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/probability\/summary\/",
+        "domain": "Math",
+        "question": "What is the relationship between complementary events in probability, and how do their probabilities relate to each other?"
+    },
+    {
+        "title": "Binomial Expansion: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/binomialexpansion\/summary\/",
+        "domain": "Math",
+        "question": "How does Pascal Triangle relate to binomial expansion, and why is it essential for understanding the coefficients of the monomials in the expansion of \\((a+b)^n\\)?"
+    },
+    {
+        "title": "Rational Expressions: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/rationalexpressions\/summary\/",
+        "domain": "Math",
+        "question": "What is the process for writing a rational expression in lowest terms, and why is it important to do so?"
+    },
+    {
+        "title": "Calculus AB: Applications of the Derivative: Preview of Applications of the Derivative | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcab\/applicationsofthederivative\/summary\/",
+        "domain": "Math",
+        "question": "How can the derivative be used to determine the instantaneous velocity and acceleration of an object if an expression for the position is known?"
+    },
+    {
+        "title": "Introduction to Integrals: Preview of Introduction to the Integral | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcab\/introductiontointegrals\/summary\/",
+        "domain": "Math",
+        "question": "What is the relationship between the definite integral and the area under the graph of a function, and how is this relationship initially approximated before being precisely calculated using the fundamental theorem of calculus?"
+    },
+    {
+        "title": "The Derivative: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc1\/intro\/summary\/",
+        "domain": "Math",
+        "question": "For which values of \\( x \\) is the function \\( f(x) \\) with the given graph not continuous and not differentiable?"
+    },
+    {
+        "title": "The Derivative: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/calcbc1\/thederivative\/summary\/",
+        "domain": "Math",
+        "question": "What is the relationship between the derivative of a function and the slope of the tangent line to the graph of the function at a given point?"
+    },
+    {
+        "title": "Geometry: Constructions: Problems  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry1\/circles\/summary\/",
+        "domain": "Math",
+        "question": "What are the three criteria that must be met for angles to be considered adjacent?"
+    },
+    {
+        "title": "Geometry: Congruence: Proving Congruence of Triangles | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry1\/polygons\/summary\/",
+        "domain": "Math",
+        "question": "What are the three major methods for proving the congruence of triangles without having to prove the congruence of all six corresponding parts, and how does each method work?"
+    },
+    {
+        "title": "Geometry: Measurements: Problems 7 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry2\/review\/summary\/",
+        "domain": "Math",
+        "question": "If the radius of circle A is twice that of circle B, how many times greater is the area of circle A than the area of circle B"
+    },
+    {
+        "title": "Geometry: Theorems: Problems 2 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry2\/specialtriangles\/summary\/",
+        "domain": "Math",
+        "question": "What must be true of a triangle if its circumcenter lies in the interior of the triangle?"
+    },
+    {
+        "title": "Special Triangles: Right Triangles | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry2\/theorems\/summary\/",
+        "domain": "Math",
+        "question": "What are the defining characteristics and side length ratios of the two special types of right triangles that every mathematician should know?"
+    },
+    {
+        "title": "Prealgebra: Operations: Problems  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/prealgebra\/measurements\/summary\/",
+        "domain": "Math",
+        "question": "What is the result of the following mathematical expression: (2 + 8)\/(6 - 1) + 7\u00d72?"
+    },
+    {
+        "title": "Polynomial Functions: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/precalc\/parametricequationsandpolarcoordinates\/summary\/",
+        "domain": "Math",
+        "question": "Identify the degree, leading coefficient, and constant term of the following polynomial: \\(5x^6 + 2x^5 - 2x^4 + 7x^3 - x^2 - x + 23\\)."
+    },
+    {
+        "title": "Sequences and Series: Sequences and Series | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/precalc\/sequencesandseries\/summary\/",
+        "domain": "Math",
+        "question": "What is the difference between an arithmetic sequence and a geometric sequence, and how are they examples of recursive sequences?"
+    },
+    {
+        "title": "Trigonometry: Graphs: Problems  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/trigonometry\/angles\/summary\/",
+        "domain": "Math",
+        "question": "What is the defining characteristic of a function in terms of the relationship between values in its domain and range"
+    },
+    {
+        "title": "Solving Oblique Triangles: Solving Oblique Triangles | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/trigonometry\/solvingobliquetriangles\/summary\/",
+        "domain": "Math",
+        "question": "What are the two new techniques needed to solve oblique triangles, and why can't the Pythagorean Theorem and the fact that two acute angles are complementary be used for these triangles?"
+    },
+    {
+        "title": "Trigonometry: Trigonometric Functions: Trigonometric Functions | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/trigonometry\/trigonometricfunctions\/summary\/",
+        "domain": "Math",
+        "question": "What are the six trigonometric functions, and how do reference angles and the unit circle simplify the calculation of these functions for any given angle?"
+    },
+    {
+        "title": "Exponents: Problems 3 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra1\/absolutevalue\/summary\/",
+        "domain": "Math",
+        "question": "Which of the following statements about algebraic expressions is true always, sometimes, or never for \\(a, b, c, d, k, l > 0\\)"
+    },
+    {
+        "title": "Quadratics: Graphing Quadratic Functions | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/complexnumbers\/summary\/",
+        "domain": "Math",
+        "question": "What is the significance of the discriminant in determining the number of x-intercepts for a quadratic function, and how does its value affect the graph of the function?"
+    },
+    {
+        "title": "Exponential Functions: Negative and Fractional Exponents | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/algebra2\/operationswithfunctions\/summary\/",
+        "domain": "Math",
+        "question": "What is the process for evaluating a number raised to a negative fractional exponent, and why can't we take a negative number to a fractional power if the denominator of the exponent is even?"
+    },
+    {
+        "title": "Geometry: Inductive and Deductive Reasoning: Inductive and Deductive Reasoning | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry3\/geometricproofs\/summary\/",
+        "domain": "Math",
+        "question": "What are the two basic methods of mathematical reasoning discussed in the context, and how are they used in the study of geometry?"
+    },
+    {
+        "title": "Prealgebra: Measurements: Problems 3 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/geometry3\/inductiveanddeductivereasoning\/summary\/",
+        "domain": "Math",
+        "question": "If Sarah weighs 156 lbs. and Sally weighs 59.0 kg., who weighs more and by how much in kilograms"
+    },
+    {
+        "title": "Geometric Proofs: Indirect Proof | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/prealgebra\/integersandrationals\/summary\/",
+        "domain": "Math",
+        "question": "What is the primary goal of an indirect proof in geometry, and how is it achieved?"
+    },
+    {
+        "title": "Prealgebra: Measurements: Systems of Measurement | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/prealgebra\/powersexponentsroots\/summary\/",
+        "domain": "Math",
+        "question": "How would you convert an area of 2.3 square miles into acres using the appropriate conversion factor?"
+    },
+    {
+        "title": "Math Study Guides - SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/math\/trigonometry\/solvingrighttriangles\/summary\/",
+        "domain": "Math",
+        "question": "What are the key differences between solving equations and solving inequalities in Algebra I?"
+    }
+]
