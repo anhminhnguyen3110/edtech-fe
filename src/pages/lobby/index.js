@@ -113,6 +113,7 @@ const Lobby = () => {
   const getSpacing = (numPlayers) => {
     if (numPlayers <= 6) return 3
     if (numPlayers <= 10) return 4
+    if (numPlayers <= 30) return 2
     return 5
   }
 
@@ -172,7 +173,7 @@ const Lobby = () => {
         Game code
       </Typography>
       <GameCodeDisplay gameCode={gameCode} />
-      <Box width="80%" mb={5}>
+      <Box maxWidth="80%" mb={2} sx={{ overflow: 'hidden' }}>
         <PlayerList players={players} fontSize={fontSize} spacing={spacing} />
       </Box>
       <LobbyActions numPlayers={players.length} onNextClick={handleNext} />

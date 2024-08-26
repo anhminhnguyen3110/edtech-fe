@@ -1,0 +1,223 @@
+[{
+        "title": "Thermodynamics: Structure: Study Guide | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/dynamics\/intro\/summary\/",
+        "domain": "Physics",
+        "question": "What are the main topics covered in the provided context about thermodynamics?"
+    },
+    {
+        "title": "Newton's Three Laws: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/dynamics\/newtonapplications\/summary\/",
+        "domain": "Physics",
+        "question": "How much force does the magnet exert on a 5 kg piece of iron suspended in mid-air, and why must this force be equal to the gravitational force acting on the iron"
+    },
+    {
+        "title": "Newton's Three Laws: Introduction to Newton's Three Laws | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/dynamics\/newtonsthreelaws\/summary\/",
+        "domain": "Physics",
+        "question": "What are Newton's Three Laws of Motion and how do they provide the basis for the study of Dynamics?"
+    },
+    {
+        "title": "Gravitation: Orbits: Problems on Orbits  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/gravitation\/kepler\/summary\/",
+        "domain": "Physics",
+        "question": "Using the expression we derived for \\( \\frac{1}{r} \\), show that this reduces to \\( x^2 + y^2 = k^2 - 2kx \\) where \\( k = \\frac{GMm}{L^2} \\), and \\( \\cos \\theta \\). How can we solve for \\( r \\) and then use \\( r^2 = x^2 + y^2 \\) to obtain the desired result"
+    },
+    {
+        "title": "Gravitation: Potential: Newton's Shell Theorem | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/gravitation\/potential\/summary\/",
+        "domain": "Physics",
+        "question": "How does Newton's theorem regarding the gravitational force exerted by a spherical mass help in simplifying the calculation of gravitational forces for objects outside the sphere?"
+    },
+    {
+        "title": "1D Motion: One-dimensional Motion with Constant Acceleration | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/kinematics\/1dmotion\/summary\/",
+        "domain": "Physics",
+        "question": "How can you determine the time it takes for an object to reach the ground when it is dropped from a height \\( h \\) with an initial velocity of \\( v_0 = 0 \\) using the position function \\( x(t) = -gt^2 + h \\)?"
+    },
+    {
+        "title": "Sources of Magnetic Fields: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/magneticforcesandfields\/magneticforces\/summary\/",
+        "domain": "Physics",
+        "question": "What is the direction of the magnetic field at point P created by three wires, each carrying a current into the page, positioned at three corners of a square with side length \\( d \\)? How do you determine the net magnetic field at point P?"
+    },
+    {
+        "title": "Geometric Optics: Problems on Refraction 2 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/magneticforcesandfields\/sourcesofmagneticfields\/summary\/",
+        "domain": "Physics",
+        "question": "What is the critical angle for total internal reflection in a transparent fiber with an index of refraction of 1.6, surrounded by a less dense plastic with an index of refraction of 1.5, and at what angle must a light ray in the fiber approach the interface to remain within the fiber?"
+    },
+    {
+        "title": "Optical Phenomena: Problems on Interference 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/optics\/light\/summary\/",
+        "domain": "Physics",
+        "question": "What is the amplitude of the magnetic field of a light ray that has an irradiance of 0.00003 W\/cm\u00b2?"
+    },
+    {
+        "title": "Optical Phenomena: Introduction to Optical Phenomena | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/optics\/phenom\/summary\/",
+        "domain": "Physics",
+        "question": "What are the differences between interference and diffraction in the context of physical optics, and how do these phenomena support both wave and particle theories of light?"
+    },
+    {
+        "title": "Rotational Dynamics: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/rotationalmotion\/rotationaldynamics\/summary\/",
+        "domain": "Physics",
+        "question": "What is the role of torque in the dynamics of rotational motion, and how is it related to the kinematic equations similar to Newton's Second Law?"
+    },
+    {
+        "title": "Rotational Kinetics: Rotational Kinematics | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/rotationalmotion\/rotationalkinetics\/summary\/",
+        "domain": "Physics",
+        "question": "How can we relate linear velocity to angular velocity in the context of rotational motion, and what is the mathematical expression for this relationship?"
+    },
+    {
+        "title": "Thermodynamics: Building Blocks: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/thermodynamics\/bblocks\/summary\/",
+        "domain": "Physics",
+        "question": "What significant development in the early 20th century provided a theoretical basis for the postulates and equations of Thermodynamics, and how did it influence the study of macroscopic behaviors of thermal systems?"
+    },
+    {
+        "title": "Thermodynamics: Heat: Processes with Heat and Work | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/thermodynamics\/gas\/summary\/",
+        "domain": "Physics",
+        "question": "What are the four phases of the Carnot cycle, and how do they contribute to the overall work accomplished by the system?"
+    },
+    {
+        "title": "Thermodynamics: Heat: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/thermodynamics\/heat\/summary\/",
+        "domain": "Physics",
+        "question": "What is the relationship between the high temperature (Th) and the low temperature (Tl) in determining the maximum Carnot efficiency of an engine?"
+    },
+    {
+        "title": "Thermodynamics: Stats: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/thermodynamics\/stats\/summary\/",
+        "domain": "Physics",
+        "question": "What is the Boltzmann factor and how is it used to determine the probability of occupying a given state in a thermodynamic system?"
+    },
+    {
+        "title": "Vector Multiplication: Introduction to Vector Multiplication | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/vectors\/vectoraddition\/summary\/",
+        "domain": "Physics",
+        "question": "What are the primary differences between the dot product and the cross product when performing vector multiplication in Euclidean space?"
+    },
+    {
+        "title": "Conservation of Energy: Problems 2 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/vectors\/vectormultiplication\/summary\/",
+        "domain": "Physics",
+        "question": "Given that a skier glides down a frictionless hill of 100 meters and then ascends another hill of height 90 meters, what is the change in potential energy of the skier, assuming the mass of the skier is 50 kg"
+    },
+    {
+        "title": "Work and Power: Problems 2 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/workenergypower\/conservationofenergy\/summary\/",
+        "domain": "Physics",
+        "question": "What is the kinetic energy of a 50 kg man standing on the surface of the earth, given that the earth rotates about its axis once a day and has a radius of 6.37\u00d710^6 meters?"
+    },
+    {
+        "title": "Gravitation: Orbits: Orbits | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/gravitation\/newton\/summary\/",
+        "domain": "Physics",
+        "question": "What is the significance of the eccentricity value in determining the shape of an orbit, and how does it affect the potential energy and kinetic energy of a particle in that orbit?"
+    },
+    {
+        "title": "Gravitation: Orbits: Problems on Orbits 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/gravitation\/orbits\/summary\/",
+        "domain": "Physics",
+        "question": "Using the expression derived for \\( \\frac{1}{r} \\), show that it reduces to \\( x^2 + y^2 = k^2 - 2kx \\) where \\( k = \\frac{GMm}{L^2} \\). How can this equation be solved for \\( r \\) and then used to show that \\( r^2 = x^2 + y^2 \\)"
+    },
+    {
+        "title": "2D Motion: Introduction to Motion in Two and Three Dimensions | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/kinematics\/2dmotion\/summary\/",
+        "domain": "Physics",
+        "question": "How are the equations for position, velocity, and acceleration generalized when moving from one-dimensional to two- and three-dimensional kinematics?"
+    },
+    {
+        "title": "Introduction to Kinematics: Introduction to Kinematics | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/kinematics\/intro\/summary\/",
+        "domain": "Physics",
+        "question": "What is the primary focus of kinematics in classical mechanics, and how does it differ from the study of dynamics?"
+    },
+    {
+        "title": "Linear Momentum: Collisions: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/linearmomentum\/collisions\/summary\/",
+        "domain": "Physics",
+        "question": "In a head-on elastic collision between two balls of equal mass \\( m \\) and equal speed \\( v \\), what are the final velocities of each ball in terms of \\( m \\) and \\( v \\)"
+    },
+    {
+        "title": "Magnetic Field Theory: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/linearmomentum\/conservationofmomentum\/summary\/",
+        "domain": "Physics",
+        "question": "What are the implications of Stokes' Theorem and Gauss' Theorem for the vector field F = (2y, 2x + 3z, 3y) given that both the divergence and curl of the field are zero?"
+    },
+    {
+        "title": "Linear Momentum: Conservation of Momentum: Introduction and Summary Conservation of Momentum | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/magneticforcesandfields\/magneticfieldtheory\/summary\/",
+        "domain": "Physics",
+        "question": "What is the significance of the center of mass in the study of the mechanics of a system of mutually interacting particles, and how does it relate to the conservation of linear momentum?"
+    },
+    {
+        "title": "Angular Momentum: Introduction and Summary | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/rotationalmotion\/angularmomentum\/summary\/",
+        "domain": "Physics",
+        "question": "What is the concept of angular momentum and how does it relate to torque in the context of rotational motion?"
+    },
+    {
+        "title": "Applications of Special Relativity: The Twin Paradox | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/specialrelativity\/applications\/summary\/",
+        "domain": "Physics",
+        "question": "In the context of the twin paradox, why is twin B (the one who travels to a distant star and returns) younger than twin A (who remains on Earth), despite the fact that from B's perspective, A should be the one experiencing time dilation"
+    },
+    {
+        "title": "Thermodynamics: Building Blocks: Problems  | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/specialrelativity\/kinematics\/summary\/",
+        "domain": "Physics",
+        "question": "Given a system of 3 particles, each of which can be in one of three states (A, B, and C) with equal probability, write an expression that represents all possible configurations of the entire system. Which configuration is most likely, and what is its probability"
+    },
+    {
+        "title": "Thermodynamics: Heat: Heat Engines | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/thermodynamics\/intro\/summary\/",
+        "domain": "Physics",
+        "question": "What is the fundamental difference between heat and work in the context of thermodynamics, and how does this difference affect the entropy of a system?"
+    },
+    {
+        "title": "Uniform Circular Motion: Introduction to the Dynamics of Uniform Circular Motion | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/dynamics\/uniformcircularmotion\/summary\/",
+        "domain": "Physics",
+        "question": "How can Newton's Laws be applied to analyze uniform circular motion, and why does an object moving in a circular path with uniform speed experience acceleration?"
+    },
+    {
+        "title": "Applications of Harmonic Motion: Problems 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/optics\/geom\/summary\/",
+        "domain": "Physics",
+        "question": "What is the torsional constant of the wire if a disk of mass 2 kg and radius 0.5 m, when hung from the wire and rotated to engage in torsional oscillation, has a period of 2 seconds?"
+    },
+    {
+        "title": "Optical Phenomena: Diffraction | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/optics\/intro\/summary\/",
+        "domain": "Physics",
+        "question": "What is the Huygens-Fresnel principle and how does it explain the propagation of wavefronts through an aperture?"
+    },
+    {
+        "title": "Applications of Harmonic Motion: Applications of Simple Harmonic Motion | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/oscillations\/applicationsofharmonicmotion\/summary\/",
+        "domain": "Physics",
+        "question": "Explain the concept of a torsional oscillator and describe how it is analogous to a mass-spring system in terms of simple harmonic motion. How can the period of a torsional oscillator be used to determine the moment of inertia of an unknown body"
+    },
+    {
+        "title": "Special Relativity: Dynamics: Problems on Energy and Momentum 1 | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/specialrelativity\/dynamics\/summary\/",
+        "domain": "Physics",
+        "question": "What is the mass of a single particle formed when two protons, each with a mass of 1.67\u00d710^-27 kilograms, approach each other from opposite directions with equal and opposite speeds of 0.6c and collide to form a particle at rest?"
+    },
+    {
+        "title": "Introduction to Dynamics: Study Guide | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/workenergypower\/workpower\/summary\/",
+        "domain": "Physics",
+        "question": "What type of content can you find in the provided context that combines literature and personality quizzes?"
+    },
+    {
+        "title": "Units, Scientific Notation, and Significant Figures: Accuracy vs. Precision | SparkNotes",
+        "url": "https:\/\/www.sparknotes.com\/physics\/units\/summary\/",
+        "domain": "Physics",
+        "question": "What is the difference between precision and accuracy in the context of scientific experiments, and how can an experiment be precise but not accurate? Provide an example to illustrate your explanation."
+    }
+]

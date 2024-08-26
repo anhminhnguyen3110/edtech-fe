@@ -12,16 +12,21 @@ const LobbyActions = ({ numPlayers, onNextClick }) => {
       position="absolute"
       bottom={20}
       left={0}
-      px={3}
-      sx={{ padding: '4rem' }}
+      px={{ xs: 2, sm: 3, md: 4 }} // Responsive padding
+      sx={{ padding: { xs: '2rem', sm: '3rem', md: '4rem' } }} // Adjusting padding for different screen sizes
     >
       <Box display="flex" flexDirection="column" alignItems="center">
-        <Typography variant="h5" mb={1}>
+        <Typography variant="h5" mb={1} sx={{ fontSize: { xs: '1.25rem', sm: '1.5rem' } }}>
           {numPlayers}
         </Typography>
         <Button
           variant="contained"
-          style={{ borderRadius: '20px', width: '150px', background: BLUE.main }}
+          style={{
+            borderRadius: '20px',
+            width: { xs: '120px', sm: '140px', md: '150px' },
+            height: { xs: '40px', sm: '50px', md: '60px' },
+            background: BLUE.main,
+          }}
         >
           Players
         </Button>
@@ -32,8 +37,8 @@ const LobbyActions = ({ numPlayers, onNextClick }) => {
         disabled={numPlayers === 0}
         sx={{
           borderRadius: '15px',
-          width: '150px',
-          height: '60px',
+          width: { xs: '120px', sm: '140px', md: '150px' },
+          height: { xs: '40px', sm: '50px', md: '60px' },
           backgroundColor: numPlayers === 0 ? 'gray' : BLUE.main,
           '&:hover': {
             backgroundColor: numPlayers === 0 ? 'gray' : BLUE.dark,

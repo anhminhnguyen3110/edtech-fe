@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { Box, Typography, useMediaQuery, useTheme } from '@mui/material'
+import { Box, Typography, useMediaQuery, useTheme, Tooltip } from '@mui/material'
 import { useRouter } from 'next/router'
 import api from '@/lib/api'
 import MessageBox from '../box/messageBox'
@@ -13,6 +13,8 @@ import IconButton from '@mui/material/IconButton'
 import SuggestionModal from './suggestionModal'
 import { BLUE } from '@/theme/palette'
 import useModal from './useModal'
+import MessageTooltip from './messageToolTip'
+
 const ChatPage = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
@@ -37,6 +39,8 @@ const ChatPage = () => {
   const [lastFile, setLastFile] = useState(null)
   const [boxHeight, setBoxHeight] = useState('97vh')
   const { isOpen, openModal, closeModal } = useModal()
+  const [isOpenToolTip, setIsOpenToolTip] = useState(false)
+  const [messageToolTip, setMessageToolTip] = useState(null)
 
   const fetchChat = useCallback(
     async (pageNumber = 1) => {
@@ -149,8 +153,10 @@ const ChatPage = () => {
     }
   }
 
-  const handleSendSuggestion = async (suggestion) => {
+  const handleSendSuggestion = async (suggestion, title, url) => {
     console.log('Suggestion:', suggestion)
+    setIsOpenToolTip(true)
+    setMessageToolTip({ title, url })
     const newChat = {
       id: chats.length + 1,
       message: suggestion,
@@ -346,20 +352,36 @@ const ChatPage = () => {
         sendSuggestion={handleSendSuggestion}
       />
       {/* Button for suggestion modal */}
-      <IconButton
-        color="primary"
-        sx={{
-          position: 'absolute',
-          bottom: 32,
-          right: 32,
-          bgcolor: 'background.paper',
-          boxShadow: 3,
-          padding: 1.4,
-        }}
-        onClick={openModal} // Replace with your actual click handler
-      >
-        <TipsAndUpdatesIcon sx={{ fontSize: '2rem' }} />
-      </IconButton>
+      {!isMobile && (
+        <Tooltip
+          title={
+            <MessageTooltip
+              url={messageToolTip ? messageToolTip.url : null}
+              linkText={messageToolTip ? messageToolTip.title : null}
+            />
+          }
+          open={isOpenToolTip}
+          disableHoverListener
+        >
+          <IconButton
+            color="primary"
+            sx={{
+              position: 'absolute',
+              bottom: 32,
+              right: 32,
+              bgcolor: 'background.paper',
+              boxShadow: 3,
+              padding: 1.4,
+            }}
+            onClick={() => {
+              openModal()
+              setIsOpenToolTip(!isOpenToolTip)
+            }}
+          >
+            <TipsAndUpdatesIcon sx={{ fontSize: '2rem' }} />
+          </IconButton>
+        </Tooltip>
+      )}
     </Box>
   )
 }
