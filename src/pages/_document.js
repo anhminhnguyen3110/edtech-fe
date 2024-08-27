@@ -24,7 +24,10 @@ export default function Document() {
           name="description"
           content="EdTech-Assistant is your learning companion, designed to enhance your educational experience."
         />
-        <meta name="keywords" content="EdTech, Education, Assistant, Learning, Mobile App" />
+        <meta
+          name="keywords"
+          content="EdTech Assistant, Classroom technology, Student learning enhancement, Interactive lesson generation, Custom quiz creation, Educational games, AI-powered education tools, Common key issue extraction, Educational chat app, Online quiz hosting, Large language model"
+        />
         <meta name="author" content="EdTech Assistant" />
 
         {/* Google font */}

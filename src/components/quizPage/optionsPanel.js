@@ -55,6 +55,8 @@ const OptionsPanel = ({ question, onUpdate }) => {
         onUpdate({ ...question, image: e.target.result })
       }
       reader.readAsDataURL(file)
+      // Reset the file input value
+      event.target.value = ''
     }
   }
 
