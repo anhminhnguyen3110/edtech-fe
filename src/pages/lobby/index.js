@@ -62,6 +62,12 @@ const Lobby = () => {
       }
     }
 
+    socket.off('disconnect')
+    socket.on('disconnect', () => {
+      console.log('Socket disconnected')
+      setGameStatus({ status: 'DISCONNECTED', message: 'Game get disconnected', gameCode: null })
+    })
+
     const updatePlayers = (data) => {
       console.log('Players in lobby:', data)
       setPlayers(data.players)
