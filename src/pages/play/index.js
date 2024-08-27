@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useCallback, useState } from 'react'
 import { Box, Typography, Button } from '@mui/material'
 import { BLUE } from '@/theme/palette'
@@ -30,6 +31,12 @@ const Play = () => {
       setHasGame(false)
     } else {
       if (gameStatusStorage === 'STARTED') {
+        if (socket) {
+          socket.off('disconnect')
+          socket.on('disconnect', () => {
+            setHostDisconnected(true)
+          })
+        }
         setGameState('WAITING')
       }
       setGameStatus(true)
@@ -78,8 +85,6 @@ const Play = () => {
     }
 
     console.log('Adding event listeners')
-    socket.off('disconnect')
-    socket.on('disconnect', handleHostDisconnected)
     socket.on('HOST_DISCONNECTED', handleHostDisconnected)
     socket.on('GAME_NOT_FOUND', handleGameNotFound)
     socket.on('PLAYER_NOT_FOUND', handlePlayerNotFound)

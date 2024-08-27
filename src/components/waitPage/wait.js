@@ -34,6 +34,10 @@ const Wait = () => {
       setHostDisconnected(true)
     }
 
+    socket.off('disconnect')
+    socket.on('disconnect', () => {
+      setHostDisconnected(true)
+    })
     socket.on('HOST_DISCONNECTED', handleHostDisconnected)
 
     socket.on('GAME_HAS_STARTED', (data) => {
