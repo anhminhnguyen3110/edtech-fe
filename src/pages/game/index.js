@@ -26,8 +26,9 @@ const Game = () => {
   const [playersAnswered, setPlayersAnswered] = useState(0)
   const [gameScoreboard, setGameScoreboard] = useState(null)
   const [finalResult, setFinalResult] = useState(null)
+  const [gameStatistics, setGameStatistics] = useState(null)
   const [error, setError] = useState(null)
-  const delayTime = 6
+  const delayTime = 7
 
   const hasInitializedRef = useRef(false) // Add a ref to track initialization
 
@@ -37,6 +38,9 @@ const Game = () => {
 
   const handleGameTermination = () => {
     console.log('gameState', gameState)
+    if (socket) {
+      socket.off('disconnect')
+    }
     resetSocket()
     const gameId = sessionStorage.getItem('gameId')
     if (gameState !== 'END') {
@@ -131,9 +135,9 @@ const Game = () => {
           setError(true)
         })
 
-        socket.on('QUESTION_HOST_RESULT', (data) => {
-          console.log('QUESTION_HOST_RESULT', data)
-        })
+        // socket.on('QUESTION_HOST_RESULT', (data) => {
+        //   console.log('QUESTION_HOST_RESULT', data)
+        // })
 
         socket.on('QUESTION_HOST_NEXT', (data) => {
           console.log('QUESTION_HOST_NEXT', data)
@@ -168,18 +172,17 @@ const Game = () => {
   }
 
   const handleEndQuestion = () => {
-    console.log('Next Question')
+    console.log('End Question')
     socket.emit('QUESTION_END', {
       gameCode: sessionStorage.getItem('gameCode'),
       questionIndexInQuiz: questionIndex,
     })
-    socket.on('QUIZ_HOST_RANK', (data) => {
-      console.log('QUIZ_HOST_RANK', data)
-      setGameScoreboard(data)
-      console.log('Scoreboard', data)
-      setGameState('SCOREBOARD')
-      setPlayersAnswered(0)
-    })
+  }
+
+  const handleMovetoScoreboard = () => {
+    console.log('Move to Scoreboard')
+    setGameState('SCOREBOARD')
+    setPlayersAnswered(0)
   }
 
   const handleNextQuestion = () => {
@@ -187,6 +190,10 @@ const Game = () => {
     setQuestionIndex((prev) => prev + 1)
     setPlayersAnswered(0)
     console.log('Question Index', questionIndex)
+    socket.emit('PROCEED_TO_NEXT_QUESTION', {
+      gameCode: sessionStorage.getItem('gameCode'),
+      questionIndexInQuiz: questionIndex + 1,
+    })
     if (questionIndex === quiz.questions.length - 1) {
       socket.emit('HOST_GET_QUESTION', {
         gameCode: sessionStorage.getItem('gameCode'),
@@ -227,9 +234,17 @@ const Game = () => {
     })
     console.log('Question Index', questionIndex)
     if (questionIndex === 0) {
+      socket.on('QUESTION_HOST_RESULT', (data) => {
+        setGameStatistics(data.questionStatistic)
+      })
       socket.on('UPDATE_PLAYERS_ANSWERED', (data) => {
         console.log('UPDATE_PLAYERS_ANSWERED', data)
         setPlayersAnswered((prev) => prev + 1) // Increment playersAnswered
+      })
+      socket.on('QUIZ_HOST_RANK', (data) => {
+        console.log('QUIZ_HOST_RANK', data)
+        setGameScoreboard(data)
+        console.log('Scoreboard', data)
       })
     }
   }
@@ -283,6 +298,7 @@ const Game = () => {
           question={quiz.questions[questionIndex]}
           startGetQuestions={handleSendQuestion}
           moveToQuestion={handleSwitchPlaying}
+          delayTime={delayTime}
         />
       )}
       {gameState === 'PLAYING' && (
@@ -290,6 +306,8 @@ const Game = () => {
           question={quiz.questions[questionIndex]}
           playersAnswered={playersAnswered}
           handleEndQuestion={handleEndQuestion}
+          handleMovetoScoreboard={handleMovetoScoreboard}
+          questionStatistics={gameStatistics}
         />
       )}
       {gameState === 'SCOREBOARD' && gameScoreboard !== null && (

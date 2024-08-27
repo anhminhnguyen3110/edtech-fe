@@ -1,11 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Box, Button, Typography, Grid, useTheme, useMediaQuery } from '@mui/material'
-import CountdownTimer from '@/components/countDown/countDownTimer'
+import CountdownTimer from '@/components/gamePage/countDownStop'
 import { BACKGROUND_ANSWER, TRUE_FALSE_ANSWER, BLUE } from '@/theme/palette'
 import CustomCheckIcon from '@/components/quizPage/customCheckIcon'
 import ThickerClearOutlinedIcon from '@/components/icons/thickerClearOutlinedIcon'
 import AutoShrinkText from './autoShrinkText'
-const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
+import SimpleBarChart from '@/components/gamePage/simpleBarChart'
+const Playing = ({
+  question,
+  handleEndQuestion,
+  playersAnswered,
+  handleMovetoScoreboard,
+  questionStatistics,
+}) => {
   const { choices, questionText, timeLimitInSecond, imageFileUrl, questionType, correctAnswers } =
     question
   const [timeCounter, setTimeCounter] = useState(timeLimitInSecond)
@@ -14,32 +21,41 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
   const [buttonText, setButtonText] = useState('Skip')
   const theme = useTheme()
   const smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
-  const calculateFontSize = (text) => {
-    const baseSize = isTrueFalse ? 2.7 : 2.2
-    const minSize = 1.3
-    const maxLength = 30
+  const stopTimerRef = useRef(null)
 
-    if (text.length > maxLength) {
-      const reduction = (text.length - maxLength) / 20
-      return Math.max(baseSize - reduction, minSize)
+  const handleStopTimer = () => {
+    if (stopTimerRef.current) {
+      stopTimerRef.current() // Call the stop function to stop the countdown
     }
-    return baseSize
   }
 
   const handleSkipOrNext = () => {
     if (buttonText === 'Skip') {
+      handleEndQuestion()
       setShowCorrectAnswer(true)
       setTimeCounter(0)
       setButtonText('Next')
+      handleStopTimer()
     } else {
       // Logic for "Next" will be handled here later
-      handleEndQuestion()
+      // handleEndQuestion()
+      handleMovetoScoreboard()
     }
   }
+  useEffect(() => {
+    console.log('question statistics changed')
+    console.log('questionStatistics: ', questionStatistics)
+  }, [questionStatistics])
 
   const handleTimerComplete = () => {
+    handleEndQuestion()
     setShowCorrectAnswer(true)
     setButtonText('Next')
+  }
+  let maxCount = 0
+  if (questionStatistics) {
+    maxCount = Math.max(...choices.map((choice) => questionStatistics.answerCounts[choice] || 0))
+    console.log('Max count: ', maxCount)
   }
 
   return (
@@ -132,21 +148,30 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
               display: 'flex',
               justifyContent: 'center',
               mb: { xs: 2, sm: 0 }, // Margin bottom on small screens
+              height: '300px',
             }}
           >
-            {imageFileUrl && (
-              <Box
-                component="img"
-                src={imageFileUrl}
-                alt="Question"
-                sx={{
-                  width: '100%',
-                  height: 'auto',
-                  maxHeight: { xs: '30vh', sm: '40vh' }, // Adjust height based on screen size
-                  objectFit: 'contain',
-                }}
-              />
-            )}
+            {showCorrectAnswer
+              ? questionStatistics && (
+                  <SimpleBarChart
+                    choices={choices}
+                    questionStatistics={questionStatistics}
+                    maxCount={maxCount}
+                  />
+                )
+              : imageFileUrl && (
+                  <Box
+                    component="img"
+                    src={imageFileUrl}
+                    alt="Question"
+                    sx={{
+                      width: '100%',
+                      height: 'auto',
+                      maxHeight: { xs: '30vh', sm: '40vh' },
+                      objectFit: 'contain',
+                    }}
+                  />
+                )}
           </Box>
 
           {/* Countdown Timer - Right */}
@@ -161,6 +186,7 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
               totalTime={timeCounter}
               onComplete={handleTimerComplete}
               width={smallScreen ? 80 : 120} // Reduce width for small screens
+              stopCountdown={(stopFunction) => (stopTimerRef.current = stopFunction)}
             />
           </Box>
         </Box>
@@ -196,6 +222,17 @@ const Playing = ({ question, handleEndQuestion, playersAnswered }) => {
                 }}
               >
                 <AutoShrinkText text={choice} />
+                <Box sx={{ width: '10%', display: 'flex', justifyContent: 'center' }}>
+                  {showCorrectAnswer ? (
+                    correctAnswers.includes(choice) ? (
+                      <CustomCheckIcon sx={{ fontSize: { sm: '2rem', md: '3rem', lg: '4rem' } }} />
+                    ) : (
+                      <ThickerClearOutlinedIcon
+                        sx={{ fontSize: { sm: '2rem', md: '3rem', lg: '4rem' } }}
+                      />
+                    )
+                  ) : null}
+                </Box>
               </Button>
             </Grid>
           ))}
