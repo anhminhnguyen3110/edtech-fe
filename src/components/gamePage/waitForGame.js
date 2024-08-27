@@ -16,10 +16,15 @@ const parseQuestionType = (type) => {
   }
 }
 
-const WaitForGame = ({ question = defaultQuestion, startGetQuestions, moveToQuestion }) => {
+const WaitForGame = ({
+  question = defaultQuestion,
+  startGetQuestions,
+  moveToQuestion,
+  delayTime = 7,
+}) => {
   const { choices, questionText, timeLimitInSecond, imageFileUrl, questionType, correctAnswers } =
     question
-  const totalTime = 5
+  const totalTime = delayTime - 1
 
   const counter = useRef(0)
 

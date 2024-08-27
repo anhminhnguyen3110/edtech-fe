@@ -252,6 +252,7 @@ const SuggestionModal = ({ open, handleClose, sendSuggestion }) => {
                       key={index}
                       button
                       onClick={() => handleSendSuggestions(item.question, item.title, item.url)}
+                      sx={{ overflowX: 'hidden' }}
                     >
                       <ListItemText
                         primary={item.question}
