@@ -7,7 +7,6 @@ import AutoShrinkText from './autoShrinkText'
 const QuestionPreview = ({ question, anchorEl, open, onClose }) => {
   const popoverWidth = 450
   const popoverHeight = 300
-  console.log(question)
 
   return (
     <Popover
