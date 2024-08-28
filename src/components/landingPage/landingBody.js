@@ -5,19 +5,19 @@ import welcomeImage from '../../../public/edtech-getty-removebg.webp' // Adjust 
 
 const services = [
   {
-    title: 'Advanced Error Detection in Student Work',
+    title: 'Automatated Error Detection in Student Works',
     description:
       'Employ Large Language Models (LLMs) to automatically identify and correct critical errors in student submissions, ensuring precise, effective feedback that drives improved learning outcomes.',
     imageUrl: '/issue.png', // Placeholder for image
   },
   {
-    title: 'Dynamic Lesson Creation',
+    title: 'Dynamic Lesson Generation',
     description:
       "Empower educators with LLM-driven technology that generates Python code and automated testing tools, enabling the creation of highly engaging, personalised lessons suitable to all student's unique learning journey.",
     imageUrl: '/lesson.png', // Placeholder for image
   },
   {
-    title: 'Custom Online Quizzes and Interactive Game Sessions',
+    title: 'Custom Quizzes & Interactive Game',
     description:
       'Enhance learning engagement with LLM-powered, self-hosted quizzes and interactive games. Our solution delivers appropriate educational experiences that captivate students and reinforce key concepts. Most importantly, it is funs!',
     imageUrl: '/quiz.png', // Placeholder for image
