@@ -76,8 +76,8 @@ export const QuizPage = () => {
 
     const choices = ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
     const correctAnswers = ['Answer 1']
-    formData.append('choices', choices)
-    formData.append('correctAnswers', correctAnswers)
+    formData.append('choices', choices.join('\0'))
+    formData.append('correctAnswers', correctAnswers.join('\0'))
 
     try {
       const response = await api.post('/questions', formData, { authRequired: true })

@@ -95,8 +95,9 @@ const QuizCreator = () => {
     formData.append('questionType', 'MULTIPLE_CHOICE')
     formData.append('timeLimitInSecond', 20)
 
-    const choices = ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4']
-    const correctAnswers = ['Answer 1']
+    const choices = ['Answer 1', 'Answer 2', 'Answer 3', 'Answer 4'].join('\0')
+    const correctAnswers = ['Answer 1'].join('\0')
+
     formData.append('choices', choices)
     formData.append('correctAnswers', correctAnswers)
 
@@ -171,12 +172,12 @@ const QuizCreator = () => {
     formData.append('quizId', id)
     formData.append('questionText', selectedQuestion.text)
     formData.append('questionType', selectedQuestion.type.toUpperCase())
-    formData.append('choices', selectedQuestion.answers)
+    formData.append('choices', selectedQuestion.answers.join('\0'))
     // formData.append('correctAnswers', [selectedQuestion.answers[selectedQuestion.correctAnswer]]);
     const correctAnswers = selectedQuestion.correctAnswer.map(
       (index) => selectedQuestion.answers[index]
     )
-    formData.append('correctAnswers', correctAnswers)
+    formData.append('correctAnswers', correctAnswers.join('\0'))
     // selectedQuestion.correctAnswer.forEach(index => formData.append('correctAnswers', selectedQuestion.answers[index]));
     formData.append('timeLimitInSecond', selectedQuestion.timing)
 
