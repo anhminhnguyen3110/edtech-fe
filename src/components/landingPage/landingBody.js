@@ -5,25 +5,27 @@ import welcomeImage from '../../../public/edtech-getty-removebg.webp' // Adjust 
 
 const services = [
   {
-    title: 'Common Key Issue Extraction',
-    description: 'Identifies important common areas in student work that need attention.',
+    title: 'Advanced Error Detection in Student Work',
+    description:
+      'Employ Large Language Models (LLMs) to automatically identify and correct critical errors in student submissions, ensuring precise, effective feedback that drives improved learning outcomes.',
     imageUrl: '/issue.png', // Placeholder for image
   },
   {
-    title: 'Interactive Lesson Generation',
-    description: 'Creates engaging lessons based on identified student needs.',
+    title: 'Dynamic Lesson Creation',
+    description:
+      "Empower educators with LLM-driven technology that generates Python code and automated testing tools, enabling the creation of highly engaging, personalised lessons suitable to all student's unique learning journey.",
     imageUrl: '/lesson.png', // Placeholder for image
   },
   {
-    title: 'Quiz and Assessment Tools',
+    title: 'Custom Online Quizzes and Interactive Game Sessions',
     description:
-      'Generates custom quizzes, offers online quiz hosting, and provides interactive educational games.',
+      'Enhance learning engagement with LLM-powered, self-hosted quizzes and interactive games. Our solution delivers appropriate educational experiences that captivate students and reinforce key concepts. Most importantly, it is funs!',
     imageUrl: '/quiz.png', // Placeholder for image
   },
   {
-    title: 'Educational Chat App',
+    title: 'Intelligent Educational Chat Solution',
     description:
-      'Powered by large language models with internet access, this feature offers comprehensive assistance on educational topics while also providing knowledgeable support across various other domains.',
+      'Elevate teachers with a robust LLM-driven chat application designed specifically for the educational domain. Featuring a Retrieval-Augmented Generation (RAG) system and integrated Google web search capabilities, this tool provides comprehensive, on-demand support across both educational content and general knowledge topics.',
     imageUrl: '/chat.png', // Placeholder for image
   },
 ]
@@ -113,11 +115,11 @@ const LandingBody = () => {
             component="h2"
             align="center"
             gutterBottom
-            sx={{ fontWeight: 600, marginBottom: '2rem' }}
+            sx={{ fontWeight: 600, marginBottom: '2rem', fontSize: '3.5rem' }}
           >
             Services
           </Typography>
-          <Grid container spacing={4}>
+          <Grid container spacing={1.5}>
             {services.map((service, index) => (
               <Grid item xs={12} md={6} key={index}>
                 <Card sx={{ textAlign: 'center', padding: '2rem', boxShadow: 'none' }}>
@@ -161,7 +163,7 @@ const LandingBody = () => {
                     </Typography>
                     <Typography
                       variant="body1"
-                      sx={{ color: 'text.secondary', fontSize: '1.25rem' }}
+                      sx={{ color: 'text.secondary', fontSize: '1.25rem', textAlign: 'justify' }}
                     >
                       {service.description}
                     </Typography>
