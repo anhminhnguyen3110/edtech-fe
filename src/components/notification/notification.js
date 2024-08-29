@@ -6,7 +6,7 @@ import api from '@/lib/api'
 import NotificationList from './notificationList'
 import NotificationButton from './notificationButton'
 import { useAuth } from '@/context/authContext'
-
+import NotificationSnackbar from '../snackBar/notificationSnackbar'
 const Notification = () => {
   const { accessToken } = useAuth()
   const [notifications, setNotifications] = useState([])
@@ -18,6 +18,16 @@ const Notification = () => {
   const socket = useRef(null)
   const [loading, setLoading] = useState(false)
   const [unreadCount, setUnreadCount] = useState(0)
+  const [snackbarNotifOpen, setSnackbarNotifOpen] = useState(false)
+  const [snackbarNotif, setSnackbarNotif] = useState('')
+  const [snackbarNotifSeverity, setSnackbarNotifSeverity] = useState('success')
+
+  const handleCloseNotifSnackbar = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+    setSnackbarNotifOpen(false)
+  }
 
   const handleNotificationClick = (event) => {
     setAnchorEl(event.currentTarget)
@@ -128,6 +138,20 @@ const Notification = () => {
       'CREATE_GAME',
     ]
 
+    const successEventTypes = [
+      'EXTRACT_ISSUE_SUCCESS',
+      'GENERATE_LESSON_SUCCESS',
+      'GENERATE_QUIZ_SUCCESS',
+      'ACCOUNT_ACTIVATION_SUCCESS',
+      'CREATE_GAME',
+    ]
+
+    const failedEventTypes = [
+      'EXTRACT_ISSUE_FAILED',
+      'GENERATE_LESSON_FAILED',
+      'GENERATE_QUIZ_FAILED',
+    ]
+
     eventTypes.forEach((eventType) => {
       socket.current.on(eventType, (data) => {
         console.log(`Received event: ${eventType}`, data)
@@ -135,6 +159,13 @@ const Notification = () => {
         setTimeout(() => {
           fetchLatestNotification()
         }, 600)
+        setSnackbarNotif(data.message)
+        if (failedEventTypes.includes(eventType)) {
+          setSnackbarNotifSeverity('error')
+        } else {
+          setSnackbarNotifSeverity('success')
+        }
+        setSnackbarNotifOpen(true)
       })
     })
 
@@ -180,6 +211,12 @@ const Notification = () => {
 
   return (
     <>
+      <NotificationSnackbar
+        open={snackbarNotifOpen}
+        message={snackbarNotif}
+        type={snackbarNotifSeverity}
+        onClose={handleCloseNotifSnackbar}
+      />
       <NotificationButton unreadCount={unreadCount} onClick={handleNotificationClick} />
       <Popover
         id={id}

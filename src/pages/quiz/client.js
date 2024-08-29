@@ -124,7 +124,7 @@ export const QuizPage = () => {
       if (response.status === 201) {
         const message = response.data.message
         setErrorMessage(message)
-        setSeverity('success')
+        setSeverity('info')
         setOpenSnackbar(true)
       }
     } catch (error) {
@@ -215,8 +215,8 @@ export const QuizPage = () => {
       socket.current.on(eventType, (data) => {
         console.log(`Received event type in page: ${eventType}`, data)
         console.log(data.message)
-        setErrorMessage(data.message)
-        setSeverity('success')
+        // setErrorMessage(data.message)
+        // setSeverity('success')
         setOpenSnackbar(true)
         fetchData()
         setCurrentPage(1)
