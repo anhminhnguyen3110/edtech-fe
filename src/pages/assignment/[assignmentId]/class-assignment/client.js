@@ -107,7 +107,7 @@ const ClassAssignmentDetail = () => {
       if (response.status === 201) {
         const message = response.data.message
         setSnackbarNotifMessage(message)
-        setSnackbarNotifSeverity('success')
+        setSnackbarNotifSeverity('info')
         setSnackbarNotifOpen(true)
       }
     } catch (error) {
@@ -134,7 +134,7 @@ const ClassAssignmentDetail = () => {
       if (response.status === 200) {
         const message = response.data.message
         setSnackbarNotifMessage(message)
-        setSnackbarNotifSeverity('success')
+        setSnackbarNotifSeverity('info')
         setSnackbarNotifOpen(true)
       }
     } catch (error) {
@@ -158,7 +158,7 @@ const ClassAssignmentDetail = () => {
         const extractIssue = response.data
         console.log('Extract Issue:', extractIssue)
         setSnackbarNotifMessage('Request successfully sent. Please wait for the result.')
-        setSnackbarNotifSeverity('success')
+        setSnackbarNotifSeverity('info')
         setSnackbarNotifOpen(true)
       }
     } catch (error) {
@@ -229,21 +229,12 @@ const ClassAssignmentDetail = () => {
       'GENERATE_QUIZ_SUCCESS',
     ]
 
-    const failedEventTypes = [
-      'EXTRACT_ISSUE_FAILED',
-      'GENERATE_LESSON_FAILED',
-      'GENERATE_QUIZ_FAILED',
-    ]
-
     successEventTypes.forEach((eventType) => {
       socket.current.on(eventType, (data) => {
         if (data.classAssignmentId !== parseInt(classAssignmentId)) {
           return
         }
         console.log(`Received event: ${eventType}`, data)
-        setSnackbarNotifMessage(data.message)
-        setSnackbarNotifSeverity('success')
-        setSnackbarNotifOpen(true)
         if (eventType === 'GENERATE_LESSON_SUCCESS' || eventType === 'EXTRACT_ISSUE_SUCCESS') {
           fetchClassAssessment(classAssignmentId)
         }
@@ -254,20 +245,8 @@ const ClassAssignmentDetail = () => {
       })
     })
 
-    failedEventTypes.forEach((eventType) => {
-      socket.current.on(eventType, (data) => {
-        console.log(`Received event: ${eventType}`, data)
-        setSnackbarNotifMessage(data.message)
-        setSnackbarNotifSeverity('fail')
-        setSnackbarNotifOpen(true)
-      })
-    })
-
     return () => {
       successEventTypes.forEach((eventType) => {
-        socket.current.off(eventType)
-      })
-      failedEventTypes.forEach((eventType) => {
         socket.current.off(eventType)
       })
       socket.current.disconnect()
