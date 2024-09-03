@@ -22,8 +22,10 @@ import QuizList from '@/components/classAssignmentPage/quizList'
 import NotificationSnackbar from '@/components/snackBar/notificationSnackbar'
 import GenerateQuizModal from '@/components/classAssignmentPage/generateQuizModal'
 import GenerateLessonModal from '@/components/classAssignmentPage/generateLessonModal'
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark'
 import { useAuth } from '@/context/authContext'
 import { io } from 'socket.io-client'
+import FeatureModal from '@/components/classAssignmentPage/FeatureModal'
 
 const ClassAssignmentDetail = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false)
@@ -43,6 +45,15 @@ const ClassAssignmentDetail = () => {
   const { assignmentId, classAssignmentId } = router.query
   const { accessToken } = useAuth()
   const socket = useRef(null)
+  const [isOpenFeatureModal, setIsOpenFeatureModal] = useState(false)
+
+  const handleOpenFeatureModal = () => {
+    setIsOpenFeatureModal(true)
+  }
+
+  const handleCloseFeatureModal = () => {
+    setIsOpenFeatureModal(false)
+  }
 
   const handleBackClick = () => {
     router.push(`/assignment/${assignmentId}`)
@@ -500,6 +511,23 @@ const ClassAssignmentDetail = () => {
         type={snackbarNotifSeverity}
         onClose={handleCloseNotifSnackbar}
       />
+      <FeatureModal open={isOpenFeatureModal} handleClose={handleCloseFeatureModal} />
+      <IconButton
+        color="primary"
+        sx={{
+          position: 'fixed',
+          bottom: 32,
+          right: 32,
+          bgcolor: 'background.paper',
+          boxShadow: 3,
+          padding: 1.4,
+        }}
+        onClick={() => {
+          handleOpenFeatureModal()
+        }}
+      >
+        <QuestionMarkIcon sx={{ fontSize: '2rem' }} />
+      </IconButton>
     </Box>
   )
 }

@@ -11,6 +11,7 @@ import {
   useTheme,
   Avatar,
   Divider,
+  Link,
 } from '@mui/material'
 import { styled } from '@mui/system'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
@@ -91,7 +92,12 @@ const AppBarMain = ({ open, toggleDrawer, logout }) => {
           {!open ? <ToggleIcon src="/toggle-icon.png" alt="Toggle" /> : <ArrowBackIcon />}
         </IconButton>
         <Typography variant="h6" noWrap>
-          EdTech Assistant
+          <Link
+            href="/assistant"
+            style={{ textDecoration: 'none', cursor: 'pointer', color: 'inherit' }}
+          >
+            EdTech Assistant
+          </Link>
         </Typography>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center' }}>
           <Notification />
