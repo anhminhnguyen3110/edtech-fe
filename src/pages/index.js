@@ -2,6 +2,8 @@ import NavBarLanding from '@/components/navbar/navBarLanding'
 import LandingBody from '@/components/landingPage/landingBody'
 import Footer from '@/components/footer/footer'
 import Page from '@/components/page'
+import withNonAuth from '@/hoc/withNonAuth'
+
 const HomePage = () => (
   <div className="app">
     <Page title="EdTech Assistant" description="EdTech Assistant" />
@@ -10,4 +12,4 @@ const HomePage = () => (
   </div>
 )
 
-export default HomePage
+export default withNonAuth(HomePage)
