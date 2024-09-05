@@ -521,6 +521,9 @@ const ClassAssignmentDetail = () => {
           bgcolor: 'background.paper',
           boxShadow: 3,
           padding: 1.4,
+          '&:hover': {
+            bgcolor: 'background.paper', // Keeps the background color the same on hover
+          },
         }}
         onClick={() => {
           handleOpenFeatureModal()

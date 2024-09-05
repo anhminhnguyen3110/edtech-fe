@@ -84,6 +84,7 @@ const LandingBody = () => {
                 sx={{
                   fontSize: { xs: '1rem', md: '1.25rem', lg: '1.5rem' },
                   fontWeight: 200,
+                  textAlign: 'justify',
                 }}
               >
                 Revolutionise your classroom with EdTech Assistant, the all-in-one platform designed
@@ -155,7 +156,7 @@ const LandingBody = () => {
                       component="h3"
                       gutterBottom
                       sx={{
-                        fontSize: '1.5rem', // Adjust the size as needed
+                        fontSize: '1.2rem', // Adjust the size as needed
                         fontWeight: 'bold', // Make the text bold
                       }}
                     >
@@ -163,7 +164,7 @@ const LandingBody = () => {
                     </Typography>
                     <Typography
                       variant="body1"
-                      sx={{ color: 'text.secondary', fontSize: '1.25rem', textAlign: 'justify' }}
+                      sx={{ color: 'text.secondary', fontSize: '1.15rem', textAlign: 'justify' }}
                     >
                       {service.description}
                     </Typography>
