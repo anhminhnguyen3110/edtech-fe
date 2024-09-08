@@ -159,6 +159,7 @@ const Notification = () => {
         setTimeout(() => {
           fetchLatestNotification()
         }, 600)
+        setUnreadCount((prevUnreadCount) => prevUnreadCount + 1)
         setSnackbarNotif(data.message)
         if (failedEventTypes.includes(eventType)) {
           setSnackbarNotifSeverity('error')
