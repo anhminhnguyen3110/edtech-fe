@@ -22,13 +22,12 @@ const promptSuggestions = [
 ]
 
 const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
-  const [prompt, setPrompt] = useState('genereate a lesson to improve student issues')
+  const prompt = 'genereate a lesson to improve student issues'
   const [name, setName] = useState('')
   const [error, setError] = useState('')
 
   const onClose = () => {
     setError('')
-    setPrompt('')
     setName('')
     handleClose()
   }
@@ -41,14 +40,6 @@ const GenerateLessonModal = ({ open, handleClose, generateLesson }) => {
     setError('')
     generateLesson(name, prompt)
     onClose()
-  }
-
-  const handlePromptChange = (event) => {
-    setPrompt(event.target.value)
-  }
-
-  const handleSuggestionSelect = (suggestion) => {
-    setPrompt(`Generate a lesson to ${suggestion.toLowerCase()}`)
   }
 
   return (
