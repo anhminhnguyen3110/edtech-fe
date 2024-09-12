@@ -46,31 +46,7 @@ const Game = () => {
     if (gameState !== 'END') {
       console.log(gameState)
       console.log('Game termination triggered successfully')
-      api
-        .patch(
-          `/games/${sessionStorage.getItem('gameId')}`,
-          { gameStatus: 'TERMINATED' },
-          { authRequired: true }
-        )
-        .then(() => {
-          console.log('Game terminated successfully')
-        })
-        .catch((e) => {
-          console.log('Error terminating game:', e)
-        })
     } else {
-      api
-        .patch(
-          `/games/${sessionStorage.getItem('gameId')}`,
-          { gameStatus: 'COMPLETE' },
-          { authRequired: true }
-        )
-        .then(() => {
-          console.log('Game terminated successfully')
-        })
-        .catch((e) => {
-          console.log('Error terminating game:', e)
-        })
     }
     sessionStorage.clear()
   }
@@ -203,18 +179,6 @@ const Game = () => {
       socket.on('GAME_END', (data) => {
         console.log('GAME_END', data)
         setGameState('END')
-        api
-          .patch(
-            `/games/${sessionStorage.getItem('gameId')}`,
-            { gameStatus: 'COMPLETE' },
-            { authRequired: true }
-          )
-          .then(() => {
-            console.log('Game terminated successfully')
-          })
-          .catch((e) => {
-            console.log('Error terminating game:', e)
-          })
       })
     } else {
       setGameState('READY')
