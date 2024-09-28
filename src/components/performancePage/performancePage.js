@@ -40,19 +40,22 @@ const PlayerGameAnalysis = () => {
     setLoading(true)
 
     try {
+      const params = {
+        limit: itemsPerPage,
+        page,
+        sortBy: 'createdAt',
+        sortDirection: 'DESC',
+        ...(searchTerm ? { searchPlayerName: searchTerm } : {}), // Add conditionally
+      }
+
       const response = await api.get('/games/game-history/performance/players', {
-        params: {
-          limit: itemsPerPage,
-          page,
-          sortBy: 'createdAt',
-          sortDirection: 'DESC',
-          searchPlayerName: searchTerm,
-        },
+        params,
         authRequired: true,
       })
 
       const newPlayers = response.data.items
       newPlayers.forEach((player) => (player.selectedGames = []))
+      console.log('newPlayers:', response)
 
       setPlayers((prevPlayers) => {
         const uniquePlayers = newPlayers.filter(
