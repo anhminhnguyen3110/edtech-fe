@@ -45,6 +45,7 @@ const PlayerGameAnalysis = () => {
         page,
         ...(searchTerm ? { searchPlayerName: searchTerm } : {}), // Add conditionally
       }
+      console.log('params:', params)
       const response = await api.get('/games/game-history/performance/players', {
         params,
         authRequired: true,
@@ -52,7 +53,7 @@ const PlayerGameAnalysis = () => {
 
       const newPlayers = response.data.items
       newPlayers.forEach((player) => (player.selectedGames = []))
-
+      console.log('newPlayers:', response)
       setPlayers((prevPlayers) => {
         const uniquePlayers = newPlayers.filter(
           (newPlayer) => !prevPlayers.some((player) => player.nickname === newPlayer.nickname)

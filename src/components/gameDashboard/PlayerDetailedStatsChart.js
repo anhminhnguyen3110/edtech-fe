@@ -18,15 +18,27 @@ const PlayerDetailedStatsChart = ({ players }) => {
     correct: player.numberOfCorrectAnswers,
     wrong: player.numberOfWrongAnswers,
     unanswered: player.numberOfUnansweredQuestions,
+    total:
+      player.numberOfCorrectAnswers +
+      player.numberOfWrongAnswers +
+      player.numberOfUnansweredQuestions,
   }))
 
+  // Find the maximum total answers for all players
+  const maxTotal = Math.max(...data.map((player) => player.total))
+
   // Adjust the chart height to ensure it renders properly with one player
-  const chartHeight = players.length > 1 ? players.length * 30 + 40 : 150 // Minimum height for one player
+  const chartHeight =
+    players.length === 1
+      ? 150
+      : players.length >= 2 && players.length <= 5
+      ? players.length * 60 + 120
+      : players.length * 30 + 40
 
   return (
     <ResponsiveContainer width="100%" height={chartHeight}>
       <BarChart data={data} layout="vertical" margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-        <XAxis type="number" />
+        <XAxis type="number" domain={[0, maxTotal]} /> {/* Set the domain with maxTotal */}
         <YAxis
           type="category"
           dataKey="name" // Use 'name' key to match the data structure

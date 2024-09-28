@@ -22,7 +22,13 @@ const PlayerRankingChart = ({ players }) => {
     return <NaNDisplay />
   }
   const sortedPlayers = [...players].sort((a, b) => b.finalScore - a.finalScore)
-  const chartHeight = players.length > 1 ? players.length * 30 + 40 : 150 // Minimum height for one player
+  // Adjust the chart height to ensure it renders properly with one player
+  const chartHeight =
+    players.length === 1
+      ? 150
+      : players.length >= 2 && players.length <= 5
+      ? players.length * 60 + 120
+      : players.length * 30 + 40
 
   return (
     <ResponsiveContainer width="95%" height={chartHeight}>
