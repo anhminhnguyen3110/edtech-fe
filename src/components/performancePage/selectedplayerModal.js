@@ -51,13 +51,15 @@ const SelectedPlayersModal = ({ onAnalyze }) => {
               <Typography variant="h5" sx={{ fontWeight: 'bold', color: BLUE.main }}>
                 Selected Players ({selectedPlayers.length})
               </Typography>
-              <Button
-                variant="contained"
-                sx={{ backgroundColor: BLUE.main, ':hover': { backgroundColor: BLUE.dark } }}
-                onClick={onAnalyze}
-              >
-                Analyse
-              </Button>
+              {selectedPlayers.length > 0 && (
+                <Button
+                  variant="contained"
+                  sx={{ backgroundColor: BLUE.main, ':hover': { backgroundColor: BLUE.dark } }}
+                  onClick={onAnalyze}
+                >
+                  Analyse
+                </Button>
+              )}
             </Box>
 
             {/* Players Section */}
