@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListItem, ListItemIcon, ListItemText, Box } from '@mui/material'
+import { ListItem, ListItemIcon, ListItemText, Box, Link } from '@mui/material'
 import { useRouter } from 'next/router'
 import { useTheme } from '@mui/material/styles'
 import { BLUE } from '../../theme/palette'
@@ -52,12 +52,14 @@ const NavItem = ({ item, open }) => {
   }
 
   return (
-    <ListItem onClick={() => router.push(item.path)} sx={listItemStyle}>
-      <ListItemIcon sx={iconStyle}>{item.icon}</ListItemIcon>
-      <Box sx={{ overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
-        <ListItemText primary={item.name} sx={textStyle} />
-      </Box>
-    </ListItem>
+    <Link href={item.path} sx={{ textDecoration: 'none' }}>
+      <ListItem sx={listItemStyle}>
+        <ListItemIcon sx={iconStyle}>{item.icon}</ListItemIcon>
+        <Box sx={{ overflow: 'hidden', display: 'flex', alignItems: 'center' }}>
+          <ListItemText primary={item.name} sx={textStyle} />
+        </Box>
+      </ListItem>
+    </Link>
   )
 }
 

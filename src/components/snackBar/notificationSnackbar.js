@@ -7,13 +7,11 @@ import { green, red, blue } from '@mui/material/colors' // Import blue from the 
 import { BLUE } from '@/theme/palette'
 
 const NotificationSnackbar = ({ open, message, type, onClose }) => {
-  console.log('NotificationSnackbar open:', message)
   // Function to get the current date and time
   const getCurrentDateTime = () => {
     const now = new Date()
     return now.toLocaleString()
   }
-
   useEffect(() => {
     console.log('NotificationSnackbar open:', open)
   }, [open, message, type])

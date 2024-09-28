@@ -9,21 +9,21 @@ const Ready = ({ timeQuestionStart, moveToAnswer }) => {
     // Convert timeQuestionStart to the user's local time
     if (!timeQuestionStart) return
     const targetTime = new Date(timeQuestionStart).getTime()
-    const updatedTargetTime = targetTime - 2000
+    const updatedTargetTime = targetTime
 
     // Update the time left every 100 milliseconds for higher precision
     const interval = setInterval(() => {
       const now = new Date().getTime()
       const timeRemaining = updatedTargetTime - now
 
-      if (timeRemaining <= 0) {
+      if (timeRemaining <= 50) {
         clearInterval(interval)
         setTimeLeft(0)
         moveToAnswer() // Trigger the function when time is up
       } else {
         setTimeLeft(timeRemaining)
       }
-    }, 100) // Checking every 100 milliseconds for more precision
+    }, 50) // Checking every 100 milliseconds for more precision
 
     // Cleanup the interval on component unmount
     return () => clearInterval(interval)

@@ -136,6 +136,9 @@ export const QuizPage = () => {
   }
 
   const handleCreateQuiz = async () => {
+    if (loading) {
+      return
+    }
     try {
       setLoading(true) // Set loading state to true when starting the API call
       console.log('Creating quiz...')
@@ -276,18 +279,23 @@ export const QuizPage = () => {
             <SearchBar placeholder="Search quizzes..." onSearch={handleSearch} />{' '}
           </Box>
           {/* Pass handleSearch function as prop */}
-          <ButtonComponent
+          <Button
             onClick={handleCreateQuiz}
             variant="contained"
             disabled={loading} // Disable button when loading
-            style={{ display: 'flex', alignItems: 'center', gap: '5px' }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '5px',
+              background: loading ? GRAY.main : BLUE.main,
+            }}
           >
             {loading && (
               <CircularProgress size={24} sx={{ color: '#ffffff', marginRight: '5px' }} />
             )}
             {!loading && <AddIcon />}
             <span>Create Quiz</span>
-          </ButtonComponent>
+          </Button>
           <ButtonComponent
             onClick={handleOpenQuizModal}
             variant="contained"
