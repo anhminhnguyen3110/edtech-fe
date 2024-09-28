@@ -51,7 +51,7 @@ const QuestionPerformanceChart = ({ questionStats, totalPlayers }) => {
     )
   }
   // Determine if we need to truncate the text based on the number of questions
-  const shouldTruncate = questionStats.length > 6
+  const shouldTruncate = questionStats.length > 2
   const barSize = questionStats.length < 5 ? 90 : undefined
 
   return (
