@@ -52,7 +52,6 @@ const Notification = () => {
         },
         authRequired: true,
       })
-      console.log('Fetched notifications:', response.data)
       const newNotifications = response.data.items.filter(
         (newNotification) =>
           !notificationsRef.current.some((notification) => notification.id === newNotification.id)

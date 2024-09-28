@@ -1,6 +1,7 @@
 import { alpha } from '@mui/material/styles'
 
 export const BLUE = {
+  lighter: 'rgba(25, 118, 210, 0.08)',
   light: '#CCE5FF',
   main: '#57ADE0',
   dark: '#2196F3',
@@ -22,5 +23,5 @@ export const RED = {
   dark: '#E53935',
 }
 
-export const BACKGROUND_ANSWER = ['#FFBD39', '#E61C5D', '#930077', '#3A0088']
+export const BACKGROUND_ANSWER = ['#FFC107', '#E61C5D', '#930077', '#3A0088']
 export const TRUE_FALSE_ANSWER = ['#1260be', '#E61C5D']

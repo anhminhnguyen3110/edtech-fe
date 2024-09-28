@@ -310,10 +310,14 @@ const QuizCreator = () => {
           </Typography>
         )}
         <IconButton onClick={toggleEditQuizName}>
-          {isEditingQuizName ? <CheckIcon /> : <EditIcon />}
+          {isEditingQuizName ? (
+            <CheckIcon sx={{ fontSize: '2rem' }} />
+          ) : (
+            <EditIcon sx={{ fontSize: '2rem' }} />
+          )}
         </IconButton>
         <IconButton onClick={handleDeleteQuiz} color="error">
-          <DeleteIcon />
+          <DeleteIcon sx={{ fontSize: '2rem' }} />
         </IconButton>
       </Box>
       <Grid container spacing={4}>

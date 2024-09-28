@@ -16,10 +16,12 @@ import AssessmentIcon from '@mui/icons-material/Assessment'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import AssistantIcon from '@mui/icons-material/Assistant'
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined'
+import SchoolIcon from '@mui/icons-material/School'
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer'
 const navItems = [
   {
     name: 'AI Assistant',
-    icon: <ChatOutlinedIcon sx={{ fontSize: '2rem' }} />,
+    icon: <QuestionAnswerIcon sx={{ fontSize: '2rem' }} />,
     path: '/assistant',
   },
   {
@@ -29,8 +31,13 @@ const navItems = [
   },
   {
     name: 'Assignment',
-    icon: <AssessmentIcon sx={{ fontSize: '2rem' }} />,
+    icon: <SchoolIcon sx={{ fontSize: '2rem' }} />,
     path: '/assignment',
+  },
+  {
+    name: 'Performance',
+    icon: <AssessmentIcon sx={{ fontSize: '2rem' }} />,
+    path: '/performance',
   },
 ]
 

@@ -157,18 +157,47 @@ const ClassAssignmentDetail = () => {
   }
 
   const handelExtractIssue = async () => {
+    const classAssignmentIdInt = parseInt(classAssignmentId)
+
+    // Check if the request was made recently by retrieving the stored data from localStorage
+    const storedData = localStorage.getItem(`extractIssue_${classAssignmentIdInt}`)
+    const currentTime = new Date().getTime() // Get current time in milliseconds
+
+    if (storedData) {
+      const { timestamp } = JSON.parse(storedData)
+      const elapsedTime = (currentTime - timestamp) / (1000 * 60) // Convert elapsed time to minutes
+
+      // If the request was made less than 10 minutes ago, set an error and return
+      if (elapsedTime < 10) {
+        setSnackbarNotifMessage('Extracting is in progress try again after 10 minutes.')
+        setSnackbarNotifSeverity('error')
+        setSnackbarNotifOpen(true)
+        return
+      }
+    }
+
     try {
       const response = await api.post(
         `/issues/extract-issues`,
         {
-          classAssignmentId: parseInt(classAssignmentId),
+          classAssignmentId: classAssignmentIdInt,
         },
         { authRequired: true }
       )
+
       if (response.status === 200) {
-        const extractIssue = response.data
+        const extractIssue = response?.data || {} // Ensure response and response.data are both defined
         console.log('Extract Issue:', extractIssue)
-        setSnackbarNotifMessage('Request successfully sent. Please wait for the result.')
+        const message =
+          response?.data?.message || 'Request successfully sent. Please wait for the result.'
+
+        // Store the classAssignmentId and current timestamp in localStorage
+        localStorage.setItem(
+          `extractIssue_${classAssignmentIdInt}`,
+          JSON.stringify({ timestamp: currentTime, classAssignmentId: classAssignmentIdInt })
+        )
+
+        setSnackbarNotifMessage(message)
         setSnackbarNotifSeverity('info')
         setSnackbarNotifOpen(true)
       }

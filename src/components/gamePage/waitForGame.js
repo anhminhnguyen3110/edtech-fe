@@ -24,7 +24,7 @@ const WaitForGame = ({
 }) => {
   const { choices, questionText, timeLimitInSecond, imageFileUrl, questionType, correctAnswers } =
     question
-  const totalTime = delayTime - 1
+  const totalTime = delayTime
 
   const counter = useRef(0)
 

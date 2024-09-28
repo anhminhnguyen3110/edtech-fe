@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef, useEffect } from 'react'
-import { Typography, Box, useMediaQuery, useTheme, Collapse } from '@mui/material'
+import { Typography, Box, useMediaQuery, useTheme, Collapse, IconButton } from '@mui/material'
 import { BLUE } from '@/theme/palette'
+import CustomCheckIcon from '@/components/quizPage/customCheckIcon'
 
-const RubricItem = ({ rubric }) => {
+const QuestionItem = ({ question }) => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [showLevels, setShowLevels] = useState(false)
@@ -20,14 +22,17 @@ const RubricItem = ({ rubric }) => {
         const paddingTop = parseInt(computedStyle.paddingTop)
         const paddingBottom = parseInt(computedStyle.paddingBottom)
         const totalHeight = parentRef.current.offsetHeight + paddingTop + paddingBottom
-        console.log(totalHeight)
-        setBoxHeight(`${totalHeight * 1.6}px`)
+
+        if (question.choices.length > 2) {
+          setBoxHeight(`${totalHeight * 1.6}px`)
+        } else {
+          setBoxHeight(`${totalHeight * 1.1}px`)
+        }
       } else {
-        console.log('default')
         setBoxHeight('4rem')
       }
     }
-  }, [showLevels])
+  }, [showLevels, question.choices.length])
 
   return (
     <Box
@@ -61,33 +66,51 @@ const RubricItem = ({ rubric }) => {
             variant="h6"
             sx={{ fontWeight: '500', fontSize: isMobile ? '1.1rem' : '1.5rem' }}
           >
-            {rubric.description}
+            {question.questionText}
           </Typography>
         </Box>
         <Collapse in={showLevels} timeout="auto" unmountOnExit>
           <Box mt={2}>
-            {rubric.criteriaLevels.map((level) => (
+            {question.choices.map((choice, idx) => (
               <Box
-                key={level.id}
+                key={idx}
                 display="flex"
-                justifyContent="space-between"
                 alignItems="center"
                 p={1}
                 mb={1}
                 sx={{
                   backgroundColor: '#e3f2fd',
                   borderRadius: '8px',
+                  justifyContent: 'space-between',
                   '&:hover': {
                     backgroundColor: '#bbdefb',
                   },
+                  height: '3rem', // Ensures the height of each choice is consistent
                 }}
               >
-                <Typography variant="body1" sx={{ fontWeight: '500' }}>
-                  {level.name}
+                <Typography variant="body1" sx={{ fontWeight: '500', fontSize: '1rem' }}>
+                  {choice}
                 </Typography>
-                <Typography variant="body1" sx={{ fontWeight: '500' }}>
-                  {level.score} marks
-                </Typography>
+                {question.correctAnswers.includes(choice) && (
+                  <IconButton
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      margin: '3px',
+                      backgroundColor: 'lightgreen',
+                      borderRadius: '50%',
+                      border: 'none',
+                      '&:hover': {
+                        backgroundColor: 'lightgreen',
+                      },
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <CustomCheckIcon sx={{ fontSize: '1.3rem' }} />
+                  </IconButton>
+                )}
               </Box>
             ))}
           </Box>
@@ -97,4 +120,4 @@ const RubricItem = ({ rubric }) => {
   )
 }
 
-export default RubricItem
+export default QuestionItem
