@@ -2,6 +2,18 @@
 
 This document provides an in-depth look at the structure and components of the EdTech Assistant front-end project, focusing on how various contexts and providers interact to manage state and functionality across the application.
 
+## Table of Contents
+
+1. [Application Architecture](#application-architecture)
+   - [Folder Structure](#folder-structure)
+   - [Routing and Navigation](#routing-and-navigation)
+   - [Page Layout Structure](#page-layout-structure)
+   - [Component Layout Overview](#component-layout-overview)
+2. [Communication with the Backend](#communication-with-the-backend)
+   - [With API](#with-api)
+   - [The use of Axios interceptor](#the-use-of-axios-interceptor)
+   - [With WebSocket](#with-websocket)
+
 ## Application Architecture
 
 ### Folder Structure

@@ -27,7 +27,7 @@ const wrapText = (text, maxWidth) => {
 
 // Custom X Axis tick with conditional text truncation
 const CustomXAxisTick = ({ x, y, payload, shouldTruncate }) => {
-  const truncatedLabel = shouldTruncate ? truncateText(payload.value, 20) : payload.value
+  const truncatedLabel = shouldTruncate ? truncateText(payload.value, 15) : payload.value
   const lines = wrapText(truncatedLabel, 25) // Adjust 25 to change the wrap width
   return (
     <g transform={`translate(${x},${y})`} cursor="pointer">

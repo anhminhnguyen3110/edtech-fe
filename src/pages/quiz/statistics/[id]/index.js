@@ -5,7 +5,7 @@ import QuizDashboardPage from '@/components/quizStatistics/quizDashboardPage'
 export default function Quiz() {
   return (
     <>
-      <Page title="Quiz" description="Quiz page" />
+      <Page title="Quiz Statistics" description="Quiz statistics page" />
       <AuthorizedLayout>
         <QuizDashboardPage />
       </AuthorizedLayout>

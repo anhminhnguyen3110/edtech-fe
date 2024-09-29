@@ -7,7 +7,7 @@ import { SelectedStudentsProvider } from '@/components/performancePage/selectedS
 export default function Dashboard() {
   return (
     <>
-      <Page title="Quiz" description="Quiz page" />
+      <Page title="Performance" description="Performance page" />
       <SelectedStudentsProvider>
         <AuthPerformanceLayout>
           <PerformancePage /> {/* Ensure that this component uses PlayerCard */}

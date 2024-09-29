@@ -8,7 +8,7 @@ import ViewPage from '@/components/performancePage/viewPage'
 export default function Dashboard() {
   return (
     <>
-      <Page title="Quiz" description="Quiz page" />
+      <Page title="View Performance" description="Vie Perfromance page" />
       <AuthorizedLayout>
         <ViewPage />
       </AuthorizedLayout>

@@ -1,19 +1,22 @@
+# README
+
 # Introduction
 
-In this repo, we introduce EdTech Assistant, an application designed to enhance the teaching and learning experience for both teachers and students. EdTech Assistant offers the following features:
+This repository serves as the front-end for the project, offering an overview of the application's features. For details on the back-end repository, click [here](https://github.com/anhminhnguyen3110/edtech-be). We introduce EdTech Assistant, an application designed to enhance the teaching and learning experience for both teachers and students. EdTech Assistant offers the following features:
 
 - **Chatapp**: Provides real-time support with web searches, answers questions, and processes uploaded PDFs for quick responses.
 - **Quiz**: Enables teachers to create custom quizzes or auto-generate them using advanced AI.
-- **Lesson generator**: Automatically generates lessons tailored to students' needs based on AI insights.
+- **Lesson generator**: Automatically generates lessons tailored to students’ needs based on AI insights.
 - **Student issue extractor**: Analyzes assignments to identify common challenges and help teachers address them effectively.
 
 # Table of Contents
 
-- [Getting Started](#getting-started)
+- [Project Setup](#project-setup)
+- [Performance Testing](#performance-testing)
 - [Feature Overview](#features-overview)
 - [Technical Overview](#technical-overview)
 
-# Getting Started
+# Project Setup
 
 This project is built using Next.js. To get started with running the project locally:
 
@@ -21,7 +24,7 @@ This project is built using Next.js. To get started with running the project loc
 2. Install all the necessary dependencies by running the following command:
 
 ```bash
-yarn add
+yarn install
 ```
 
 1. Start the development server using:
@@ -36,277 +39,150 @@ or, if you prefer using npm
 npm run dev
 ```
 
+# Performance Testing
+
+The application is capable of supporting up to 85,000 concurrent users, as demonstrated through extensive stress testing using K6.
+![peal.png](images/peak.webp)
+
 # Features Overview
 
-## Login/ Sign-Up
+This section provides a quick overview of the main features of our platform. For more detailed information, follow the links provided for each feature.
 
-### Sign-Up
+| Feature                              | Description                                                         | Detailed Document                          |
+| ------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------ |
+| **Chat Application**                 | Integrated chat system with web search and custom knowledge base.   | [View Details](documents/chatApp.md)       |
+| **Real-Time Multiplayer Game**       | A game supporting 200 players with real-time competition.           | [View Details](documents/game.md)          |
+| **Game Dashboard**                   | Performance insights and analytics dashboard for teachers.          | [View Details](documents/gameDashboard.md) |
+| **Email Authentication**             | Secure sign-up and sign-in process with email verification.         | [View Details](documents/signInSignUp.md)  |
+| **Assignment and Class List**        | Manage assignments and class lists easily within the system.        | [View Details](documents/assignment.md)    |
+| **AI-Generated Lessons and Quizzes** | Automatically create personalized lessons and quizzes for students. | [View Details](documents/lessonAndQuiz.md) |
+| **Player Performance Analysis**      | Track student performance over time with AI-generated insights.     | [View Details](documents/performance.md)   |
+| **Quiz System**                      | Create, modify, and manage quizzes seamlessly.                      | [View Details](documents/quiz.md)          |
+| **Identify Common Patterns**         | Detect common student performance issues through AI insights.       | [View Details](documents/issues.md)        |
 
-The application provides a way to register a new account and activate the account through email
+## Chat Application with Integrated Web Search and Custom Knowledge Base for the Education Domain
 
-![sign-up.png](images/sign-up.png)
+### Education-Specific Platform with Comprehensive Knowledge Base to Assist Teachers
 
-after clicking the email the user will be navigated to this page
+![Education Focus.gif](gifs/Education_Focus.gif)
 
-<p align="center">
-  <img src="images/image%206.png" alt="image.png">
-</p>
+### Persistent Chat with Memory and Effective Resolution of Ambiguous Messages
 
-### Login
+![Multi turn conversation.gif](gifs/Multi_turn_conversation.gif)
 
-Login will be done with the email and password set up before.
+### Intelligent Conversations with File Reading
 
-<p align="center">
-  <img src="images/image%207.png" alt="image.png">
-</p>
+![History + PDF Upload.gif](gifs/History__PDF_Upload.gif)
 
-## Chat Application
+### Real-Time Internet Search for Up-to-Date Knowledge in Resolving User Requests
 
-### Search Web
+![Online search + table + keep chat in different field.gif](gifs/Online_search__table__keep_chat_in_different_field.gif)
 
-After logging in, the user is directed to the chat page. The chat application is highly effective because it provides real-time data retrieval, allowing users to search and access the most current information. Below is a demonstration showcasing this functionality.
+### Advanced Reasoning Engine to Handle Ambiguous Questions
 
-<p align="center">
-  <img src="images/Chat-AppOverView.gif" alt="Chat-AppOverView.gif">
-</p>
+![Ambigiuos Question.gif](gifs/Ambigiuos_Question.gif)
 
-### Suggestion
+### Effective Handling of Non-Education Related Questions
 
-The chat application is enriched with a comprehensive knowledge base focused on the education domain. To help users maximise its potential, we have included a button that lists all available suggestions and knowledge areas. Users can select these as a reference to fully leverage the chat application's capabilities.
+![Non-educational questions (biomedical field), Chat history.gif](<gifs/Non-educational_questions_(biomedical_field)_Chat_history.gif>)
 
-<p align="center">
-  <img src="images/Chat-AppSuggestion.gif" alt="Chat-AppSuggestion.gif">
-</p>
+### Recommendation System to Showcase All Available Chat Features
 
-### File Handling
+![Recommendation.gif](gifs/Recommendation.gif)
 
-The chat application also supports PDF file handling, allowing users to upload a file and provide responses or answers based on its content.
+### Option to Resume or Delete Chats as Needed
 
-<p align="center">
-  <img src="images/Chat-AppFile.gif" alt="Chat-AppFile.gif">
-</p>
+![View + Continue chat conversation + Delete.gif](gifs/View__Continue_chat_conversation__Delete.gif)
 
-files can also be uploaded inside the chat itself
+## Real-Time Multiplayer Game Supporting Up to 200 Concurrent Players
 
-<p align="center">
-  <img src="images/Chat-AppFileinChat.gif" alt="Chat-AppFileinChat.gif">
-</p>
+| Feature                                     | Teacher View                                                           | Player View                                        |
+| ------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------- |
+| **Overall Process**                         | ![teacher-overalll.gif](gifs/teacher-overalll.gif)                     | ![student-overall.gif](gifs/student-overall.gif)   |
+| **Initiating a Game with Multiple Players** | ![start-game-wait-for-player.gif](gifs/start-game-wait-for-player.gif) | ![player-join-play.gif](gifs/player-join-play.gif) |
+| **Receiving Questions in Real-Time**        | ![start-to-play.gif](gifs/start-to-play.gif)                           | ![player-join-play.gif](gifs/player-join-play.gif) |
+| **In-Question Process Flow**                | ![question-play.gif](gifs/question-play.gif)                           | ![player-join-play.gif](gifs/player-join-play.gif) |
+| **Final Scoreboard**                        | ![2.png](images/Game/Host%20Final%20Scoreboard/2.png)                  | ![1.png](gifs/1.png)                               |
 
-### Question Follow-Up
+### Additional Views
 
-Our chat application supports follow-up questions by maintaining a conversation history, enabling the model to reference previous messages and provide context-aware responses within the same chat.
+- **Different Types of Questions for Players**
+  ![question-types.gif](gifs/question-types.gif)
 
-<!-- ![Chat-AppFollowUp.gif](images/Chat-AppFollowUp.gif) -->
-<p align="center">
-  <img src="images/Chat-AppFollowUp.gif" alt="Chat-AppFollowUp.gif">
-</p>
+## Game Dashboard for Performance Insights and Analytics
 
-## Quiz
+### Dashboard Overview
 
-The quiz system provides exceptional flexibility, allowing users to customize quizzes and questions while choosing from various question types. Additionally, it offers the option to generate quizzes using our AI models, requiring only a few instructions (prompts) to automate the process and deliver exactly what users need efficiently.
+![game-dashboard.gif](gifs/game-dashboard.gif)
 
-### Create Quiz
+## Player Performance Analysis Over Time
 
-You can create a new quiz by clicking the create quiz button and click edit button at the top to edit the name, and click the add question to add a new question
+![performance.gif](gifs/performance.gif)
 
-<p align="center">
-  <img src="images/Quiz-Create.gif" alt="Quiz-Create.gif">
-</p>
+## Quiz System
 
-### Edit Question
+### Create Custom Quizzes Instantly with AI-Powered Instructions
 
-You can edit the question text, modify the answers, and specify the correct ones. There are three types of questions to choose from: **Multiple Choice**, where only one correct answer is accepted with four possible options; **Multiple Answer**, where more than one correct answer can be specified; and **True/False**, which only allows two possible answers. Any changes made to a question require clicking **Save** to apply the updates or **Delete** to remove the question entirely. Additionally, when hovering over a question in the left panel for more than one second, a preview will appear, showing how the quiz will look during the game.
+![generate-quiz-with-prompt.gif](gifs/generate-quiz-with-prompt.gif)
 
-<p align="center">
-  <img src="images/Quiz-EditQuestion.gif" alt="Quiz-EditQuestion.gif">
-</p>
+### Manually Create a New Quiz
 
-### Upload Image for Question
+![quiz-creation.gif](gifs/quiz-creation.gif)
 
-You can also upload an image for a question to enrich the content like this example and hover over a question to preview how it would look like while playing in game.
+### Delete a Quiz
 
-<p align="center">
-  <img src="images/Quiz-UploadImage.gif" alt="Quiz-UploadImage.gif">
-</p>
+![delete-quiz.gif](gifs/delete-quiz.gif)
+
+### Create and Delete Questions
+
+![create-delete-question.gif](gifs/create-delete-question.gif)
+
+### Modify Questions and Preview Their In-Game Display
+
+![question-edit.gif](gifs/question-edit.gif)
+
+### Add Images to a Question
+
+![add-image.gif](gifs/add-image.gif)
+
+## AI-Generated Lessons and Quiz Tailored to Address Student Challenges
+
+### Generating Lessons
+
+![6 - Generate lesson.gif](gifs/6_-_Generate_lesson.gif)
+
+### Lesson Example
+
+![7 - Lesson showing.gif](gifs/7_-_Lesson_showing.gif)
 
 ### Generate Quiz
 
-Our application also supports automatic quiz generation based on user instructions, streamlining the quiz preparation process. Users can also specify the types of questions they want to include in the quiz.
+![6 - Generate Quiz.gif](gifs/8-Generate_quiz.gif)
 
-<p align="center">
-  <img src="images/Chat-Generate.gif" alt="Chat-Generate.gif">
-</p>
+### View and Edit Generated Quiz
 
-## Game
+![6 - Edit Quiz.gif](gifs/9-Edit_Generate_quiz.gif)
 
-To host a quiz, simply click the "Host Live" button to start the quiz and play with students in real-time.
+## Identify Common Patterns in Student Performance with AI-Extracted Insights from Class Assignments
 
-### Lobby Page for Teacher
+### Extracting Process
 
-<p align="center">
-  <img src="images/image%208.png" alt="image%208.png">
-</p>
+![4- Class + Extract Issues + Instruction.gif](gifs/4-_Class__Extract_Issues__Instruction.gif)
 
-Lobby page for the teacher to wait for students to join
+### Manually Add and Edit Issues
 
-### Player Join
+![5 - Add + Edit Issues.gif](gifs/5_-_Add__Edit_Issues.gif)
 
-Students don't need an account to join the quiz. They can simply navigate to the home page, click "Join," and enter the game code along with their name to participate.
+## Assignment and Class List
 
-<p align="center">
-  <img src="images/Game-PlayerJoin.gif" alt="Game-PlayerJoin.gif">
-</p>
+![3 - Assignment.gif](gifs/3_-_Assignment.gif)
 
-### Waiting Page
+## Email Authentication for Secure Sign-Up and Sign-In
 
-Once the teacher finalises the player list and starts the game, their screen will display the quiz name and the total number of questions included in the quiz.
-
-![image.png](images/image%209.png)
-
-### Waiting Page before each Question
-
-Before each question, there is a 6-second waiting page to ensure that all players have received the question data. This buffer ensures that when the question begins, every player has an equal opportunity to answer without experiencing delays. This page also allows students to read the question first and prepare the answer first
-
-<p align="center">
-  <img src="images/image%2010.png" alt="image%2010.png">
-</p>
-
-Ready Page for students:
-
-<p align="center">
-  <img src="images/image%2011.png" alt="image%2011.png">
-</p>
-
-### Question Page
-
-During the question page, the teacher can skip the question once at least one student has answered. After the question ends, the correct answer will be displayed, along with basic statistics such as the number of students who selected each answer.
-
-<p align="center">
-  <img src="images/Game-Control.gif" alt="Game-Control.gif">
-</p>
-
-Students can answer questions, such as multiple-choice, by selecting their responses and submitting them. After submission, they will wait for the teacher to finalize the question, at which point the results will be displayed.
-
-<p align="center">
-  <img src="images/Game-PlayerAnswer.gif" alt="Game-PlayerAnswer.gif">
-</p>
-
-### Result Page
-
-after the teacher clicks next button after finish each question, the current scoreboard will be presented
-
-<p align="center">
-  <img src="images/image%2012.png" alt="image%2012.png">
-</p>
-
-Each student will be shown their earned score after answering a question. If they answer incorrectly, a separate screen will display indicating the incorrect response.
-
-<p align="center">
-  <img src="images/image%2013.png" alt="image%2013.png">
-</p>
-
-### Final Scoreboard
-
-After all the questions are completed, the teacher's screen will display a scoreboard showing the top 3 players.
-
-<p align="center">
-  <img src="images/image%2014.png" alt="image%2014.png">
-</p>
-
-And each student will be presented with the score and rank in the game.
-
-<p align="center">
-  <img src="images/image%2015.png" alt="image%2015.png">
-</p>
-
-## Notification
-
-Our application includes a notification feature to alert users when long-running tasks are completed or special events occur. Notifications are stored in a list, categorised as read or unread. To mark a notification as read, users simply need to click on it.
-
-<p align="center">
-  <img src="images/Noti-List.gif" alt="Noti-List.gif">
-</p>
-
-Example of notfication for long running tasks
-
-<p align="center">
-  <img src="images/image%2016.png" alt="image%2016.png">
-</p>
-
-## Assignment
-
-The assignment page is an exclusive feature available to select users, providing specialized information tailored to track student progress for specific assignments. To access this feature, please contact our admin, [Minh Nguyen](mailto:nganhminh2003@gmail.com) or [Hung Tran](mailto:hungtrangia2003@gmail.com), via email.
-
-### Assigment List
-
-when you first enter the page you will see a list of available assignments assigned to you account. you can also search for a specific assignment you want to look into.
-
-<p align="center">
-  <img src="images/Assignment-List.gif" alt="Assignment-List.gif">
-</p>
-
-### Assignment Detail
-
-When selecting an assignment, you will be presented with the assignment details, including the rubric and a list of classes associated with that assignment.
-
-<p align="center">
-  <img src="images/Assignment-Detail.gif" alt="Assignment-Detail.gif">
-</p>
-
-### Detail for a Class in an Assignment
-
-After clicking "View" for a class in an assignment, you will be directed to a detailed page showing a list of extracted issues, generated lessons, and quizzes for that class. Upon entering the page, you can access rules and guidance for easier navigation by clicking the question mark button in the bottom-right corner.
-
-<p align="center">
-  <img src="images/Assignment-Instruction.gif" alt="Assignment-Instruction.gif">
-</p>
-
-**Issue Extraction**
-
-The application extracts common issues identified for the entire class in an assignment. However, the issue extraction function is not triggered automatically from students' work. Users must manually initiate this process when first entering the class page for an assignment. The automatic issue extraction feature can only be used if no issues have already been identified in the list.
-
-<p align="center">
-  <img src="images/Assignment-ExtractIssue.gif" alt="Assignment-ExtractIssue.gif">
-</p>
-
-The extraction process can take up to 10 minutes. During this time, you can perform other tasks, and a notification will pop up when the process is complete, as shown in the example. If you choose to stay on the page, it will automatically load the issues once the process is finished, thanks to WebSocket, which receives real-time updates. Once you used the automatic issue extraction you can only re-use it after 2 hours.
-
-**Issues Editing**
-
-You can manually add or edit issues if needed. However, there is a limit of 10 issues that can be added.
-
-<p align="center">
-  <img src="images/Assignment-EditIssue.gif" alt="Assignment-EditIssue.gif">
-</p>
-
-**Lesson Generating**
-
-Lessons can only be generated if at least one issue has been identified. To generate a lesson, click the "Generate Lesson" button and specify the desired file name. Once the lesson is generated, you can download it to view the content.
-
-<p align="center">
-  <img src="images/Assignment-LessonGenerate.gif" alt="Assignment-LessonGenerate.gif">
-</p>
-
-**Lesson Name Editing**
-
-Once a lesson is generated, you can rename it as desired. There is a limit of five lessons per class in an assignment. If you wish to generate additional lessons, you will need to delete existing ones first.
-
-<p align="center">
-  <img src="images/Assignment-LessonEdit.gif" alt="Assignment-LessonEdit.gif">
-</p>
-
-**Quiz Generate**
-
-You can also generate quizzes to create interactive lessons based on the identified issues in the class. To do so, click the "Generate Quiz" button and select the types of questions you want to include. To edit a quiz, click the "Edit" button, which will navigate you to the quiz editing page, where you can modify the quiz as needed.
-
-<p align="center">
-  <img src="images/Assignment-Quiz.gif" alt="Assignment-Quiz.gif">
-</p>
+![1 - Sign in Sign up.gif](gifs/1_-_Sign_in_Sign_up.gif)
 
 # Technical Overview
 
-The front-end application is built using Next.js, with the application's routing structure illustrated in the following image. More detailed technical implementation can be viewed [here](./documents/technical.md).
+The front-end application is built using Next.js, with the application’s routing structure illustrated in the following image. More detailed technical implementation can be viewed [technical](./documents/technical.md).
 
-<p align="center">
-  <img src="images/image.png" alt="image.png">
-</p>
+![uploadimagesimage.png](./images/image.png)
