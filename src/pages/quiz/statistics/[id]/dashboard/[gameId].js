@@ -6,7 +6,7 @@ import GameDetail from '@/components/gameDashboard/gameDetail'
 export default function Quiz() {
   return (
     <>
-      <Page title="Quiz" description="Quiz page" />
+      <Page title="Quiz Dashboard" description="Quiz page" />
       <AuthorizedLayout>
         <GameDetail />
       </AuthorizedLayout>
