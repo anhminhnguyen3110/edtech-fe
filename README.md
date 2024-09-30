@@ -1,4 +1,4 @@
-# README
+# EdTech Assistant
 
 # Introduction
 
@@ -94,15 +94,15 @@ This section provides a quick overview of the main features of our platform. For
 
 ![View + Continue chat conversation + Delete.gif](gifs/View__Continue_chat_conversation__Delete.gif)
 
-## Real-Time Multiplayer Game Supporting Up to 200 Concurrent Players
+## Live Multiplayer Game in Real-Time
 
-| Feature                                     | Teacher View                                                           | Player View                                        |
-| ------------------------------------------- | ---------------------------------------------------------------------- | -------------------------------------------------- |
-| **Overall Process**                         | ![teacher-overalll.gif](gifs/teacher-overalll.gif)                     | ![student-overall.gif](gifs/student-overall.gif)   |
-| **Initiating a Game with Multiple Players** | ![start-game-wait-for-player.gif](gifs/start-game-wait-for-player.gif) | ![player-join-play.gif](gifs/player-join-play.gif) |
-| **Receiving Questions in Real-Time**        | ![start-to-play.gif](gifs/start-to-play.gif)                           | ![player-join-play.gif](gifs/player-join-play.gif) |
-| **In-Question Process Flow**                | ![question-play.gif](gifs/question-play.gif)                           | ![player-join-play.gif](gifs/player-join-play.gif) |
-| **Final Scoreboard**                        | ![2.png](images/Game/Host%20Final%20Scoreboard/2.png)                  | ![1.png](gifs/1.png)                               |
+### Overall Process for Teacher
+
+![teacher-overalll.gif](gifs/teacher-overalll.gif)
+
+### Overall Process for Player
+
+![student-overall.gif](gifs/student-overall.gif)
 
 ### Additional Views
 
