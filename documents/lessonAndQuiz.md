@@ -35,6 +35,10 @@ Take a look at the lessons created by our system—**rich, detailed, and engagin
 ![7 - Lesson showing.gif](../images/Lesson%20showing/18.png)
 ![7 - Lesson showing.gif](../images/Lesson%20showing/19.png)
 
+### Download Sample Lesson PPT
+
+You can also download a **sample lesson PowerPoint** to see a more detailed structure of how lessons are generated: [Download Sample PPT](../images/Chloe-lesson.pptx)
+
 ## AI-Generated Quizzes: Tailored Assessments in an Instant
 
 Need a custom quiz to reinforce the lesson? No problem! With **AI-powered quiz generation**, create quizzes that are automatically aligned with the lesson content, addressing student difficulties and ensuring **personalized assessments** for every student.
