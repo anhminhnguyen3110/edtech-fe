@@ -48,17 +48,18 @@ The application is capable of supporting up to 85,000 concurrent users, as demon
 
 This section provides a quick overview of the main features of our platform. For more detailed information, follow the links provided for each feature.
 
-| Feature                              | Description                                                         | Detailed Document                          |
-| ------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------ |
-| **Chat Application**                 | Integrated chat system with web search and custom knowledge base.   | [View Details](documents/chatApp.md)       |
-| **Real-Time Multiplayer Game**       | A game supporting 200 players with real-time competition.           | [View Details](documents/game.md)          |
-| **Game Dashboard**                   | Performance insights and analytics dashboard for teachers.          | [View Details](documents/gameDashboard.md) |
-| **Email Authentication**             | Secure sign-up and sign-in process with email verification.         | [View Details](documents/signInSignUp.md)  |
-| **Assignment and Class List**        | Manage assignments and class lists easily within the system.        | [View Details](documents/assignment.md)    |
-| **AI-Generated Lessons and Quizzes** | Automatically create personalized lessons and quizzes for students. | [View Details](documents/lessonAndQuiz.md) |
-| **Player Performance Analysis**      | Track student performance over time with AI-generated insights.     | [View Details](documents/performance.md)   |
-| **Quiz System**                      | Create, modify, and manage quizzes seamlessly.                      | [View Details](documents/quiz.md)          |
-| **Identify Common Patterns**         | Detect common student performance issues through AI insights.       | [View Details](documents/issues.md)        |
+| Feature                              | Description                                                         | Detailed Document                           |
+| ------------------------------------ | ------------------------------------------------------------------- | ------------------------------------------- |
+| **Chat Application**                 | Integrated chat system with web search and custom knowledge base.   | [View Details](documents/chatApp.md)        |
+| **Real-Time Multiplayer Game**       | A game supporting unlimited players with real-time competition.     | [View Details](documents/game.md)           |
+| **Game Dashboard**                   | Performance insights and analytics dashboard for teachers.          | [View Details](documents/gameDashboard.md)  |
+| **Email Authentication**             | Secure sign-up and sign-in process with email verification.         | [View Details](documents/signInSignUp.md)   |
+| **Assignment and Class List**        | Manage assignments and class lists easily within the system.        | [View Details](documents/assignment.md)     |
+| **AI-Generated Lessons and Quizzes** | Automatically create personalized lessons and quizzes for students. | [View Details](documents/lessonAndQuiz.md)  |
+| **Player Performance Analysis**      | Track student performance over time with AI-generated insights.     | [View Details](documents/performance.md)    |
+| **Quiz System**                      | Create, modify, and manage quizzes seamlessly.                      | [View Details](documents/quiz.md)           |
+| **Identify Common Patterns**         | Detect common student performance issues through AI insights.       | [View Details](documents/issues.md)         |
+| **Sample Lesson PPT**                | A sample lesson PowerPoint file for teacher reference.              | [Download Sample](images/Chloe-lesson.pptx) |
 
 ## Chat Application with Integrated Web Search and Custom Knowledge Base for the Education Domain
 
@@ -94,13 +95,13 @@ This section provides a quick overview of the main features of our platform. For
 
 ![View + Continue chat conversation + Delete.gif](gifs/View__Continue_chat_conversation__Delete.gif)
 
-## Live Multiplayer Game in Real-Time
+## Live Multiplayer Game with Unlimited Players in Real-Time
 
-### Overall Process for Teacher
+### Game Screen for Host
 
 ![teacher-overalll.gif](gifs/teacher-overalll.gif)
 
-### Overall Process for Player
+### Game Screen for Player
 
 ![student-overall.gif](gifs/student-overall.gif)
 
