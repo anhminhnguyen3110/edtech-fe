@@ -43,24 +43,26 @@ npm run dev
 
 The application underwent stress testing using K6 to simulate real-world user interactions. The test was conducted in a cloud environment, allowing for scalable and realistic load conditions. Below are the key findings from the performance tests:
 
-- **Stress Test Setup**: 
+- **Stress Test Setup**:
+
   - The test simulated common user actions such as login requests, data fetching, and page navigation.
   - The test was conducted by incrementally increasing the number of concurrent users, starting from 1,000.
 
 - **Test Results**:
+
+  - A **peak test** was conducted over the course of one hour, gradually pushing the system to its limit.
   - At **85,000 concurrent users**, response times began to slow down, but no critical issues were observed.
-  ![peak.png](images/peak.webp)
-  - At **90,000 concurrent users**, the application started experiencing severe performance degradation, including slower response times, increased error rates, and eventual crashes.
-  ![fail.png](images/fail.png)
+    ![peak.png](images/peak.webp)
+  - At **90,000 concurrent users**, the application was pushed to its limit, leading to severe performance degradation, including slower response times, increased error rates, and eventual system failure.
+    ![fail.png](images/fail.png)
+
 - **Cloud Environment**:
+
   - The stress test was executed in a cloud environment, which provided the necessary scalability and reliable infrastructure to simulate high loads.
-  
+
 - **Analysis & Bottlenecks**:
-  - K6 metrics and system logs were thoroughly analyzed to identify resource bottlenecks that led to the crash at 90,000 users.
-  - These insights are being used to further optimize the application for future scalability.
-
-
-
+  - K6 metrics and system logs were thoroughly analyzed to identify resource bottlenecks that caused the system failure at 90,000 users.
+  - These insights are being used to optimize the application for better performance and future scalability.
 
 # Features Overview
 
