@@ -44,10 +44,6 @@ or, if you prefer using npm
 npm run dev
 ```
 
-# Application Introduction
-
-https://github.com/user-attachments/assets/dece0ded-eff1-4c5f-9665-4fa8f776bfec
-
 # Tech Stack
 
 ## Frontend ([Repository](https://github.com/anhminhnguyen3110/edtech-fe))
