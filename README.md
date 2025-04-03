@@ -57,68 +57,6 @@ npm run dev
     <img src="images/vercel.png" alt="Vercel" width="25" height="25"> Vercel
 </div>
 
-## Backend
-
-<div style="display: inline-block; font-size: 22px;">
-    <img src="images/nestjs.svg" alt="NestJS" width="25" height="25"> NestJS |
-    <img src="images/nodejs.png" alt="Node.js" width="25" height="25"> NodeJS |
-    <img src="images/typescript.png" alt="TypeScript" width="25" height="25"> TypeScript |
-    <img src="images/rabbitmq.svg" alt="RabbitMQ" width="25" height="25"> RabbitMQ |
-    <img src="images/redis.svg" alt="Redis" width="25" height="25"> Redis |
-    <img src="images/redis-insight.png" alt="RedisInsight" width="25" height="25"> Redis Insight |
-    <img src="images/mysql.png" alt="MySQL" width="25" height="25" style="border-radius: 50%;"> MySQL |
-    <img src="images/prometheus.png" alt="Prometheus" width="25" height="25" style="border-radius: 50%;"> Prometheus |
-    <img src="images/grafana.svg" alt="Grafana" width="25" height="25"> Grafana |
-    <img src="images/Elasticsearch.png" alt="Elasticsearch" width="25" height="25"> Elasticsearch 
-</div>
-
-## AI & Data Engineering
-
-<div style="display: inline-block; font-size: 22px;">
-    <img src="images/llm.png" alt="LLM" width="25" height="25"> Large Language Model (LLM) |
-    <img src="images/VectorDB.png" alt="VectorDB" width="25" height="25" style="border-radius: 50%;"> Vector Database |
-    <img src="images/Airflow.png" alt="Airflow" width="25" height="25"> Airflow |
-    <img src="images/dbt.png" alt="dbt" width="75" height="25"> dbt |
-    <img src="images/kafka.png" alt="Kafka" width="16" height="25"> Kafka |
-    <img src="images/zoo.webp" alt="Zookeeper" width="25" height="25"> Zookeeper |
-    <img src="images/delta_lake.png" alt="Delta Lake" width="25" height="25"> Delta Lake |
-    <img src="images/scrapy.webp" alt="Scrapy" width="25" height="25"> Scrapy |
-    <img src="images/selenium.png" alt="Selenium" width="25" height="25"> Selenium |
-    🧠 Advanced Retriever-Augmented Generation (RAG)
-</div>
-
-## DevOps
-
-<div style="display: inline-block; font-size: 22px;">
-    <img src="images/kubernetes.svg" alt="Kubernetes" width="25" height="25"> Kubernetes |
-    <img src="images/aks.png" alt="Azure Kubernetes Service" width="25" height="25"> Azure Kubernetes Service (AKS) |
-    <img src="images/helm.png" alt="Helm" width="25" height="25" style="border-radius: 50%;"> Helm |
-    <img src="images/terraform.png" alt="Terraform" width="25" height="25"> Terraform |
-    <img src="images/docker.png" alt="Docker" width="25" height="16"> Docker |
-    <img src="images/AzureCloud.png" alt="Azure Cloud" width="25" height="25"> Azure Cloud |
-    <img src="images/porkbun.png" alt="Porkbun" width="25" height="25"> Porkbun DNS Provider |
-    <img src="images/nginx.svg" alt="Nginx" width="25" height="25"> Nginx Load Balancer |
-    <img src="images/CertManager.png" alt="CertManager" width="25" height="25"> CertManager |
-    <img src="images/lets-encrypt.png" alt="Let's Encrypt" width="25" height="25"> Let's Encrypt |
-    🔏 TLS Cluster Issuer |
-    🚀 CI/CD |
-    <img src="images/GitHub-Actions.png" alt="GitHub Actions" width="25" height="25"> GitHub Actions |
-    <img src="images/hpa.png" alt="Horizontal Pod Autoscaling" width="25" height="25"> Horizontal Pod Autoscaling (HPA) |
-    <img src="images/elk.svg" alt="ELK Stack" width="25" height="25"> ELK Stack 
-    (<img src="images/Elasticsearch.png" alt="Elasticsearch" width="25" height="25"> Elasticsearch, 
-    <img src="images/Logstash.png" alt="Logstash" width="25" height="25"> Logstash, 
-    <img src="images/kibana.png" alt="Kibana" width="25" height="25"> Kibana, 
-    <img src="images/Filebeat.png" alt="Filebeat" width="25" height="25"> Filebeat)
-</div>
-
-## Testing
-
-<div style="display: inline-block; font-size: 22px;">
-    <img src="images/jest.png" alt="Jest" width="25" height="25"> Jest |
-    <img src="images/K6.svg" alt="K6" width="25" height="25"> K6 |
-    <img src="images/puppeteer.png" alt="Puppeteer" width="25" height="25"> PuppeteerJS
-</div>
-
 ## <!-- Divider -->
 
 # Performance Testing
